@@ -1,5 +1,6 @@
+const  express = require('express');
 const mongoose = require('mongoose')
-const server = 3000;
+const app = express();
 
 
 
@@ -11,7 +12,7 @@ mongoose.connect(`mongodb+srv://Admin:Admin123@cluster0.eexfj.mongodb.net/Marsvi
     useNewUrlParser : true,
     useUnifiedTopology: true
  });
-console.log('Connected to DB');
+console.log('You are now connected to your database!');
 
 
 
@@ -19,4 +20,4 @@ console.log('Connected to DB');
 
 
 // listening to the server 
-server.listen(server); 
+app.listen(3000); 
