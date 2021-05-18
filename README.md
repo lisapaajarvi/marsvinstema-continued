@@ -39,8 +39,8 @@ Installs all the required dependencies for the server application.
 
 ## Developed by
 
-[Camilla Johansson](https://github.com/millifrill)
-[Jonas Glingert](https://github.com/mrgling)
-[Lisa Pääjärvi](https://github.com/lisapaajarvi)
-[Lejla](https://github.com/LejlaDolovac)
+[Camilla Johansson](https://github.com/millifrill)<br>
+[Jonas Glingert](https://github.com/mrgling)<br>
+[Lisa Pääjärvi](https://github.com/lisapaajarvi)<br>
+[Lejla](https://github.com/LejlaDolovac)<br>
 [Tony Martinsson](https://github.com/TonyMartinsson)
