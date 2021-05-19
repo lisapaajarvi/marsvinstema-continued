@@ -21,9 +21,8 @@
   "bugs": {
     "url": "https://github.com/lisapaajarvi/marsvinstema-continued/issues"
   },
-  "homepage": "https://github.com/lisapaajarvi/marsvinstema-continued#readme" ,
+  "homepage": "https://github.com/lisapaajarvi/marsvinstema-continued#readme",
   "dependencies": {
     "npm-run-all": "^1.7.0"
   }
 }
-
