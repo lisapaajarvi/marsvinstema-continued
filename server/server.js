@@ -8,7 +8,7 @@ const app = express();
 
 // connects to the DB
 
-mongoose.connect(`mongodb+srv://Admin:Admin123@cluster0.eexfj.mongodb.net/MarsvinsTema?retryWrites=true&w=majority`, {
+mongoose.connect(`mongodb+srv://Admin:marsvin123@cluster0.eexfj.mongodb.net/MarsvinsTema?retryWrites=true&w=majority`, {
     useNewUrlParser : true,
     useUnifiedTopology: true
  });
