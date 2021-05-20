@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties } from 'react';
+import React, { useState, CSSProperties, useContext } from 'react';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -15,6 +15,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
+import { UserContext } from './contexts/UserContext';
 
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -48,6 +49,7 @@ function Header() {
     const [openSignup, setOpenSignup] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const { user } = useContext(UserContext)
     
     const handleLoginClose = () => {
         setOpenLogin(false);
@@ -113,6 +115,7 @@ function Header() {
     }
 
     const classes = useStyles();
+    console.log(user)
     return (
         <CartContext.Consumer>
             {({ cart }) => {
