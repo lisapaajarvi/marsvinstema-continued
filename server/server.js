@@ -1,23 +1,31 @@
 const  express = require('express');
 const mongoose = require('mongoose')
 const app = express();
+const dotenv = require("dotenv")
 
 
 
 
 
-// connects to the DB
+dotenv.config()
 
-mongoose.connect(`mongodb+srv://Admin:marsvin123@cluster0.eexfj.mongodb.net/MarsvinsTema?retryWrites=true&w=majority`, {
+
+// Connects to the DB
+
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.eexfj.mongodb.net/MarsvinsTema?retryWrites=true&w=majority`, {
     useNewUrlParser : true,
     useUnifiedTopology: true
- });
-console.log('You are now connected to your database!');
+})
+.then(() => {
+    console.log('You are now connected to your database!');
+})
+.catch((error)  => {
+    console.error(error)
+});
 
 
 
 
 
-
-// listening to the server 
+// Listening to the server 
 app.listen(4000); 
