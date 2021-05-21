@@ -17,8 +17,103 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeView from "@material-ui/lab/TreeView";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TreeItem from "@material-ui/lab/TreeItem";
+import  { mockedProducts, Product } from '../ProductList'
 
 const drawerWidth = 240;
+
+export default function CategoryDrawer() {
+	const classes = useStyles();
+	const theme = useTheme();
+	const [open, setOpen] = React.useState(false);
+	const handleDrawerOpen = () => {
+		setOpen(true);
+	};
+	const handleDrawerClose = () => {
+		setOpen(false);
+	};
+	const handleCategoryClick = () => {
+		console.log('clicked')
+	}
+
+	function getProductList() {
+    const productListFromLS = localStorage.getItem('productList');
+    if (productListFromLS) {
+      return JSON.parse(productListFromLS) as Product[]
+    }
+    localStorage.setItem('productList', JSON.stringify(mockedProducts));
+    return mockedProducts;
+  }
+
+  const productList = getProductList();
+
+	return (
+		<div className={classes.root1}>
+			<CssBaseline />
+			<Toolbar>
+				<IconButton
+					style= {{ color: 'white'}}
+					aria-label="open drawer"
+					onClick={handleDrawerOpen}
+					edge="start"
+					className={clsx(classes.menuButton, open && classes.hide)}
+				>
+					<MenuIcon />
+				</IconButton>
+			</Toolbar>
+			<Drawer
+				className={classes.drawer}
+				variant="persistent"
+				anchor="left"
+				open={open}
+				classes={{
+					paper: classes.drawerPaper,
+				}}
+			>
+				<div className={classes.drawerHeader}>
+					<IconButton onClick={handleDrawerClose}>
+						{theme.direction === "ltr" ? (
+							<ChevronLeftIcon />
+						) : (
+							<ChevronRightIcon />
+						)}
+					</IconButton>
+				</div>
+				<Divider />
+				<TreeView
+					className={classes.root}
+					defaultCollapseIcon={<ExpandMoreIcon />}
+					defaultExpandIcon={<ChevronRightIcon />}
+				>
+					<TreeItem nodeId="1" label="Kategorier">
+						<TreeItem 
+							nodeId="2" 
+							label="Leksaker"
+							onClick={handleCategoryClick} />
+						<TreeItem 
+							nodeId="3" 
+							label="Mat"
+							onClick={handleCategoryClick} />
+						<TreeItem 
+							nodeId="4" 
+							label="Kläder"
+							onClick={handleCategoryClick} />
+						<TreeItem 
+							nodeId="5" 
+							label="Hygien"
+							onClick={handleCategoryClick} />
+					</TreeItem>
+				</TreeView>
+			</Drawer>
+			<main
+				className={clsx(classes.content, {
+					[classes.contentShift]: open,
+				})}
+			>
+				<div className={classes.drawerHeader} />
+			</main>
+		</div>
+	);
+}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -70,73 +165,3 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 	}),
 );
-
-export default function CategoryDrawer() {
-	const classes = useStyles();
-	const theme = useTheme();
-	const [open, setOpen] = React.useState(false);
-
-	const handleDrawerOpen = () => {
-		setOpen(true);
-	};
-
-	const handleDrawerClose = () => {
-		setOpen(false);
-	};
-
-	return (
-		<div className={classes.root1}>
-			<CssBaseline />
-			<Toolbar>
-				<IconButton
-					style= {{ color: 'white'}}
-					aria-label="open drawer"
-					onClick={handleDrawerOpen}
-					edge="start"
-					className={clsx(classes.menuButton, open && classes.hide)}
-				>
-					<MenuIcon />
-				</IconButton>
-			</Toolbar>
-			<Drawer
-				className={classes.drawer}
-				variant="persistent"
-				anchor="left"
-				open={open}
-				classes={{
-					paper: classes.drawerPaper,
-				}}
-			>
-				<div className={classes.drawerHeader}>
-					<IconButton onClick={handleDrawerClose}>
-						{theme.direction === "ltr" ? (
-							<ChevronLeftIcon />
-						) : (
-							<ChevronRightIcon />
-						)}
-					</IconButton>
-				</div>
-				<Divider />
-				<TreeView
-					className={classes.root}
-					defaultCollapseIcon={<ExpandMoreIcon />}
-					defaultExpandIcon={<ChevronRightIcon />}
-				>
-					<TreeItem nodeId="1" label="Kategorier">
-						<TreeItem nodeId="2" label="Leksaker" />
-						<TreeItem nodeId="3" label="Mat" />
-						<TreeItem nodeId="4" label="Kläder" />
-						<TreeItem nodeId="5" label="Hygien" />
-					</TreeItem>
-				</TreeView>
-			</Drawer>
-			<main
-				className={clsx(classes.content, {
-					[classes.contentShift]: open,
-				})}
-			>
-				<div className={classes.drawerHeader} />
-			</main>
-		</div>
-	);
-}

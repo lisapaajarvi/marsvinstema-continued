@@ -6,23 +6,6 @@ import  { mockedProducts, Product } from '../ProductList'
 import ProductCard from './ProductCard';
 import { Footer } from './Footer';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-    item: {
-      display: 'flex',
-      justifyContent: 'center'
-    }
-  }),
-);
-
 export default function ProductView() {
   const classes = useStyles();
   
@@ -54,3 +37,20 @@ export default function ProductView() {
     </div>
   );
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+    item: {
+      display: 'flex',
+      justifyContent: 'center'
+    }
+  }),
+);
