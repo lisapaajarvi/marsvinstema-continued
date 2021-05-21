@@ -105,18 +105,21 @@ const useStyles = makeStyles((theme: Theme) =>
 function Header() {
 	const classes = useStyles();
 	const theme = useTheme();
-	const [open, setOpen] = React.useState(false);
-	const handleDrawerOpen = () => {
-		setOpen(true);
-	};
-	const handleDrawerClose = () => {
-		setOpen(false);
-	};
+	const [open, setOpen] = useState(false);
 	const [openLogin, setOpenLogin] = useState(false);
 	const [openSignup, setOpenSignup] = useState(false);
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const { user } = useContext(UserContext)
+	const [email, setEmail] = useState('');
+	const { user, setUserInContext } = useContext(UserContext)
+
+	const handleDrawerOpen = () => {
+		setOpen(true);
+	};
+
+	const handleDrawerClose = () => {
+		setOpen(false);
+	};
 
 	const handleLoginClose = () => {
 		setOpenLogin(false);
@@ -137,7 +140,8 @@ function Header() {
 	// const signup = ()=> {
 	//   const newUser = {
 	//     username: username,
-	//     password: password,
+	//	   email: email,
+	//     password: password
 	//   }
 	//   console.log(newUser)
 	//   axios
@@ -153,28 +157,33 @@ function Header() {
 
 	// const login = ()=> {
 	//   const body = {
-	//     username: username,
+	//     email: email,
 	//     password: password
 	//   }
 	//   axios
 	//     .post('/api/users/login', body)
 	//     .then(({ data: user }) => {
-	//       setUser(user);
+	//       setUserInContext(user)
 	//       setOpenLogin(false);          
 	//       setPassword('')
-	//       setUsername('')
+	//       setEmail('')
 	//   })
 	// }
 
 	const handleSignupUsername = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
 		setUsername(e.target.value)
 	}
+
+	const handleSignupEmail = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+		setEmail(e.target.value)
+	}
+
 	const handleSignupPassword = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
 		setPassword(e.target.value)
 	}
 
-	const handleLoginUsername = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-		setUsername(e.target.value)
+	const handleLoginEmail = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+		setEmail(e.target.value)
 	}
 
 	const handleLoginPassword = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -282,11 +291,11 @@ function Header() {
 										<TextField
 											autoFocus
 											margin="dense"
-											id="name"
-											label="Username"
+											id="email"
+											label="E-mail"
 											type="text"
-											onChange={handleLoginUsername}
-											defaultValue={username}
+											onChange={handleLoginEmail}
+											defaultValue={email}
 											fullWidth
 										/>
 										<TextField
@@ -315,11 +324,21 @@ function Header() {
 										<TextField
 											autoFocus
 											margin="dense"
-											id="name"
+											id="username"
 											label="Username"
 											type="text"
 											value={username}
 											onChange={handleSignupUsername}
+											fullWidth
+										/>
+										<TextField
+											autoFocus
+											margin="dense"
+											id="email"
+											label="E-mail"
+											type="text"
+											value={email}
+											onChange={handleSignupEmail}
 											fullWidth
 										/>
 										<TextField

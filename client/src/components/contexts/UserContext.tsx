@@ -14,6 +14,7 @@ interface User {
 
 
 interface ContextValue extends State {
+    setUserInContext: (newUser: User) => void;
 }
 
 export const UserContext = createContext<ContextValue>({
@@ -23,16 +24,17 @@ export const UserContext = createContext<ContextValue>({
         email: "abc",
         access: "admin"
     },
+    setUserInContext: () => {},
 
 });
 
-function getUser() {
-//     const cart = localStorage.getItem('cart');
-//     if (cart) {
-//       return JSON.parse(cart) as CartProduct[];
-//     }
-//     return [];
-   }
+// function getUser() {
+// //     const cart = localStorage.getItem('cart');
+// //     if (cart) {
+// //       return JSON.parse(cart) as CartProduct[];
+// //     }
+// //     return [];
+//    }
 
 class UserProvider extends Component<{}, State> {
     state: State = {
@@ -45,10 +47,15 @@ class UserProvider extends Component<{}, State> {
         },
     }
 
+    setUserInContext = (newUser: User) => {
+        this.setState({ user: newUser });
+    }
+
     render() {
         return (
             <UserContext.Provider value={{
                 user: this.state.user,
+                setUserInContext: this.setUserInContext
 
             }}>
                 {this.props.children}
