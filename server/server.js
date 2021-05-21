@@ -1,13 +1,9 @@
-const  express = require('express');
-const mongoose = require('mongoose')
+const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
-
 const dotenv = require("dotenv")
 
 dotenv.config()
-
-
-
 
 // connects to the DB
 
@@ -21,8 +17,6 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
 .catch((error)  => {
     console.error(error)
 });
-
-
 
 // listening to the server 
 app.listen(4000); 
