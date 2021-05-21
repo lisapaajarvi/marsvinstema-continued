@@ -38,6 +38,7 @@ export default function CrudPage() {
   const [url, setUrl] = React.useState('');
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
+  const [category, setCategory] = React.useState('');
   const [price, setPrice] = React.useState('')
   const [img, setImg] = React.useState('')
   const [productList, setProductList] = React.useState(getProductList())
@@ -45,6 +46,7 @@ export default function CrudPage() {
   const [urlError, setUrlError] = React.useState<boolean>(false);
   const [nameError, setNameError] = React.useState<boolean>(false);
   const [descriptionError, setDescriptionError] = React.useState<boolean>(false);
+  const [categoryError, setCategoryError] = React.useState<boolean>(false);
   const [priceError, setPriceError] = React.useState<boolean>(false);
   const [imgError, setImgError] = React.useState<boolean>(false);
 
@@ -53,6 +55,7 @@ export default function CrudPage() {
       url
       && name
       && description
+      && category
       && price
       && img
     )
@@ -64,6 +67,7 @@ export default function CrudPage() {
       && !urlError
       && !nameError
       && !descriptionError
+      && !categoryError
       && !priceError
       && !imgError
     )
@@ -93,6 +97,7 @@ export default function CrudPage() {
     setUrl(product.url)
     setName(product.name)
     setDescription(product.description)
+    setCategory(product.category)
     setPrice(product.price.toString())
     setImg(product.img)
     setOpen(true);
@@ -103,6 +108,7 @@ export default function CrudPage() {
     setName('')
     setDescription('')
     setPrice('')
+    setCategory('')
     setImg('')
     setIsFieldDisabled(false)
     setOpen(true);
@@ -118,6 +124,7 @@ export default function CrudPage() {
       if(editedProduct) {
         editedProduct.name = name;
         editedProduct.description = description;
+        editedProduct.category = category;
         editedProduct.price = parseInt(price);
         editedProduct.img = img;
         setProductList(productList)
@@ -125,7 +132,7 @@ export default function CrudPage() {
       }
     }
     else {
-      let updatedProductList = [...productList, {url: url, name: name, description: description, price: parseInt(price), img: img }];
+      let updatedProductList = [...productList, {url: url, name: name, description: description, category: category, price: parseInt(price), img: img }];
       setProductList(updatedProductList)
       setIsFieldDisabled(true)  
       updateProductListInLocalStorage(updatedProductList);
@@ -160,6 +167,16 @@ export default function CrudPage() {
       setDescriptionError(true);
     }
     setDescription(e.target.value)
+  };
+
+  const handleCategoryInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (/^.{3,}$/.test(e.target.value)) {  
+      setCategoryError(false);
+    }
+    else {
+      setCategoryError(true);
+    }
+    setCategory(e.target.value)
   };
 
   const handlePriceInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -234,6 +251,17 @@ export default function CrudPage() {
                     onChange={handleDescriptionInput}
                     fullWidth
                     error={descriptionError}
+                  />
+                  <TextField
+                    margin="dense"
+                    id="category"
+                    label="Kategori"
+                    multiline
+                    defaultValue={category}
+                    type="text"
+                    onChange={handleCategoryInput}
+                    fullWidth
+                    error={categoryError}
                   />
                   <TextField
                     margin="dense"
