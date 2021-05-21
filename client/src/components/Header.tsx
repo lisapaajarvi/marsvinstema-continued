@@ -1,12 +1,21 @@
-import React, { CSSProperties } from "react";
-import Badge from "@material-ui/core/Badge";
-import { withStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { Link } from "react-router-dom";
-import { Typography, useTheme } from "@material-ui/core";
-import { CartContext, CartProduct } from "./contexts/CartContext";
-import { Theme, makeStyles, createStyles } from "@material-ui/core/styles";
+import React, { useState, CSSProperties, useContext } from 'react';
+import Badge from '@material-ui/core/Badge';
+import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Link } from 'react-router-dom';
+import { Typography, useTheme } from '@material-ui/core';
+import { CartContext, CartProduct } from './contexts/CartContext';
+import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
+import ProfileCard from './ProfileCard'
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import { Button } from '@material-ui/core';
+import { UserContext } from './contexts/UserContext';
 import clsx from "clsx";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -96,26 +105,104 @@ const useStyles = makeStyles((theme: Theme) =>
 function Header() {
 	const classes = useStyles();
 	const theme = useTheme();
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
+	const [openLogin, setOpenLogin] = useState(false);
+	const [openSignup, setOpenSignup] = useState(false);
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState('');
+	const { user, setUserInContext } = useContext(UserContext)
+
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
+
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
 
+	const handleLoginClose = () => {
+		setOpenLogin(false);
+	};
+
+	function openLoginModal() {
+		setOpenLogin(true);
+	}
+
+	const handleSignupClose = () => {
+		setOpenSignup(false);
+	};
+
+	function openSignupModal() {
+		setOpenSignup(true);
+	}
+
+	// const signup = ()=> {
+	//   const newUser = {
+	//     username: username,
+	//	   email: email,
+	//     password: password
+	//   }
+	//   console.log(newUser)
+	//   axios
+	//     .post('/api/users/register', newUser)
+	//     .then(res => {
+	//       console.log(res)
+	//       setPassword('')
+	//       setUsername('')
+	//       setOpenSignup(false);
+	//       alert('New user created!');
+	//   })
+	// }
+
+	// const login = ()=> {
+	//   const body = {
+	//     email: email,
+	//     password: password
+	//   }
+	//   axios
+	//     .post('/api/users/login', body)
+	//     .then(({ data: user }) => {
+	//       setUserInContext(user)
+	//       setOpenLogin(false);          
+	//       setPassword('')
+	//       setEmail('')
+	//   })
+	// }
+
+	const handleSignupUsername = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+		setUsername(e.target.value)
+	}
+
+	const handleSignupEmail = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+		setEmail(e.target.value)
+	}
+
+	const handleSignupPassword = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+		setPassword(e.target.value)
+	}
+
+	const handleLoginEmail = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+		setEmail(e.target.value)
+	}
+
+	const handleLoginPassword = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+		setPassword(e.target.value)
+	}
+
+	console.log(user)
 	return (
 		<CartContext.Consumer>
 			{({ cart }) => {
 				const getCartLength = (cartCount: CartProduct[]) => {
 					let length = 0;
 					cartCount.forEach((CartProduct) => {
-						length += CartProduct.quantity;
-					});
+						length += CartProduct.quantity
+					})
 					return length;
-				};
+				}
 
-				let cartLength = getCartLength(cart);
+				let cartLength = getCartLength(cart)
 
 				return (
 					<div style={headerStyle}>
@@ -176,32 +263,124 @@ function Header() {
 							</main>
 						</div>
 						{/* <div>{CategoryDrawer}</div> */}
-						<div style={{ marginLeft: "1rem" }}>
+
+
+						<div style={{ marginLeft: '1rem' }}>
 							<Typography gutterBottom>
 								<Link
 									className={classes.header}
 									style={linkStyle}
-									to="/"
-								>
+									to="/">
 									MARSVINSTEMA
-								</Link>
+                                </Link>
 							</Typography>
 						</div>
-						<div style={{ marginRight: "1rem" }}>
+						<div style={{ display: 'flex', marginRight: '1rem', alignItems: 'center' }}>
+
+
+							{/* {!user? ( */}
+
+							<div className="buttonContainer">
+
+								<Button size="medium" variant="contained" onClick={openLoginModal}>LOGIN</Button>
+								<Button size="medium" variant="contained" onClick={openSignupModal}>SIGNUP</Button>
+
+								<Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
+									<DialogTitle id="login">Login</DialogTitle>
+									<DialogContent>
+										<TextField
+											autoFocus
+											margin="dense"
+											id="email"
+											label="E-mail"
+											type="text"
+											onChange={handleLoginEmail}
+											defaultValue={email}
+											fullWidth
+										/>
+										<TextField
+											margin="dense"
+											id="password"
+											label="Password"
+											type="password"
+											onChange={handleLoginPassword}
+											defaultValue={password}
+											fullWidth
+										/>
+									</DialogContent>
+									<DialogActions>
+										<Button onClick={handleLoginClose} color="primary">
+											Go back
+                  </Button>
+										<Button onClick={handleLoginClose} variant="contained" color="primary">
+											Submit
+                  </Button>
+									</DialogActions>
+								</Dialog>
+
+								<Dialog open={openSignup} onClose={handleSignupClose} aria-labelledby="form-dialog-signup">
+									<DialogTitle id="signup">Signup</DialogTitle>
+									<DialogContent>
+										<TextField
+											autoFocus
+											margin="dense"
+											id="username"
+											label="Username"
+											type="text"
+											value={username}
+											onChange={handleSignupUsername}
+											fullWidth
+										/>
+										<TextField
+											autoFocus
+											margin="dense"
+											id="email"
+											label="E-mail"
+											type="text"
+											value={email}
+											onChange={handleSignupEmail}
+											fullWidth
+										/>
+										<TextField
+											margin="dense"
+											id="password"
+											label="Password"
+											type="password"
+											onChange={handleSignupPassword}
+											value={password}
+											fullWidth
+										/>
+									</DialogContent>
+									<DialogActions>
+										<Button onClick={handleSignupClose} color="primary">
+											Go back
+                  </Button>
+										<Button onClick={handleSignupClose} variant="contained" color="primary">
+											Register
+                  </Button>
+									</DialogActions>
+								</Dialog>
+
+							</div>
+							{/* ):(  */}
+							<ProfileCard />
+							{/* )} */}
+						</div>
+						<div>
 							<Link style={linkStyle} to="/kundvagn">
 								<IconButton aria-label="cart">
-									<StyledBadge
-										badgeContent={cartLength}
-										color="secondary"
-									>
+									<StyledBadge badgeContent={cartLength} color="secondary">
 										<ShoppingCartIcon />
 									</StyledBadge>
 								</IconButton>
 							</Link>
 						</div>
 					</div>
-				);
+				)
 			}}
+
+
+			
 		</CartContext.Consumer>
 	);
 }
