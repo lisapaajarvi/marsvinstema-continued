@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	}),
 );
 
-export default function PersistentDrawerLeft() {
+export default function CategoryDrawer() {
 	const classes = useStyles();
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
@@ -89,7 +89,7 @@ export default function PersistentDrawerLeft() {
 			<CssBaseline />
 			<Toolbar>
 				<IconButton
-					color="inherit"
+					style= {{ color: 'white'}}
 					aria-label="open drawer"
 					onClick={handleDrawerOpen}
 					edge="start"
