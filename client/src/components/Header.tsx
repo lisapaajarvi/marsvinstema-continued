@@ -145,7 +145,7 @@ function Header() {
 	  }
 	  console.log(newUser)
 	  axios
-	    .post('/users/register', newUser)
+	    .post('/api/users', newUser)
 	    .then(res => {
 	      console.log(res)
 	      setUsername('')
