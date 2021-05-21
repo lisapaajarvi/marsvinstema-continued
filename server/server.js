@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const dotenv = require("dotenv");
 
-const dotenv = require("dotenv");
 
-dotenv.config();
 
 dotenv.config();
 
