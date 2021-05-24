@@ -1,0 +1,4 @@
+###
+
+GET http://localhost:4000/api/product/:id
+Content-Type: application/json

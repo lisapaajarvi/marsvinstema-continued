@@ -3,8 +3,8 @@ const productRouter = express.Router();
 const controller = require("../controllers/product.controller");
 
 productRouter
-	.get("/product", controller.getProduct)
-	.get("/product/:id", controller.getProducts)
+	.get("/product/:id", controller.getProduct)
+	.get("/products", controller.getAllProducts)
 	.get("/products/filtered", controller.filteredProducts)
 	.put("/product/:id", controller.editProduct)
 	.post("/products", controller.addNewProduct)
