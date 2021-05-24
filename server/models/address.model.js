@@ -10,8 +10,6 @@ const AdressSchema = new mongoose.Schema({
     streetAdress: {type: String, required: true},
     zipCode: {type: Number, required: true},
     city: {type: String},
-   
-
 })
 
 const AdressModel = mongoose.model('shippingAdress', AdressSchema);
