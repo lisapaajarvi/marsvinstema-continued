@@ -41,9 +41,24 @@ exports.login = async (req, res) => {
     }   
 };
 
+exports.logout = async (req, res) => {
+    req.session = null;
+    res.status(200).json("logged out");
+};
+
 exports.getOneUser = async (req, res) => {
     const { _id } = req.body;
     const user = await UserModel.findOne({_id:_id});
     user.password = undefined;
     res.status(200).json(user); 
 }
+
+exports.getAllUsers = async (req, res) => {
+    //lägg in middleware för admin check
+    console.log("hej")
+    const users = await UserModel.find({});
+    console.log(users)
+    res.status(200).json(users);
+}
+
+
