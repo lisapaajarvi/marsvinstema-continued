@@ -5,10 +5,10 @@ const controller = require("../controllers/user.controller");
 userRouter
   //Full working endpoints
   .post("/users/register", controller.register)
-  //New untested
   .post("/users/login", controller.login)
-  // .get("/users/", controller.getAll)
-  // .get("/users/:id", controller.getOne)
+  //New untested
+  // .get("/users/", controller.getAllUsers)
+   .get("/user/:id", controller.getOneUser)
   // .put("/users/", controller.changeUser)
   // .delete("/users/:id", controller.deleteUser)
 

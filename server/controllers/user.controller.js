@@ -7,7 +7,7 @@ exports.register = async (req, res) => {
     // check if email exists
     const existingUser = await UserModel.findOne({email: email});
     if (existingUser) {
-        return res.status(400).json("Username already exists");
+        return res.status(400).json("Email already exists");
     }
     
     // hash password and save user 
@@ -40,3 +40,10 @@ exports.login = async (req, res) => {
         res.status(200).json(user); 
     }   
 };
+
+exports.getOneUser = async (req, res) => {
+    const { _id } = req.body;
+    const user = await UserModel.findOne({_id:_id});
+    user.password = undefined;
+    res.status(200).json(user); 
+}

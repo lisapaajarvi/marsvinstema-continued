@@ -20,3 +20,10 @@ Content-Type: application/json
 }
 
 ###
+
+GET http://localhost:4000/api/user/:id
+Content-Type: application/json
+
+{
+    "_id": "60ab9fc6274aab34606a67ec"
+}
