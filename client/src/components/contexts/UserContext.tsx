@@ -1,4 +1,4 @@
-import { Component, createContext } from "react"
+import { Component, ContextType, createContext } from "react"
 
 interface User {
     id: any,
@@ -7,31 +7,35 @@ interface User {
     access: String,
 }
 
-const UserContext = createContext<User>({
-    user: {}
-    
+interface State {
+    user: User
+}
+interface ContextValue extends State {
+    setUserInContext: (newUser: User) => void;
+}
+
+const UserContext = createContext<ContextValue>({
+    user: {
+            id: "",
+            username: "",
+            email: "",
+            access: ""
+            },
+            setUserInContext: () => {},
 })
 
-export const UserConsumer = UserContext.Consumer
 
+export const UserConsumer = UserContext.Consumer;
 
-export const UserContext = createContext<ContextValue>({
-    user: {
-        id: "",
-        username: "",
-        email: "",
-        access: ""
-    },
-    setUserInContext: () => {},
 
 
  // Måste vi inte hämta ut ett ID för att hämta en user ? getUser(id: number) sen göra en koll if(user.id === id )........ en fundering bara ? 
 function getUser() {
-    const user = localStorage.getItem('user'),
-    if (user: string) {
+    const user = localStorage.getItem('user');
+    if (user) {
       return JSON.parse(user) as User;
     }
-    return user,
+    return user;
    }
 
 class UserProvider extends Component<{}, State> {
@@ -63,7 +67,7 @@ class UserProvider extends Component<{}, State> {
                 {this.props.children}
             </UserContext.Provider>
             </>
-´        );
+      );
     }
 }
 
