@@ -8,7 +8,6 @@ import { Typography, useTheme } from '@material-ui/core';
 import { CartContext, CartProduct } from './contexts/CartContext';
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import ProfileCard from './ProfileCard'
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -27,6 +26,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeView from "@material-ui/lab/TreeView";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TreeItem from "@material-ui/lab/TreeItem";
+import axios from 'axios';
 
 const drawerWidth = 240;
 
@@ -137,23 +137,26 @@ function Header() {
 		setOpenSignup(true);
 	}
 
-	// const signup = ()=> {
-	//   const newUser = {
-	//     username: username,
-	//	   email: email,
-	//     password: password
-	//   }
-	//   console.log(newUser)
-	//   axios
-	//     .post('/api/users/register', newUser)
-	//     .then(res => {
-	//       console.log(res)
-	//       setPassword('')
-	//       setUsername('')
-	//       setOpenSignup(false);
-	//       alert('New user created!');
-	//   })
-	// }
+	const signup = ()=> {
+	  const newUser = {
+	    username: username,
+		email: email,
+	    password: password,
+	  }
+	  console.log(newUser)
+	  axios
+	    .post('/api/users/register', newUser)
+	    .then(res => {
+	      console.log(res)
+	      setUsername('')
+	      setEmail('')
+	      setPassword('')
+	      setOpenSignup(false);
+	      alert('New user created!');
+	  })
+	  .catch(err => console.log(err))
+
+	}
 
 	// const login = ()=> {
 	//   const body = {
@@ -355,7 +358,7 @@ function Header() {
 										<Button onClick={handleSignupClose} color="primary">
 											Go back
                   </Button>
-										<Button onClick={handleSignupClose} variant="contained" color="primary">
+										<Button onClick={signup} variant="contained" color="primary">
 											Register
                   </Button>
 									</DialogActions>
