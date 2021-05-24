@@ -8,4 +8,4 @@ orderRouter
     .post("/orders", controller.addNewOrder)
     .put("/orders/:id", controller.editOrderStatus)
 
-module.exports = userRouter;
+module.exports = orderRouter;
