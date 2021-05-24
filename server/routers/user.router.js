@@ -6,9 +6,10 @@ userRouter
   //Full working endpoints
   .post("/users/register", controller.register)
   //New untested
-  .get("/users/", controller.getAll)
-  .get("/users/:id", controller.getOne)
-  .put("/users/", controller.changeUser)
-  .delete("/users/:id", controller.deleteUser)
+  .post("/users/login", controller.login)
+  // .get("/users/", controller.getAll)
+  // .get("/users/:id", controller.getOne)
+  // .put("/users/", controller.changeUser)
+  // .delete("/users/:id", controller.deleteUser)
 
 module.exports = userRouter;

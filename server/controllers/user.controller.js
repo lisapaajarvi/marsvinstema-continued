@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-
 const UserModel = require("../models/user.model");
 
 exports.register = async (req, res) => {    
@@ -24,4 +23,20 @@ exports.register = async (req, res) => {
     delete newUser.password;
     res.status(201).json(newUser);
     console.log(newUser)
+};
+
+exports.login = async (req, res) => {
+    const { email, password } = req.body;
+    const user = await UserModel.findOne({email:email});
+
+    if (!user || !await bcrypt.compare(password, user.password)) {    
+        return res.status(401).json("Incorrect password or email!");
+    }
+    else {
+        //create session
+        req.session.username = user.username
+        req.session.access = user.access
+        req.session.email = user.email
+        res.status(200).json(user); 
+    }   
 };
