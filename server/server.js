@@ -26,10 +26,11 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
     //   path: "/",
     // }));
     app.use("/api", userRouter);
+    app.listen(4000); 
 })
 .catch((error)  => {
     console.error(error)
+
 });
 
 // listening to the server 
-app.listen(4000); 

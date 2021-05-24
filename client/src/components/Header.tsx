@@ -145,7 +145,7 @@ function Header() {
 	  }
 	  console.log(newUser)
 	  axios
-	    .post('/api/users', newUser)
+	    .post('/api/users/register', newUser)
 	    .then(res => {
 	      console.log(res)
 	      setUsername('')
@@ -154,6 +154,8 @@ function Header() {
 	      setOpenSignup(false);
 	      alert('New user created!');
 	  })
+	  .catch(err => console.log(err))
+
 	}
 
 	// const login = ()=> {

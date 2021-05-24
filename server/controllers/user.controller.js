@@ -21,6 +21,8 @@ exports.register = async (req, res) => {
         access: "user"
     }
     const newUser = await UserModel.create(userToSave);
+    // newUser.password = undefined;
+    delete newUser.password;
     res.status(201).json(newUser);
     console.log(newUser)
 };
