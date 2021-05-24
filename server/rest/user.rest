@@ -1,0 +1,39 @@
+###
+
+POST http://localhost:4000/api/users/register 
+Content-Type: application/json
+
+{
+    "username": "admin", 
+    "password": "admin", 
+    "email": "admin@admin.com"
+}
+
+###
+
+POST http://localhost:4000/api/users/login 
+Content-Type: application/json
+
+{
+    "email": "admin@admin.com", 
+    "password": "admin"
+}
+
+###
+
+
+POST http://localhost:4000/api/users/logout 
+
+
+###
+GET http://localhost:4000/api/user/:id
+Content-Type: application/json
+
+{
+    "_id": "60ab9fc6274aab34606a67ec"
+}
+
+###
+
+GET http://localhost:4000/api/users
+Content-Type: application/json
