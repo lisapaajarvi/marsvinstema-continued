@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { CSSProperties } from '@material-ui/styles';
-import { UserContext } from './contexts/UserContext';
+import { UserContext } from './contexts/UserContext-old';
 
 function ProfileCard() {  
     const { user } = useContext(UserContext)
