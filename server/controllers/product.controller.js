@@ -13,7 +13,13 @@ exports.getAllProducts = async (req, res) => {
     console.log(products)
     res.status(200).json(products);
 }
-// exports.filteredProducts = async (req, res) => {
+exports.getAllCategories = async (req, res) => {
+    const { category } = req.body;
+    const categories = await ProductModel.find({ category: 'kläder' });
+    res.status(200).json(categories);
+}
+
+// exports.getCategory = async (req, res) => {
  
 // }
 // exports.editProduct = async (req, res) => {

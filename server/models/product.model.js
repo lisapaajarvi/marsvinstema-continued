@@ -1,5 +1,5 @@
-// const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
+// const { ObjectId } = require('mongodb');
 
 
 const productSchema = new mongoose.Schema({
@@ -7,8 +7,11 @@ const productSchema = new mongoose.Schema({
     price: {type: Number, required:  true},
     category: {type: String, required: true},
     title: {type: String, required: true},
+    description: {type: String, required: true},
+    url: {type: String, required: true},
+    stock: Number,
+    img: String
     // quantity?: Number,
-    // stock?: Number,
 })
 
 const ProductModel = mongoose.model('products', productSchema);
