@@ -54,11 +54,26 @@ exports.getOneUser = async (req, res) => {
 }
 
 exports.getAllUsers = async (req, res) => {
-    //lägg in middleware för admin check
-    console.log("hej")
     const users = await UserModel.find({});
-    console.log(users)
     res.status(200).json(users);
+}
+
+//ADDRESS FUNCTIONS
+
+exports.newAddress = async (req, res) => {    
+
+    const newAddress = 
+        {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNr: req.body.phoneNr,
+            streetAddress: req.body.streetAddress,
+            zipCode: req.body.zipCode,
+            city: req.body.city,
+        }
+    const updatedUser = await UserModel.findOneAndUpdate({ _id: req.body._id }, {address: newAddress});
+
+    res.status(201).json(updatedUser.address);
 }
 
 
