@@ -13,11 +13,17 @@ exports.getAllProducts = async (req, res) => {
     console.log(products)
     res.status(200).json(products);
 }
-exports.getAllCategories = async (req, res) => {
-    const { category } = req.body;
-    const categories = await ProductModel.find({ category: 'kläder' });
-    res.status(200).json(categories);
+
+exports.getProductsByCategory = async (req, res) => {
+    const products = await ProductModel.find({'categories': req.params.id}).populate('categories').sort({ title: 1 });
+    console.log(products);
+    res.status(200).json(products);
 }
+// exports.getAllCategories = async (req, res) => {
+//     // const { category } = req.body;
+//     const categories = await ProductModel.find({ category: 'kläder' });
+//     res.status(200).json(categories);
+// }
 
 // exports.getCategory = async (req, res) => {
  
