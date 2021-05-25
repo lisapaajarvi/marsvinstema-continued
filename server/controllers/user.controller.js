@@ -61,4 +61,15 @@ exports.getAllUsers = async (req, res) => {
     res.status(200).json(users);
 }
 
-
+exports.getCurrentUser = async (req, res) => {
+    if  (req.session.username) {
+        res.status(200).json({
+            username: req.session.username,
+            email: req.session.email,
+            access: req.session.access,
+        })
+    }
+    else {
+        res.status(404)
+    }
+}

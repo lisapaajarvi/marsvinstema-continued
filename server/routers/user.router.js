@@ -13,6 +13,7 @@ userRouter
   .post("/users/logout", controller.logout)
   .get("/user/:id", controller.getOneUser)
   //Needs middleware
+  .get("/users/", controller.getCurrentUser)
   .get("/users/", checkAdminAccess, controller.getAllUsers)
   //New untested
   // .put("/users/", controller.changeUser)
