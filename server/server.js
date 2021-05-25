@@ -5,6 +5,7 @@ const app = express();
 const dotenv = require("dotenv")
 const userRouter = require("./routers/user.router");
 const productRouter = require("./routers/product.router");
+const shippingMethodRouter = require("./routers/shippingmethod.router");
 const cookieSession = require('cookie-session');
 
 dotenv.config()
@@ -31,6 +32,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
 
     app.use("/api", userRouter);
     app.use("/api", productRouter);
+    app.use("/api", shippingMethodRouter);
     app.listen(4000); 
 })
 .catch((error)  => {
