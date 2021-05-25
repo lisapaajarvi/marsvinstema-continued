@@ -4,9 +4,7 @@ const controller = require('../controllers/categories.controller');
 
 categoriesRouter
     .get('/categories', controller.getAllCategories)
-    .get('/categories/:id', controller.getOneCategory)
-    .post('/categories',
-        // body('name').not().isEmpty(),
-        controller.addCategory)
+    .get('/category/:id', controller.getOneCategory)
+    .post('/categories', controller.addCategory)
 
 module.exports = categoriesRouter;

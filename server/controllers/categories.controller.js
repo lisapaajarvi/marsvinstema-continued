@@ -10,8 +10,9 @@ exports.getAllCategories = async (req, res) => {
 }
 
 exports.getOneCategory = async (req, res) => {
-    const category = await CategoryModel.findById(req.params.id).populate('products');
-    res.status(200).json(category);   
+    const { _id } = req.body;
+    const category = await CategoryModel.findOne({_id:_id});
+    res.status(200).json(category);
 }
 
 exports.addCategory = async (req, res) => {

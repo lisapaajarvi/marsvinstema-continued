@@ -2,8 +2,12 @@ GET http://localhost:4000/api/categories
 
 ###
 
-GET http://localhost:4000/api/category 
+GET http://localhost:4000/api/category/:id
 Content-Type: application/json
+
+{
+"_id": "60acf347b43d2849bd6ec0cd"
+}
 
 ###
 

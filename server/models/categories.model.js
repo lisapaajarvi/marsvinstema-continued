@@ -7,11 +7,11 @@ const categorySchema = new mongoose.Schema({
 }); 
 
 categorySchema.virtual('products', {
-    ref: 'Product',
+    ref: 'product',
     localField: '_id',
     foreignField: 'categories'
 })
 
-const CategoryModel = mongoose.model('Category', categorySchema);
+const CategoryModel = mongoose.model('category', categorySchema);
 
 module.exports = CategoryModel;
