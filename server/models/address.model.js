@@ -12,7 +12,6 @@ const AddressSchema = new mongoose.Schema({
     city: {type: String},
 })
 
-const AddressModel = mongoose.model('shippingAddress', AddressSchema);
+//const AddressModel = mongoose.model('shippingAddress', AddressSchema);
 
-module.exports = AddressModel
-;
+module.exports = AddressSchema;

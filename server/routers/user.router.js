@@ -17,6 +17,7 @@ userRouter
 // ADDRESS ENDPOINTS
 
 .put("/user/address/:id", controller.newAddress)
-
+.get("/user/address/:id", controller.getAddress)
+.delete("/user/address/:id", controller.deleteAddress)
 
 module.exports = userRouter;
