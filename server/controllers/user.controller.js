@@ -34,6 +34,7 @@ exports.login = async (req, res) => {
     }
     else {
         //create session
+        req.session.id = user._id
         req.session.username = user.username
         req.session.access = user.access
         req.session.email = user.email
@@ -71,9 +72,9 @@ exports.newAddress = async (req, res) => {
             zipCode: req.body.zipCode,
             city: req.body.city,
         }
-    const updatedUser = await UserModel.findOneAndUpdate({ _id: req.body._id }, {address: newAddress});
+    const user = await UserModel.findOneAndUpdate({ _id: req.body._id }, {address: newAddress});
 
-    res.status(201).json(updatedUser.address);
+    res.status(201).json(newAddress);
 }
 
 exports.getAddress = async (req, res) => {
