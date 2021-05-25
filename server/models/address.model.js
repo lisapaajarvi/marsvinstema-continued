@@ -2,8 +2,8 @@ const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
 
-const AdressSchema = new mongoose.Schema({
-    id: {type: mongoose.Schema.Types.ObjectId},
+const AddressSchema = new mongoose.Schema({
+    id: {type: ObjectId},
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     phoneNr: {type: Number, required: true},
@@ -12,7 +12,7 @@ const AdressSchema = new mongoose.Schema({
     city: {type: String},
 })
 
-const AdressModel = mongoose.model('shippingAdress', AdressSchema);
+const AddressModel = mongoose.model('shippingAddress', AddressSchema);
 
-module.exports = AdressModel
+module.exports = AddressModel
 ;
