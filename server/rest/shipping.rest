@@ -1,0 +1,24 @@
+
+###
+
+
+GET http://localhost:4000/api/shippingMethod/
+Content-Type: application/json
+
+
+
+
+###
+
+
+GET http://localhost:4000/api/shippingMethod/:id
+Content-Type: application/json
+
+{
+    "_id": "60acae4ca5c1a830591e98e6"
+}
+
+
+
+
+###
