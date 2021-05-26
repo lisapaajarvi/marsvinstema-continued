@@ -8,10 +8,10 @@ productRouter
 	.get("/product/:id", controller.getProduct)
 	// .post("/products", controller.addProduct)
 	.get("/products/categories", controller.getAllCategories)
-	// .get('/api/products/category/:id', controller.getProductsByCategory)
-	// .get("/products/category", controller.getCatergory)
-	// .put("/product/:id", controller.editProduct)
-	// .post("/products", controller.addNewProduct)
-	// .delete("/product/:id", controller.deleteProduct);
+	.get('/products/category', controller.getProductsByCategory)
+// .get("/products/category", controller.getCatergory)
+// .put("/product/:id", controller.editProduct)
+// .post("/products", controller.addNewProduct)
+// .delete("/product/:id", controller.deleteProduct);
 
 module.exports = productRouter;
