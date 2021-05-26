@@ -1,7 +1,7 @@
 const express = require("express");
 const userRouter = express.Router();
 const controller = require("../controllers/user.controller");
-const checkAdminAccess = require("../helpers/auth");
+const { checkAdminAccess, checkUserLogin } = require("../helpers/auth");
 
 userRouter
   //Full working endpoints
@@ -16,7 +16,8 @@ userRouter
 
 // ADDRESS ENDPOINTS
 
-.put("/user/address/:id", controller.newAddress)
-
+.put("/user/address/:id", checkUserLogin, controller.newAddress)
+.get("/user/address/:id", checkUserLogin, controller.getAddress)
+.delete("/user/address/:id", checkUserLogin, controller.deleteAddress)
 
 module.exports = userRouter;
