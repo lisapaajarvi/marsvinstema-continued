@@ -158,20 +158,20 @@ function Header() {
 
 	}
 
-	// const login = ()=> {
-	//   const body = {
-	//     email: email,
-	//     password: password
-	//   }
-	//   axios
-	//     .post('/api/users/login', body)
-	//     .then(({ data: user }) => {
-	//       setUserInContext(user)
-	//       setOpenLogin(false);          
-	//       setPassword('')
-	//       setEmail('')
-	//   })
-	// }
+	const login = ()=> {
+	  const body = {
+	    email: email,
+	    password: password
+	  }
+	  axios
+	    .post('/api/users/login', body)
+	    .then(({ data: user }) => {
+	      setUserInContext(user)
+	      setOpenLogin(false);          
+	      setPassword('')
+	      setEmail('')
+	  })
+	}
 
 	const handleSignupUsername = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
 		setUsername(e.target.value)
@@ -314,10 +314,10 @@ function Header() {
 									<DialogActions>
 										<Button onClick={handleLoginClose} color="primary">
 											Go back
-                  </Button>
-										<Button onClick={handleLoginClose} variant="contained" color="primary">
+                  						</Button>
+										<Button onClick={login} variant="contained" color="primary">
 											Submit
-                  </Button>
+                  						</Button>
 									</DialogActions>
 								</Dialog>
 
