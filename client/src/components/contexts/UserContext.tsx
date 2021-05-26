@@ -1,17 +1,25 @@
 import { Component, createContext } from 'react';
 
-interface User {
-	id: any;
-	username: String;
+// interface User {
+// 	id: String;
+// 	userName: String;
+// 	email: String;
+// 	access: String;
+// }
+
+interface Errors {
+    wrongPassword: string;
+    noUsername: string;
+}
+interface State {
+	id: String;
+	userName: String;
 	email: String;
 	access: String;
 }
-
-interface State {
-	user: User;
-}
-interface ContextValue extends State {
+interface Context extends State {
 	setUserInContext: (newUser: User) => void;
+	handleLogout: () => void;
 }
 
 const UserContext = createContext<ContextValue>({
@@ -36,22 +44,31 @@ function getUser() {
 }
 
 class UserProvider extends Component<{}, State> {
-	setState(_arg0: { user: User }) {
-		throw new Error('Method not implemented.');
-	}
-	state: State = {
-		user: {
-			id: '123',
-			username: 'Marsvinstok123',
-			email: 'abc',
-			access: 'admin',
-		},
-	};
+	// setState(_arg0: { user: User }) {
+	// 	throw new Error('Method not implemented.');
+	// }
 
-	setUserInContext = (newUser: User) => {
-		this.setState({ user: newUser });
-	};
-	props: any;
+	// setUserInContext = (newUser: User) => {
+	// 	this.setState({ user: newUser });
+	// };
+	// props: any;
+
+    state: State = {
+        userName: "",
+        email:"",
+        errors: {
+            wrongPassword: "",
+            noUsername: "",
+        },
+    };
+
+
+interface Context extends State {
+    handleRegistration: () => void;
+    handleLogin: () => void;
+    handleLogout: () => void;
+    setUserInContext: (newUser: User) => void;
+}
 
 	render() {
 		return (

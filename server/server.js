@@ -1,37 +1,43 @@
-const express = require("express");
+const express = require('express');
 require('express-async-errors');
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const app = express();
-const dotenv = require("dotenv")
-const userRouter = require("./routers/user.router");
+const dotenv = require('dotenv');
+const userRouter = require('./routers/user.router');
 const cookieSession = require('cookie-session');
 
-dotenv.config()
+dotenv.config();
 
 // connects to the DB
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.eexfj.mongodb.net/MarsvinsTema?retryWrites=true&w=majority`, {
-    useNewUrlParser : true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-})
-.then(() => {
-    console.log('You are now connected to your database!');
+mongoose
+	.connect(
+		`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.eexfj.mongodb.net/MarsvinsTema?retryWrites=true&w=majority`,
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			useFindAndModify: false,
+		},
+	)
+	.then(() => {
+		console.log('Database is connected');
 
-    app.use(express.json());
+		app.use(express.json());
 
-    app.use(cookieSession({
-      name: "session",
-      secret: "SuperSecretKey",
-      secure: false,
-      maxAge: 1000 * 60 * 30,
-      httpOnly: false,
-      path: "/",
-    }));
+		app.use(
+			cookieSession({
+				name: 'session',
+				secret: 'SuperSecretKey',
+				secure: false,
+				maxAge: 1000 * 60 * 30,
+				httpOnly: false,
+				path: '/',
+			}),
+		);
 
-    app.use("/api", userRouter);
-    app.listen(4000); 
-})
-.catch((error)  => {
-    console.error(error)
-
-});
+		app.use('/api', userRouter);
+		app.listen(4000);
+		console.log('Server is running on port 4000');
+	})
+	.catch((error) => {
+		console.error(error);
+	});

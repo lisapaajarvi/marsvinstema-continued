@@ -39,7 +39,7 @@ export default function Header() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [email, setEmail] = useState('');
-	const { user, setUserInContext } = useContext(UserContext);
+	const { user, setUser } = useContext(UserContext);
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
@@ -77,7 +77,7 @@ export default function Header() {
 			})
 			.catch((err) => console.log(err));
 	};
-	// const login = ()=> {
+	// export const login = ()=> {
 	//   const body = {
 	//     email: email,
 	//     password: password
@@ -118,6 +118,7 @@ export default function Header() {
 	};
 
 	console.log(user);
+
 	return (
 		<CartContext.Consumer>
 			{({ cart }) => {
