@@ -39,69 +39,6 @@ const StyledBadge = withStyles((theme) => ({
 	},
 }))(Badge);
 
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		header: {
-			padding: theme.spacing(1),
-			[theme.breakpoints.down("xs")]: {
-				fontSize: "2rem",
-			},
-			[theme.breakpoints.up("sm")]: {
-				fontSize: "3rem",
-			},
-			[theme.breakpoints.up("md")]: {
-				fontSize: "4.5rem",
-			},
-		},
-		root1: {
-			display: "flex",
-		},
-		root: {
-			height: 240,
-			flexGrow: 1,
-			maxWidth: 400,
-		},
-		menuButton: {
-			color: "##f8f7f7",
-			marginRight: theme.spacing(2),
-		},
-		hide: {
-			display: "none",
-		},
-		drawer: {
-			width: drawerWidth,
-			flexShrink: 0,
-		},
-		drawerPaper: {
-			width: drawerWidth,
-		},
-		drawerHeader: {
-			display: "flex",
-			alignItems: "center",
-			padding: theme.spacing(0, 1),
-			// necessary for content to be below app bar
-			...theme.mixins.toolbar,
-			justifyContent: "flex-end",
-		},
-		content: {
-			flexGrow: 1,
-			padding: theme.spacing(3),
-			transition: theme.transitions.create("margin", {
-				easing: theme.transitions.easing.sharp,
-				duration: theme.transitions.duration.leavingScreen,
-			}),
-			marginLeft: -drawerWidth,
-		},
-		contentShift: {
-			transition: theme.transitions.create("margin", {
-				easing: theme.transitions.easing.easeOut,
-				duration: theme.transitions.duration.enteringScreen,
-			}),
-			marginLeft: 0,
-		},
-	}),
-);
-
 function Header() {
 	const classes = useStyles();
 	const theme = useTheme();
@@ -279,15 +216,10 @@ function Header() {
 							</Typography>
 						</div>
 						<div style={{ display: 'flex', marginRight: '1rem', alignItems: 'center' }}>
-
-
 							{/* {!user? ( */}
-
 							<div className="buttonContainer">
-
 								<Button size="medium" variant="contained" onClick={openLoginModal}>LOGIN</Button>
 								<Button size="medium" variant="contained" onClick={openSignupModal}>SIGNUP</Button>
-
 								<Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
 									<DialogTitle id="login">Login</DialogTitle>
 									<DialogContent>
@@ -320,7 +252,6 @@ function Header() {
                   						</Button>
 									</DialogActions>
 								</Dialog>
-
 								<Dialog open={openSignup} onClose={handleSignupClose} aria-labelledby="form-dialog-signup">
 									<DialogTitle id="signup">Signup</DialogTitle>
 									<DialogContent>
@@ -381,12 +312,71 @@ function Header() {
 					</div>
 				)
 			}}
-
-
-			
 		</CartContext.Consumer>
 	);
 }
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		header: {
+			padding: theme.spacing(1),
+			[theme.breakpoints.down("xs")]: {
+				fontSize: "2rem",
+			},
+			[theme.breakpoints.up("sm")]: {
+				fontSize: "3rem",
+			},
+			[theme.breakpoints.up("md")]: {
+				fontSize: "4.5rem",
+			},
+		},
+		root1: {
+			display: "flex",
+		},
+		root: {
+			height: 240,
+			flexGrow: 1,
+			maxWidth: 400,
+		},
+		menuButton: {
+			color: "##f8f7f7",
+			marginRight: theme.spacing(2),
+		},
+		hide: {
+			display: "none",
+		},
+		drawer: {
+			width: drawerWidth,
+			flexShrink: 0,
+		},
+		drawerPaper: {
+			width: drawerWidth,
+		},
+		drawerHeader: {
+			display: "flex",
+			alignItems: "center",
+			padding: theme.spacing(0, 1),
+			// necessary for content to be below app bar
+			...theme.mixins.toolbar,
+			justifyContent: "flex-end",
+		},
+		content: {
+			flexGrow: 1,
+			padding: theme.spacing(3),
+			transition: theme.transitions.create("margin", {
+				easing: theme.transitions.easing.sharp,
+				duration: theme.transitions.duration.leavingScreen,
+			}),
+			marginLeft: -drawerWidth,
+		},
+		contentShift: {
+			transition: theme.transitions.create("margin", {
+				easing: theme.transitions.easing.easeOut,
+				duration: theme.transitions.duration.enteringScreen,
+			}),
+			marginLeft: 0,
+		},
+	}),
+);
 
 const headerStyle: CSSProperties = {
 	background:

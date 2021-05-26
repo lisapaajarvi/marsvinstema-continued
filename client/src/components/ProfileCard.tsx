@@ -1,23 +1,15 @@
 import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button';
-// import axios from 'axios';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from "react-router-dom";
 import { CSSProperties } from '@material-ui/styles';
 import { UserContext } from './contexts/UserContext';
 
 function ProfileCard() {  
-    const { user } = useContext(UserContext)
-    // const logout = () => {
-    //     axios
-    //       .post('/api/users/logout')
-    //       .then(res => {
-    //         console.log(res)
-    //         setUser(undefined)
-    //         })
-    // }
-    if (!user) return null;
-
+    const { user, logout } = useContext(UserContext)
+    
+    if(!user) return null;
+    
     return (   
         
         <div style={profileContainer}>
@@ -30,7 +22,7 @@ function ProfileCard() {
                         ) : (  
                     <div></div>
                 )} 
-                <Button size="small" variant="contained" color="primary" style={buttonStyle}>LOG OUT</Button>
+                <Button size="small" variant="contained" color="primary" style={buttonStyle} onClick={logout}>LOG OUT</Button>
             </div>
         </div>
     )    
@@ -41,13 +33,11 @@ const profileContainer: CSSProperties = {
     alignItems: 'flex-end',
     textAlign: 'center'
 }
-
 const userNameStyle: CSSProperties = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
 }
-
 const buttonStyle: CSSProperties = {
     // background: 'green',
     // color: 'white',
