@@ -16,21 +16,22 @@ function ProfileCard() {
     //         setUser(undefined)
     //         })
     // }
+    if (!user) return null;
 
     return (   
         
         <div style={profileContainer}>
-                <div style={userNameStyle}>
-                    <p style={{color:'white'}}>{user.username}</p>
-                    { user.access === "admin" ? (
-                        <Link to="/crud" style={{color: 'lightgray', marginLeft: '1rem'}}>
-                            <SettingsIcon />
-                        </Link>
-                          ) : (  
-                        <div></div>
-                    )} 
-                    <Button size="small" variant="contained" color="primary" style={buttonStyle}>LOG OUT</Button>
-                </div>
+            <div style={userNameStyle}>
+                <p style={{color:'white'}}>{user.username}</p>
+                { user.access === "admin" ? (
+                    <Link to="/crud" style={{color: 'lightgray', marginLeft: '1rem'}}>
+                        <SettingsIcon />
+                    </Link>
+                        ) : (  
+                    <div></div>
+                )} 
+                <Button size="small" variant="contained" color="primary" style={buttonStyle}>LOG OUT</Button>
+            </div>
         </div>
     )    
 }

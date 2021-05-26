@@ -8,7 +8,7 @@ userRouter
   .post("/users/register", controller.register)
   .post("/users/login", controller.login)
   .post("/users/logout", controller.logout)
-  .get("/user/:id", controller.getOneUser)
+  .get("/users/auth", controller.getLoggedInUser)
   .get("/users/", checkAdminAccess, controller.getAllUsers)
   //New untested
   // .put("/users/", controller.changeUser)
