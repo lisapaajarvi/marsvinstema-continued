@@ -27,7 +27,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     const { email, password } = req.body;
-    const user = await UserModel.findOne({email:email});
+    const user = await UserModel.findOne({email:email}).select('+password');
 
     if (!user || !await bcrypt.compare(password, user.password)) {    
         return res.status(401).json("Incorrect password or email!");
@@ -38,6 +38,8 @@ exports.login = async (req, res) => {
         req.session.username = user.username
         req.session.access = user.access
         req.session.email = user.email
+        
+        delete user.password;
         res.status(200).json(user); 
     }   
 };
@@ -47,10 +49,11 @@ exports.logout = async (req, res) => {
     res.status(200).json("logged out");
 };
 
-exports.getOneUser = async (req, res) => {
-    const { _id } = req.body;
-    const user = await UserModel.findOne({_id:_id});
-    user.password = undefined;
+exports.getLoggedInUser = async (req, res) => {
+    if (!req.session.id) {
+        return res.status(401).json('You must login');
+    }
+    const user = await UserModel.findOne({ _id: req.session.id });
     res.status(200).json(user); 
 }
 
