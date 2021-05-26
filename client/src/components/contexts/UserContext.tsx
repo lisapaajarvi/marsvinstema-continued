@@ -13,20 +13,18 @@ interface User {
 }
 
 interface ContextValue extends State {
-    setUserInContext: (newUser: User) => void;
+    signup: (newUser: any) => void;
+    login: (loginBody: any) => void;
     logout: () => void;
 }    
 
 export const UserContext = createContext<ContextValue>({
-    setUserInContext: () => {},
-    logout: () => {}
+    login: () => {},
+    logout: () => {},
+    signup: () => {}
 });
 class UserProvider extends Component<{}, State> {
     state: State = {};
-
-    setUserInContext = (newUser: User) => {
-        this.setState({ user: newUser });
-    }
 
     async fetchUser() {
         const response = await fetch('/api/users/auth');
@@ -39,6 +37,25 @@ class UserProvider extends Component<{}, State> {
         this.fetchUser();
     }
 
+    signup = (newUser: any)=> {
+        axios
+          .post('/api/users/register', newUser)
+          .then(res => {
+            console.log(res)
+
+        })
+        .catch(err => console.log(err))
+  
+      }
+  
+    login = (loginBody: any)=> {
+        axios
+          .post('/api/users/login', loginBody)
+          .then(({ data: user }) => {
+            this.setState({ user });
+        })
+    }
+    
     logout = () => {
         axios
           .post('/api/users/logout')
@@ -51,8 +68,9 @@ class UserProvider extends Component<{}, State> {
     render() {
         return (
             <UserContext.Provider value={{
+                signup: this.signup,
                 user: this.state.user,
-                setUserInContext: this.setUserInContext,
+                login: this.login,
                 logout: this.logout
             }}>
                 {this.props.children}

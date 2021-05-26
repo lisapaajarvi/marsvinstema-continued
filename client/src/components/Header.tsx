@@ -26,7 +26,6 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeView from "@material-ui/lab/TreeView";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TreeItem from "@material-ui/lab/TreeItem";
-import axios from 'axios';
 
 const drawerWidth = 240;
 
@@ -48,7 +47,7 @@ function Header() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [email, setEmail] = useState('');
-	const { user, setUserInContext } = useContext(UserContext)
+	const { user, login, signup } = useContext(UserContext)
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -74,42 +73,6 @@ function Header() {
 		setOpenSignup(true);
 	}
 
-	const signup = ()=> {
-	  const newUser = {
-	    username: username,
-		email: email,
-	    password: password,
-	  }
-	  console.log(newUser)
-	  axios
-	    .post('/api/users/register', newUser)
-	    .then(res => {
-	      console.log(res)
-	      setUsername('')
-	      setEmail('')
-	      setPassword('')
-	      setOpenSignup(false);
-	      alert('New user created!');
-	  })
-	  .catch(err => console.log(err))
-
-	}
-
-	const login = ()=> {
-	  const body = {
-	    email: email,
-	    password: password
-	  }
-	  axios
-	    .post('/api/users/login', body)
-	    .then(({ data: user }) => {
-	      setUserInContext(user)
-	      setOpenLogin(false);          
-	      setPassword('')
-	      setEmail('')
-	  })
-	}
-
 	const handleSignupUsername = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
 		setUsername(e.target.value)
 	}
@@ -130,7 +93,32 @@ function Header() {
 		setPassword(e.target.value)
 	}
 
+	const handleLogin = () => {
+		const loginBody = {
+			email: email,
+			password: password
+		  }
+		login(loginBody)	
+		setOpenLogin(false);          
+		setPassword('')
+		setEmail('')
+	}
+
+	const handleSignup = () => {
+		const newUser = {
+			username: username,
+			email: email,
+			password: password,
+		  }
+		signup(newUser)	
+		setUsername('')
+		setEmail('')
+		setPassword('')
+		setOpenSignup(false);
+		alert('New user created!');
+	}
 	console.log(user)
+
 	return (
 		<CartContext.Consumer>
 			{({ cart }) => {
@@ -216,10 +204,10 @@ function Header() {
 							</Typography>
 						</div>
 						<div style={{ display: 'flex', marginRight: '1rem', alignItems: 'center' }}>
-							{/* {!user? ( */}
+						{!user? ( 
 							<div className="buttonContainer">
-								<Button size="medium" variant="contained" onClick={openLoginModal}>LOGIN</Button>
-								<Button size="medium" variant="contained" onClick={openSignupModal}>SIGNUP</Button>
+								<Button size="medium" variant="contained" color="primary" onClick={openLoginModal}>LOGIN</Button>
+								<Button size="medium" variant="contained" color="primary" onClick={openSignupModal}>SIGNUP</Button>
 								<Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
 									<DialogTitle id="login">Login</DialogTitle>
 									<DialogContent>
@@ -247,7 +235,7 @@ function Header() {
 										<Button onClick={handleLoginClose} color="primary">
 											Go back
                   						</Button>
-										<Button onClick={login} variant="contained" color="primary">
+										<Button onClick={handleLogin} variant="contained" color="primary">
 											Submit
                   						</Button>
 									</DialogActions>
@@ -286,19 +274,19 @@ function Header() {
 										/>
 									</DialogContent>
 									<DialogActions>
-										<Button onClick={handleSignupClose} color="primary">
+										<Button onClick={handleSignupClose} color="primary" className={classes.buttonStyle}>
 											Go back
-                  </Button>
-										<Button onClick={signup} variant="contained" color="primary">
+                 				 </Button>
+										<Button onClick={handleSignup} variant="contained" color="primary" className={classes.buttonStyle}>
 											Register
-                  </Button>
+                			  </Button>
 									</DialogActions>
 								</Dialog>
 
 							</div>
-							{/* ):(  */}
+							):( 
 							<ProfileCard />
-							{/* )} */}
+							 )}
 						</div>
 						<div>
 							<Link style={linkStyle} to="/kundvagn">
@@ -374,6 +362,9 @@ const useStyles = makeStyles((theme: Theme) =>
 				duration: theme.transitions.duration.enteringScreen,
 			}),
 			marginLeft: 0,
+		},
+		buttonStyle: {
+			margin: '1rem',
 		},
 	}),
 );
