@@ -8,6 +8,8 @@ import { UserContext } from './contexts/UserContext';
 function ProfileCard() {  
     const { user, logout } = useContext(UserContext)
     
+    console.log({ user });
+
     if(!user) return null;
     
     return (   
@@ -39,7 +41,6 @@ const userNameStyle: CSSProperties = {
     alignItems: 'center'
 }
 const buttonStyle: CSSProperties = {
-    // background: 'green',
     // color: 'white',
     margin: '1rem'
 }

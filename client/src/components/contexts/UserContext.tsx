@@ -6,15 +6,25 @@ interface State {
 }
 
 interface User {
-    id: string,
     username: string,
     email: string,
     access: string,
 }
 
+interface NewUser {
+    username: string,
+    email: string,
+    password: string;
+}
+
+interface LoginBody {
+    email: string,
+    password: string
+}
+
 interface ContextValue extends State {
-    signup: (newUser: any) => void;
-    login: (loginBody: any) => void;
+    signup: (newUser: NewUser) => void;
+    login: (loginBody: LoginBody) => void;
     logout: () => void;
 }    
 
@@ -28,9 +38,10 @@ class UserProvider extends Component<{}, State> {
 
     async fetchUser() {
         const response = await fetch('/api/users/auth');
-        const user = await response.json();
-        this.setState({ user });
-        console.log(user);
+        if (response.ok) {
+            const user = await response.json();
+            this.setState({ user });
+        }
     }
 
     componentDidMount() {
