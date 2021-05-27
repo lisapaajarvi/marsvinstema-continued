@@ -17,6 +17,12 @@ Content-Type: application/json
 PUT http://localhost:4000/api/product/:id
 Content-Type: application/json
 
+{
+    "_id": "60acae4ca5c1a830591e98e6",
+    "stock": "100", 
+    "price": "400" 
+}
+
 ###
 
 GET http://localhost:4000/api/products/categories 
