@@ -53,15 +53,15 @@ interface Props {
 export default function CartItem(props: Props) {
   const classes = useStyles();
   const cart = useContext(CartContext);
-  const { title, img, price, id, quantity} = props.product;
-  const productUrl = `/produkt/${id}`;
+  const { title, img, price, _id, quantity} = props.product;
+  const productUrl = `/produkt/${_id}`;
 
   const increaseQuantityInCart = () => {
-    cart.increaseQuantity(id)
+    cart.increaseQuantity(_id)
   }
 
   const decreaseQuantityInCart = () => {
-    cart.decreaseQuantity(id)
+    cart.decreaseQuantity(_id)
   }
 
   function priceForItems() {

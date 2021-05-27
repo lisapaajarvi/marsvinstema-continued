@@ -5,7 +5,7 @@ interface State {
 }
 
 export interface Product {
-    id: string
+    _id: string
     title: string
     price: number
     stock: number

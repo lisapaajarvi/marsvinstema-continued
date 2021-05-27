@@ -15,7 +15,7 @@ function Main() {
             <Route path="/kundvagn" component={Cart} />
             <Route path="/crud" component={CrudPage} />
             <Route path="/checkout" component={Checkout} />
-            <Route path="/produkt/:url" component={ProductDetail} />
+            <Route path="/produkt/:_id" component={ProductDetail} />
         </Switch>
     )    
 }
