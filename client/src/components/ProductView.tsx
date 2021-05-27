@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Box, Container } from '@material-ui/core';
-import  { mockedProducts, Product } from '../ProductList'
+// import  { mockedProducts, Product } from '../ProductList'
 import ProductCard from './ProductCard';
 import { Footer } from './Footer';
+import { ProductContext } from './contexts/ProductContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,27 +25,29 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function ProductView() {
+  const {products} = useContext(ProductContext)
   const classes = useStyles();
   
-  function getProductList() {
-    const productListFromLS = localStorage.getItem('productList');
-    if (productListFromLS) {
-      return JSON.parse(productListFromLS) as Product[]
-    }
-    localStorage.setItem('productList', JSON.stringify(mockedProducts));
-    return mockedProducts;
-  }
+  // function getProductList() {
+  //   const productListFromLS = localStorage.getItem('productList');
+  //   if (productListFromLS) {
+  //     return JSON.parse(productListFromLS) as Product[]
+  //   }
+  //   localStorage.setItem('productList', JSON.stringify(mockedProducts));
+  //   return mockedProducts;
+  // }
 
-  const productList = getProductList();
+  // const productList = getProductList();
 
   return (
     <div className={classes.root}>
       <Container maxWidth="lg">
         <Box pt={5} pb={0}>
           <Grid container spacing={3}>
-            {productList.map((product, index) => (
+            {products.map((product, index) => (
               <Grid item className={classes.item} xs={12} sm={6} md={3} key={index}>
-                <ProductCard product={product} />
+               <ProductCard product={product}/>
+                {product.price}
               </Grid>
             ))}
           </Grid>

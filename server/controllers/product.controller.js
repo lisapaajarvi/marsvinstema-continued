@@ -29,6 +29,7 @@ exports.getAllCategories = async (req, res) => {
     // console.log(categories)
     res.status(200).json(categories);
 }
+
 // exports.getProductsByCategory = async (req, res) => {
 //     const products = await ProductModel.find({'categories': req.params.id}).populate('categories').sort({ title: 1 });
 //     console.log(products);

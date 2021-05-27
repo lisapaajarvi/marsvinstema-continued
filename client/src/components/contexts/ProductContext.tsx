@@ -7,8 +7,10 @@ interface State {
 export interface Product {
     id: string
     name: string
+    url: string
+    // category: string
     description: string
-    category: string
+    categories: string[]
     price: number
     img: string
 }
@@ -22,37 +24,39 @@ export const ProductContext = createContext<ContextValue>({
     // addProduct: () => {}
 });
 
-async function fetchProducts() {
-    const response = await fetch('/api/products');
-    if (response.ok) {
-        const products = await response.json();
-        return products as Product[]
-        // this.setState({ products });
-    }
-    return [];
-}
 
 class ProductProvider extends Component<{}, State> {
-    // state: State = Products[];
- 
+   
     state: State = {
-        products: fetchProducts()
+        products: []
     }
-
+    
+    async fetchProducts() {
+        const response = await fetch('/api/products');
+        console.log(response)
+        if (response.ok) {
+            const products = await response.json();
+            console.log(products)
+            this.setState({products});
+        }
+        return [];
+    }
+    
     // addProduct = () => {
-    //     // logik för att lägga till produkt här
-    // }
-
-    componentDidMount() {
-        // fetchProducts();
-    }
-
-    render() {
-        return (
-            <ProductContext.Provider value={{
-                // addProduct: this.addProduct,
-                products: this.state.products
-            }}>
+        //     // logik för att lägga till produkt här
+        // }
+        
+        componentDidMount() {
+            this.fetchProducts();
+        }
+        
+        render() {
+            return (
+                <ProductContext.Provider value={{
+                    // addProduct: this.addProduct,
+                    products: this.state.products
+                }}>
+                {console.log(this.state)}
                 {this.props.children}
             </ProductContext.Provider>
         );
