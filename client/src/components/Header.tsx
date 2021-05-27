@@ -15,7 +15,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import { UserContext } from './contexts/UserContext';
-import CategoryDrawer from './CategoryDrawer';
+// import CategoryDrawer from './CategoryDrawer';
+import CategoryBar from './CategoryBar';
 
 const StyledBadge = withStyles((theme) => ({
 	badge: {
@@ -100,10 +101,8 @@ function Header() {
 				let cartLength = getCartLength(cart)
 
 				return (
+					<div style={{display: 'flex', flexDirection: 'column'}}>
 					<div style={headerStyle}>
-							{/* <div>
-								<CategoryDrawer />
-							</div> */}
 						<div style={{ marginLeft: '1rem' }}>
 							<Typography gutterBottom>
 								<Link
@@ -131,7 +130,7 @@ function Header() {
 											onChange={handleLoginEmail}
 											defaultValue={email}
 											fullWidth
-										/>
+											/>
 										<TextField
 											margin="dense"
 											id="password"
@@ -140,7 +139,7 @@ function Header() {
 											onChange={handleLoginPassword}
 											defaultValue={password}
 											fullWidth
-										/>
+											/>
 									</DialogContent>
 									<DialogActions>
 										<Button onClick={handleLoginClose} color="primary">
@@ -163,7 +162,7 @@ function Header() {
 											value={username}
 											onChange={handleSignupUsername}
 											fullWidth
-										/>
+											/>
 										<TextField
 											autoFocus
 											margin="dense"
@@ -173,7 +172,7 @@ function Header() {
 											value={email}
 											onChange={handleSignupEmail}
 											fullWidth
-										/>
+											/>
 										<TextField
 											margin="dense"
 											id="password"
@@ -182,7 +181,7 @@ function Header() {
 											onChange={handleSignupPassword}
 											value={password}
 											fullWidth
-										/>
+											/>
 									</DialogContent>
 									<DialogActions>
 										<Button onClick={handleSignupClose} color="primary" style={buttonStyle}>
@@ -196,8 +195,8 @@ function Header() {
 
 							</div>
 							):( 
-							<ProfileCard />
-							 )}
+								<ProfileCard />
+								)}
 						</div>
 						<div>
 							<Link style={linkStyle} to="/kundvagn">
@@ -209,6 +208,10 @@ function Header() {
 							</Link>
 						</div>
 					</div>
+							<div>
+								<CategoryBar/>
+							</div>
+			</div>
 				)
 			}}
 		</CartContext.Consumer>
