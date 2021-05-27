@@ -326,7 +326,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			maxWidth: 400,
 		},
 		menuButton: {
-			color: "##f8f7f7",
+			color: "#f8f7f7",
 			marginRight: theme.spacing(2),
 		},
 		hide: {
