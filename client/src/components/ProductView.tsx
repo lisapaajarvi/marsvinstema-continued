@@ -47,7 +47,6 @@ export default function ProductView() {
             {products.map((product, index) => (
               <Grid item className={classes.item} xs={12} sm={6} md={3} key={index}>
                <ProductCard product={product}/>
-                {product.price}
               </Grid>
             ))}
           </Grid>

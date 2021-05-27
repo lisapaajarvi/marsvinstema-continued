@@ -6,15 +6,13 @@ interface State {
 
 export interface Product {
     id: string
-    name: string
-    url: string
-    // category: string
-    description: string
-    categories: string[]
+    title: string
     price: number
+    stock: number
+    categories: string[]
+    description: string
     img: string
 }
-
 interface ContextValue extends State {
     // addProduct: (newProduct: Product) => void;
 }    

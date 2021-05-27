@@ -40,7 +40,7 @@ class CartProvider extends Component<{}, State> {
     }
 
     addProductToCart = (product: Product) => {
-        const cartItem = this.state.cart.find( item=> item.url === product.url)
+        const cartItem = this.state.cart.find( item=> item.id === product.id)
         if (cartItem) {
             cartItem.quantity ++;
             this.setState({ cart: this.state.cart });
@@ -54,13 +54,13 @@ class CartProvider extends Component<{}, State> {
     }
 
     removeProductFromCart = (product: Product) => {
-        const updatedCart = this.state.cart.filter(item => item.url !== product.url);
+        const updatedCart = this.state.cart.filter(item => item.id !== product.id);
         this.setState({ cart: updatedCart });
         this.updateCartInLocalStorage(updatedCart)
     }
 
     increaseQuantity = (product: string) => {
-        const cartItem = this.state.cart.find( item=> item.url === product);
+        const cartItem = this.state.cart.find( item=> item.id === product);
         if (cartItem) {
             cartItem.quantity ++;
             this.setState({ cart: this.state.cart }); 
@@ -69,13 +69,13 @@ class CartProvider extends Component<{}, State> {
     }
 
     decreaseQuantity = (product: string) => {
-        const cartItem = this.state.cart.find( item=> item.url === product);
+        const cartItem = this.state.cart.find( item=> item.id === product);
         if (cartItem && cartItem.quantity > 1) {
             cartItem.quantity --;
             this.setState({ cart: this.state.cart }); 
             this.updateCartInLocalStorage(this.state.cart)
         } else {
-            const updatedCart = this.state.cart.filter(item => item.url !== product);
+            const updatedCart = this.state.cart.filter(item => item.id !== product);
             this.setState({ cart: updatedCart });
             this.updateCartInLocalStorage(updatedCart);
         } 
