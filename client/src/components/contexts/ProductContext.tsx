@@ -2,6 +2,7 @@ import { Component, createContext } from 'react';
 
 interface State {
     products: Product[]      
+    categories: string[]   
 }
 
 export interface Product {
@@ -19,6 +20,7 @@ interface ContextValue extends State {
 
 export const ProductContext = createContext<ContextValue>({
     products: [],
+    categories: []
     // addProduct: () => {}
 });
 
@@ -26,16 +28,25 @@ export const ProductContext = createContext<ContextValue>({
 class ProductProvider extends Component<{}, State> {
    
     state: State = {
-        products: []
+        products: [],
+        categories: []
     }
     
     async fetchProducts() {
         const response = await fetch('/api/products');
-        console.log(response)
         if (response.ok) {
             const products = await response.json();
-            console.log(products)
             this.setState({products});
+        }
+        return [];
+    }
+
+    async fetchAllCategories() {
+        const response = await fetch('/api/products/categories');
+        if (response.ok) {
+            const categories = await response.json();
+            console.log(categories)
+            this.setState({categories});
         }
         return [];
     }
@@ -46,15 +57,16 @@ class ProductProvider extends Component<{}, State> {
         
         componentDidMount() {
             this.fetchProducts();
+            this.fetchAllCategories();
         }
         
         render() {
             return (
                 <ProductContext.Provider value={{
                     // addProduct: this.addProduct,
-                    products: this.state.products
+                    products: this.state.products,
+                    categories: this.state.categories
                 }}>
-                {console.log(this.state)}
                 {this.props.children}
             </ProductContext.Provider>
         );
