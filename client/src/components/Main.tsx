@@ -16,6 +16,7 @@ function Main() {
             <Route path="/crud" component={CrudPage} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/produkt/:_id" component={ProductDetail} />
+            {/* <Route path="/produkt/:category" component={ProductDetail} /> */}
         </Switch>
     )    
 }

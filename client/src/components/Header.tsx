@@ -164,7 +164,6 @@ function Header() {
 											fullWidth
 											/>
 										<TextField
-											autoFocus
 											margin="dense"
 											id="email"
 											label="E-mail"
