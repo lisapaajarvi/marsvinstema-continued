@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Component, createContext } from 'react';
 
 interface State {
@@ -5,44 +6,83 @@ interface State {
 }
 
 interface User {
-    id: string,
     username: string,
     email: string,
     access: string,
 }
 
-
-interface ContextValue extends State {
-    setUserInContext: (newUser: User) => void;
+interface NewUser {
+    username: string,
+    email: string,
+    password: string;
 }
 
+interface LoginBody {
+    email: string,
+    password: string
+}
+
+interface ContextValue extends State {
+    signup: (newUser: NewUser) => void;
+    login: (loginBody: LoginBody) => void;
+    logout: () => void;
+}    
+
 export const UserContext = createContext<ContextValue>({
-    setUserInContext: () => {},
+    login: () => {},
+    logout: () => {},
+    signup: () => {}
 });
 class UserProvider extends Component<{}, State> {
     state: State = {};
 
-    setUserInContext = (newUser: User) => {
-        this.setState({ user: newUser });
-    }
-
     async fetchUser() {
         const response = await fetch('/api/users/auth');
-        const user = await response.json();
-        this.setState({ user });
-        console.log(user);
+        if (response.ok) {
+            const user = await response.json();
+            this.setState({ user });
+        }
     }
 
     componentDidMount() {
         this.fetchUser();
     }
 
+    signup = (newUser: any)=> {
+        axios
+          .post('/api/users/register', newUser)
+          .then(res => {
+            console.log(res)
+
+        })
+        .catch(err => console.log(err))
+  
+      }
+  
+    login = (loginBody: any)=> {
+        axios
+          .post('/api/users/login', loginBody)
+          .then(({ data: user }) => {
+            this.setState({ user });
+        })
+    }
+    
+    logout = () => {
+        axios
+          .post('/api/users/logout')
+          .then(res => {
+            console.log(res)
+            this.setState({user: undefined})
+        })
+    }
+
     render() {
         return (
             <UserContext.Provider value={{
+                signup: this.signup,
                 user: this.state.user,
-                setUserInContext: this.setUserInContext
-
+                login: this.login,
+                logout: this.logout
             }}>
                 {this.props.children}
             </UserContext.Provider>
