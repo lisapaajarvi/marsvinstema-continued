@@ -7,10 +7,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Product } from './contexts/ProductContext';
 import { Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { CartContext } from './contexts/CartContext';
+import { Product } from './contexts/ProductContext';
 
 const useStyles = makeStyles({
   root: {
@@ -29,8 +29,8 @@ interface Props {
 export default function ProductCard(props: Props) {
   const classes = useStyles();
   const cart = useContext(CartContext)
-  const { name, img, price, url} = props.product;
-  const productUrl = `/produkt/${url}`;
+  const { title, img, price, _id} = props.product;
+  const productUrl = `/produkt/${_id}`;
  
   return (
     <Card className={classes.root}>
@@ -38,11 +38,11 @@ export default function ProductCard(props: Props) {
         <CardMedia
           className={classes.media}
           image={img}
-          title={name}
+          title={title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {name}
+            {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             Pris: {price} kr

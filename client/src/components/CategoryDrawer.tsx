@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import {
 	makeStyles,
@@ -17,6 +17,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeView from "@material-ui/lab/TreeView";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TreeItem from "@material-ui/lab/TreeItem";
+import { ProductContext } from './contexts/ProductContext';
 
 const drawerWidth = 240;
 
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			maxWidth: 400,
 		},
 		menuButton: {
-			backgroudColor: "#fafafa",
+			color: "#fafafa",
 			marginRight: theme.spacing(2),
 		},
 		hide: {
@@ -72,6 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function PersistentDrawerLeft() {
+	const { categories } = useContext(ProductContext)
 	const classes = useStyles();
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
@@ -116,19 +118,26 @@ export default function PersistentDrawerLeft() {
 						)}
 					</IconButton>
 				</div>
+				<p>Kategorier</p>
 				<Divider />
-				<TreeView
+
+				{categories.map((category, index) => (
+					<p key={index} style={{marginLeft: '1rem'}}>{category}</p>
+						//   <label={category} nodeId="1"/>
+				))}
+				
+				{/* <TreeView
 					className={classes.root}
 					defaultCollapseIcon={<ExpandMoreIcon />}
 					defaultExpandIcon={<ChevronRightIcon />}
+
+					
+					{...categories.map((category, index) => (
+						  <TreeItem label={category} nodeId="1"/>
+					  ))}
 				>
-					<TreeItem nodeId="1" label="Kategorier">
-						<TreeItem nodeId="2" label="Leksaker" />
-						<TreeItem nodeId="3" label="Mat" />
-						<TreeItem nodeId="4" label="Kläder" />
-						<TreeItem nodeId="5" label="Hygien" />
-					</TreeItem>
-				</TreeView>
+
+				</TreeView> */}
 			</Drawer>
 			<main
 				className={clsx(classes.content, {
