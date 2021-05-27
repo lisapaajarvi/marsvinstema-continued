@@ -8,7 +8,7 @@ const product = await ProductModel.findOne({_id:_id});
 
 exports.getAllProducts = async (req, res) => {
     const products = await ProductModel.find({});
-    console.log(products)
+    // console.log(products)
     res.status(200).json(products);
 }
 
@@ -26,7 +26,7 @@ exports.getAllCategories = async (req, res) => {
     // remove duplicates
     categories = [...new Set(categories)];
     
-    console.log(categories)
+    // console.log(categories)
     res.status(200).json(categories);
 }
 // exports.getProductsByCategory = async (req, res) => {
