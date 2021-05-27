@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React, { CSSProperties, useContext } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { ProductContext } from './contexts/ProductContext';
+import { Link } from 'react-router-dom';
+// import ListItemIcon from '@material-ui/core/ListItemIcon';
 // import Divider from '@material-ui/core/Divider';
 // import InboxIcon from '@material-ui/icons/Inbox';
 // import DraftsIcon from '@material-ui/icons/Drafts';
-import { ProductContext } from './contexts/ProductContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,24 +33,27 @@ export default function SelectedListItem() {
   };
 
   return (
-    <div className={classes.root}>
-      <List component="nav" aria-label="main mailbox folders" style={{display: 'flex', flexDirection: 'row'}}>
-
-      <ListItem button
-                onClick={(event) => handleListItemClick(event, 1)}>
-                    <ListItemText primary="Alla"/>
-                </ListItem>
-
-      {categories.map((category, index) => (
-                <ListItem key={index} button
-                selected={selectedIndex === index}
-                onClick={(event) => handleListItemClick(event, index)}>
-                    <ListItemText primary={category}/>
-                </ListItem>
-            ))}
-
-      </List>
-      {/* <Divider /> */}
-    </div>
+      <div className={classes.root} style={{ borderBottom: '1px solid lightgray' }}>
+          <List component="nav" aria-label="main mailbox folders" style={{ display: 'flex', flexDirection: 'row' }}>
+              <ListItem button
+                  onClick={(event) => handleListItemClick(event, 1)}>
+                      <Link to="/" style={linkStyle}>
+                        <ListItemText primary="Alla" />
+                      </Link>
+              </ListItem>
+              {categories.map((category, index) => (
+                  <ListItem key={index} button
+                      selected={selectedIndex === index}
+                      onClick={(event) => handleListItemClick(event, index)}>
+                      <ListItemText primary={category} />
+                  </ListItem>
+              ))}
+          </List>
+      </div>
   );
 }
+
+const linkStyle: CSSProperties = {
+	textDecoration: "none",
+	color: "black",
+};

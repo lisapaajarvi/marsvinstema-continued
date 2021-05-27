@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Box, Button, Container, Hidden, Typography } from '@material-ui/core';
-import  { mockedProducts, Product } from '../ProductList'
 import CrudItem from './CrudItem';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,6 +10,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { ProductContext } from './contexts/ProductContext';
+// import  { mockedProducts, Product } from '../ProductList'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,29 +34,29 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function CrudPage() {
+  const { products } = useContext(ProductContext)
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [url, setUrl] = React.useState('');
-  const [name, setName] = React.useState('');
+  // const [url, setUrl] = React.useState('');
+  const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
-  const [category, setCategory] = React.useState('');
+  const [categories, setCategories] = React.useState([]);
   const [price, setPrice] = React.useState('')
   const [img, setImg] = React.useState('')
-  const [productList, setProductList] = React.useState(getProductList())
-  const [isFieldDisabled, setIsFieldDisabled] = React.useState(true)
-  const [urlError, setUrlError] = React.useState<boolean>(false);
-  const [nameError, setNameError] = React.useState<boolean>(false);
+  // const [productList, setProductList] = React.useState(getProductList())
+  // const [isFieldDisabled, setIsFieldDisabled] = React.useState(true)
+  // const [urlError, setUrlError] = React.useState<boolean>(false);
+  const [titleError, setTitleError] = React.useState<boolean>(false);
   const [descriptionError, setDescriptionError] = React.useState<boolean>(false);
-  const [categoryError, setCategoryError] = React.useState<boolean>(false);
+  const [categoriesError, setCategoriesError] = React.useState<boolean>(false);
   const [priceError, setPriceError] = React.useState<boolean>(false);
   const [imgError, setImgError] = React.useState<boolean>(false);
 
   function isAllRequiredFieldsOk() {
     return (
-      url
-      && name
+      title
       && description
-      && category
+      && categories
       && price
       && img
     )
@@ -64,53 +65,43 @@ export default function CrudPage() {
   function isFormValid() {
     return (
       isAllRequiredFieldsOk()
-      && !urlError
-      && !nameError
+      && !titleError
       && !descriptionError
-      && !categoryError
+      && !categoriesError
       && !priceError
       && !imgError
     )
   }
-  
-  function getProductList() {
-    const productListFromLS = localStorage.getItem('productList');
-    if (productListFromLS) {
-      return JSON.parse(productListFromLS) as Product[]
-    }
-    localStorage.setItem('productList', JSON.stringify(mockedProducts));
-    return mockedProducts;
-  }
 
-  function removeFromProductList(product:Product) {
-    const updatedProductList = productList.filter(item => item.url !== product.url);
-    setProductList(updatedProductList);
-    updateProductListInLocalStorage(updatedProductList);
-  }
+  // // Denna funktionen måste ändras!
 
-  function updateProductListInLocalStorage(newProductList:Product[]) {
-    localStorage.setItem('productList', JSON.stringify(newProductList))
-  }
+  // function removeFromProductList(product:Product) {
+  //   const updatedProductList = productList.filter(item => item._id !== product._id);
+  //   setProductList(updatedProductList);
+  //   updateProductListInLocalStorage(updatedProductList);
+  // }
 
-  function openEditProductModal(product:Product) {
-    setIsFieldDisabled(true)
-    setUrl(product.url)
-    setName(product.name)
-    setDescription(product.description)
-    setCategory(product.category)
-    setPrice(product.price.toString())
-    setImg(product.img)
-    setOpen(true);
-  }
+  // function updateProductListInLocalStorage(newProductList:Product[]) {
+  //   localStorage.setItem('productList', JSON.stringify(newProductList))
+  // }
+
+  // function openEditProductModal(product:Product) {
+  //   // setIsFieldDisabled(true)
+  //   setTitle(product.title)
+  //   setDescription(product.description)
+  //   // setCategories(product.categories)
+  //   setPrice(product.price.toString())
+  //   setImg(product.img)
+  //   setOpen(true);
+  // }
 
   function openAddProductModal() {
-    setUrl('')
-    setName('')
+    setTitle('')
     setDescription('')
     setPrice('')
-    setCategory('')
+    setCategories([])
     setImg('')
-    setIsFieldDisabled(false)
+    // setIsFieldDisabled(false)
     setOpen(true);
   }
 
@@ -118,46 +109,36 @@ export default function CrudPage() {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
-    if(isFieldDisabled) {
-      let editedProduct = productList.find(item=> item.url === url);  
-      if(editedProduct) {
-        editedProduct.name = name;
-        editedProduct.description = description;
-        editedProduct.category = category;
-        editedProduct.price = parseInt(price);
-        editedProduct.img = img;
-        setProductList(productList)
-        updateProductListInLocalStorage(productList)
-      }
-    }
-    else {
-      let updatedProductList = [...productList, {url: url, name: name, description: description, category: category, price: parseInt(price), img: img }];
-      setProductList(updatedProductList)
-      setIsFieldDisabled(true)  
-      updateProductListInLocalStorage(updatedProductList);
-    }
-    setOpen(false);  
-  }
+  // const handleSubmit = () => {
+  //   if(isFieldDisabled) {
+  //     let editedProduct = productList.find(item=> item._id === _id);  
+  //     if(editedProduct) {
+  //       editedProduct.title = title;
+  //       editedProduct.description = description;
+  //       editedProduct.category = category;
+  //       editedProduct.price = parseInt(price);
+  //       editedProduct.img = img;
+  //       setProductList(productList)
+  //       updateProductListInLocalStorage(productList)
+  //     }
+  //   }
+  //   else {
+  //     let updatedProductList = [...productList, {title: title, description: description, categories: categories, price: parseInt(price), img: img }];
+  //     setProductList(updatedProductList)
+  //     setIsFieldDisabled(true)  
+  //     updateProductListInLocalStorage(updatedProductList);
+  //   }
+  //   setOpen(false);  
+  // }
 
-  const handleUrlInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^[a-z0-9-]+$/.test(e.target.value)) {  
-      setUrlError(false);
-    }
-    else {
-      setUrlError(true);
-    }
-    setUrl(e.target.value)
-  };
-
-  const handleNameInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const handleTitleInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (/^.{3,}$/.test(e.target.value)) {  
-      setNameError(false);
+      setTitleError(false);
     }
     else {
-      setNameError(true);
+      setTitleError(true);
     }
-    setName(e.target.value)
+    setTitle(e.target.value)
   };
   const handleDescriptionInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (/^.{3,}$/.test(e.target.value)) {  
@@ -169,14 +150,14 @@ export default function CrudPage() {
     setDescription(e.target.value)
   };
 
-  const handleCategoryInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const handleCategoriesInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (/^.{3,}$/.test(e.target.value)) {  
-      setCategoryError(false);
+      setCategoriesError(false);
     }
     else {
-      setCategoryError(true);
+      setCategoriesError(true);
     }
-    setCategory(e.target.value)
+    // setCategories(e.target.value)
   };
 
   const handlePriceInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -220,26 +201,14 @@ export default function CrudPage() {
                 <DialogTitle id="edit-product">Ändra / lägg till produkt</DialogTitle>
                 <DialogContent>
                   <TextField
-                    autoFocus
                     margin="dense"
-                    id="url"
-                    label="ID/url"
-                    defaultValue={url}
-                    type="text"
-                    onChange={handleUrlInput}
-                    fullWidth
-                    disabled={isFieldDisabled}
-                    error={urlError}
-                  />
-                  <TextField
-                    margin="dense"
-                    id="name"
+                    id="title"
                     label="Namn"
-                    defaultValue={name}
+                    defaultValue={title}
                     type="text"
-                    onChange={handleNameInput}
+                    onChange={handleTitleInput}
                     fullWidth
-                    error={nameError}
+                    error={titleError}
                   />
                   <TextField
                     margin="dense"
@@ -254,14 +223,14 @@ export default function CrudPage() {
                   />
                   <TextField
                     margin="dense"
-                    id="category"
+                    id="categories"
                     label="Kategori"
                     multiline
-                    defaultValue={category}
+                    defaultValue={categories}
                     type="text"
-                    onChange={handleCategoryInput}
+                    onChange={handleCategoriesInput}
                     fullWidth
-                    error={categoryError}
+                    error={categoriesError}
                   />
                   <TextField
                     margin="dense"
@@ -289,7 +258,7 @@ export default function CrudPage() {
                   <Button onClick={handleClose} color="primary">
                     Tillbaka
                   </Button>
-                  <Button disabled={!isFormValid()} onClick={handleSubmit} variant="contained" color="primary">
+                  <Button disabled={!isFormValid()} variant="contained" color="primary">
                     Spara
                   </Button>
                 </DialogActions>
@@ -298,13 +267,6 @@ export default function CrudPage() {
                 <Grid container spacing={2}>
                   <Grid item xs={3} sm={2} md={2} lg={1}>
                   </Grid>
-                  <Hidden xsDown>
-                    <Grid item xs={2} md={2} lg={1}>
-                      <Typography variant="body1">
-                        ID/url
-                      </Typography>
-                    </Grid>
-                  </Hidden>
                   <Grid item xs={5} sm={3} md={2} lg={2}>
                     <Typography variant="body1">
                       Namn
@@ -318,14 +280,18 @@ export default function CrudPage() {
                   <Grid item xs={4} sm={3} md={1} lg={1}>
                     <Typography variant="body1">Pris</Typography>
                   </Grid>
+                  <Grid item xs={4} sm={3} md={1} lg={1}>
+                    <Typography variant="body1">Lagersaldo</Typography>
+                  </Grid>
                   <Grid item xs={12} sm={1}>
                     <Typography variant="body1"></Typography>
                   </Grid>
                 </Grid>
               </Hidden>
-              {productList.map((product, index) => (
+              {products.map((product, index) => (
                 <Grid item xs={12} key={index}>
-                  <CrudItem product={product} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} />
+                  {/* <CrudItem products={products} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} /> */}
+                  <CrudItem product={product} />
                 </Grid>
               ))}
               <Grid item xs={12}>
