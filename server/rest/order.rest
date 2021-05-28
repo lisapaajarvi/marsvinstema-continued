@@ -1,0 +1,36 @@
+
+POST http://localhost:4000/api/orders
+Content-Type: application/json
+
+{
+    "totalPrice": 449,
+    "cart": [{
+        "categories": ["Leksaker"],
+        "description": "Ett härligt tält med ananasmönster passar perfekt för att söka skydd från solen en varm sommardag. Plats för minst 3 marsvin",
+        "img": "https://i.imgur.com/7pIdBXDl.jpg",
+        "price": 400,
+        "quantity": 1,
+        "stock": 100,
+        "title": "Soltält"
+    }],
+    "customer": {
+        "streetAddress": "Väderkvarnsgatan 11A",
+        "city": "Göteborg",
+        "firstName": "Lisa",
+        "lastName": "Pääjärvi",
+        "phoneNr": "0704662253",
+        "zipCode": "417 04"
+    },
+    "shippingOption": {
+        "name": "PostNord",
+        "expectedDeliveryTime": 5,
+        "price": 49
+    }
+}
+
+###
+
+POST http://localhost:4000/api/orders 
+Content-Type: application/json
+
+###

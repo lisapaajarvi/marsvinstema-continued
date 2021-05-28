@@ -5,9 +5,9 @@ Content-Type: application/json
     "_id": "60acb4fe981f9a2448ad7c42",
     "firstName": "Lisa",
     "lastName": "Marsvinstok",
-    "phoneNr": "123123123123",
-    "streetAddress": "Marsvinsbyn 1",
-    "zipCode": "12345",
+    "phoneNumber": "123123123123",
+    "address": "Marsvinsbyn 1",
+    "zip": "12345",
     "city": "Guinea Pig City"
 }
 
