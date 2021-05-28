@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { Box, Button, Container, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Footer } from './Footer';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +28,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function OrderPage() {
   const classes = useStyles();
+  const [state, setState] = React.useState({
+    checkedA: true,
+    checkedB: true,
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
 
   return (
       <>
@@ -53,6 +62,13 @@ export default function OrderPage() {
                                   </Grid>
                                   <Grid item xs={4} sm={3} md={1} lg={1}>
                                       <Typography variant="body1">Skickad</Typography>
+                                      <Switch
+                                          checked={state.checkedB}
+                                          onChange={handleChange}
+                                          color="primary"
+                                          name="checkedB"
+                                          inputProps={{ 'aria-label': 'primary checkbox' }}
+                                      />
                                   </Grid>
                                   <Grid item xs={12} sm={1}>
                                       <Typography variant="body1"></Typography>
@@ -65,10 +81,10 @@ export default function OrderPage() {
                               <Grid item xs={12} key={index}>
                               <OrderItem orders={orders} />
                               </Grid>
-                            ))} */}
+                              ))} */}
 
                               <div className={classes.paper} style={container}>
-                                  <Link className={classes.link} to="/">
+                                  <Link className={classes.link} to="/admin">
                                       <Button variant="contained" color="primary" style={{ margin: '1rem' }}>Tillbaka</Button>
                                   </Link>
                                   <Footer />

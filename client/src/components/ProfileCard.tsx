@@ -7,8 +7,6 @@ import { UserContext } from './contexts/UserContext';
 
 function ProfileCard() {  
     const { user, logout } = useContext(UserContext)
-    
-    console.log({ user });
 
     if(!user) return null;
     

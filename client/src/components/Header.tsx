@@ -84,7 +84,6 @@ function Header() {
 		setOpenSignup(false);
 		alert('New user created!');
 	}
-	console.log(user)
 
 	return (
 		<CartContext.Consumer>
