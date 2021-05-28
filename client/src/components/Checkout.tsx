@@ -71,16 +71,17 @@ export default function Checkout() {
       const orderId = createFakeOrderID(); 
       const order: Order = {
         //orderNumber: orderId, ska genereras automatiskt i databasen?
-        shippingAddress: {customer},
-        shippingMethod: {shippingOption},
+        customer,
+        shippingOption,
         //paymentOption: {paymentOption},
         //cardInfo: {cardInfo},
-        products: {cart}
+        cart
       }
       setIsLoading(true)
 
       // här ska ordern skickas in till databasen?
       await sendOrderToApi(order);
+      console.log(order)
       setOrderNumber(orderId)
       setIsLoading(false)
       emptyCart();
