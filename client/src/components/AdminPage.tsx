@@ -3,6 +3,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Box, Button, Container, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import { Footer } from './Footer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function CrudPage() {
+export default function AdminPage() {
   const classes = useStyles();
 
   return (
@@ -51,13 +52,7 @@ export default function CrudPage() {
                                   <Link className={classes.link} to="/">
                                       <Button variant="contained" color="primary" size="large" style={{ margin: '1rem' }}>Tillbaka</Button>
                                   </Link>
-                                  <Typography variant="subtitle2" color="textSecondary" align="center" style={{ marginTop: '1rem' }}>
-                                      {'Copyright © '}
-                                      <Link className={classes.link} to="/">
-                                          {' Marsvinstema '}
-                                      </Link>
-                                      {new Date().getFullYear()}
-                                  </Typography>
+                                  <Footer/>
                               </div>
                           </Grid>
                       </Grid>

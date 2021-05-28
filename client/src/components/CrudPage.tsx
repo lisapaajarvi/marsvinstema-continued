@@ -11,7 +11,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { ProductContext } from './contexts/ProductContext';
-// import  { mockedProducts, Product } from '../ProductList'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -184,10 +183,14 @@ export default function CrudPage() {
     <>
       <div className={classes.root}>
         <Container maxWidth="lg">
-          <Box pt={2} pb={0}>
+          <Box pt={5} pb={5}>
             <Grid container spacing={2}>
               <Grid item xs={12} className={classes.paper}>
-                <h2>Produktlista</h2>
+              <Typography variant="h5">
+                <div style={{ marginBottom: '1rem' }}>
+                  Produktlista
+                </div>
+              </Typography>
               </Grid>
               <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="edit-product">Ändra / lägg till produkt</DialogTitle>
@@ -294,15 +297,6 @@ export default function CrudPage() {
               <Grid item xs={12} sm={6} className={classes.paper}>
                 <Button variant="contained" color="primary" onClick={openAddProductModal}>Lägg till<AddCircleIcon className={classes.icon} /></Button>
               </Grid>
-              {/* <Grid item xs={12}>
-                <Typography variant="subtitle2" color="textSecondary" align="center">
-                  {'Copyright © '}
-                  <Link className={classes.link} to="/">
-                    {' Marsvinstema '}
-                  </Link>
-                  {new Date().getFullYear()}
-                </Typography>
-              </Grid> */}
             </Grid>
           </Box>
         </Container>
