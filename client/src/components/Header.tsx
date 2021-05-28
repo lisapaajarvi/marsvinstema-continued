@@ -15,7 +15,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import { UserContext } from './contexts/UserContext';
-// import CategoryDrawer from './CategoryDrawer';
 import CategoryBar from './CategoryBar';
 
 const StyledBadge = withStyles((theme) => ({
@@ -116,10 +115,10 @@ function Header() {
 						<div style={{ display: 'flex', marginRight: '1rem', alignItems: 'center' }}>
 						{!user? ( 
 							<div className="buttonContainer">
-								<Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openLoginModal}>LOGIN</Button>
-								<Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openSignupModal}>SIGNUP</Button>
+								<Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openLoginModal}>LOGGA IN</Button>
+								<Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openSignupModal}>REGISTRERA</Button>
 								<Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
-									<DialogTitle id="login">Login</DialogTitle>
+									<DialogTitle id="login">Logga in</DialogTitle>
 									<DialogContent>
 										<TextField
 											autoFocus
@@ -134,7 +133,7 @@ function Header() {
 										<TextField
 											margin="dense"
 											id="password"
-											label="Password"
+											label="Lösenord"
 											type="password"
 											onChange={handleLoginPassword}
 											defaultValue={password}
@@ -143,21 +142,21 @@ function Header() {
 									</DialogContent>
 									<DialogActions>
 										<Button onClick={handleLoginClose} color="primary">
-											Go back
+											Tillbaka
                   						</Button>
 										<Button onClick={handleLogin} variant="contained" color="primary">
-											Submit
+											Bekräfta
                   						</Button>
 									</DialogActions>
 								</Dialog>
 								<Dialog open={openSignup} onClose={handleSignupClose} aria-labelledby="form-dialog-signup">
-									<DialogTitle id="signup">Signup</DialogTitle>
+									<DialogTitle id="signup">Registrera dig</DialogTitle>
 									<DialogContent>
 										<TextField
 											autoFocus
 											margin="dense"
 											id="username"
-											label="Username"
+											label="Användarnamn"
 											type="text"
 											value={username}
 											onChange={handleSignupUsername}
@@ -175,7 +174,7 @@ function Header() {
 										<TextField
 											margin="dense"
 											id="password"
-											label="Password"
+											label="Lösenord"
 											type="password"
 											onChange={handleSignupPassword}
 											value={password}
@@ -184,10 +183,10 @@ function Header() {
 									</DialogContent>
 									<DialogActions>
 										<Button onClick={handleSignupClose} color="primary" style={buttonStyle}>
-											Go back
+											Tillbaka
                  				 </Button>
 										<Button onClick={handleSignup} variant="contained" color="primary" style={buttonStyle}>
-											Register
+											Bekräfta
                 			  </Button>
 									</DialogActions>
 								</Dialog>
@@ -195,7 +194,7 @@ function Header() {
 							</div>
 							):( 
 								<ProfileCard />
-								)}
+							)}
 						</div>
 						<div>
 							<Link style={linkStyle} to="/kundvagn">
@@ -207,10 +206,10 @@ function Header() {
 							</Link>
 						</div>
 					</div>
-							<div>
-								<CategoryBar/>
-							</div>
-			</div>
+					<div>
+						<CategoryBar/>
+					</div>
+				</div>
 				)
 			}}
 		</CartContext.Consumer>

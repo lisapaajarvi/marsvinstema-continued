@@ -189,14 +189,6 @@ export default function CrudPage() {
               <Grid item xs={12} className={classes.paper}>
                 <h2>Produktlista</h2>
               </Grid>
-              <Grid item xs={12} sm={6} className={classes.paper}>
-                <Link className={classes.link} to="/">
-                  <Button variant="contained" color="primary">Gå tillbaka till butiken</Button>
-                </Link>
-              </Grid>
-              <Grid item xs={12} sm={6} className={classes.paper}>
-                <Button variant="contained" color="primary" onClick={openAddProductModal}>Lägg till en produkt <AddCircleIcon className={classes.icon} /></Button>
-              </Grid>
               <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="edit-product">Ändra / lägg till produkt</DialogTitle>
                 <DialogContent>
@@ -294,7 +286,15 @@ export default function CrudPage() {
                   <CrudItem product={product} />
                 </Grid>
               ))}
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6} className={classes.paper}>
+                <Link className={classes.link} to="/admin">
+                  <Button variant="contained" color="primary">Tillbaka</Button>
+                </Link>
+              </Grid>
+              <Grid item xs={12} sm={6} className={classes.paper}>
+                <Button variant="contained" color="primary" onClick={openAddProductModal}>Lägg till<AddCircleIcon className={classes.icon} /></Button>
+              </Grid>
+              {/* <Grid item xs={12}>
                 <Typography variant="subtitle2" color="textSecondary" align="center">
                   {'Copyright © '}
                   <Link className={classes.link} to="/">
@@ -302,7 +302,7 @@ export default function CrudPage() {
                   </Link>
                   {new Date().getFullYear()}
                 </Typography>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Box>
         </Container>

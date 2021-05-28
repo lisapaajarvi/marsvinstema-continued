@@ -18,13 +18,13 @@ function ProfileCard() {
             <div style={userNameStyle}>
                 <p style={{color:'white'}}>{user.username}</p>
                 { user.access === "admin" ? (
-                    <Link to="/crud" style={{color: 'lightgray', marginLeft: '1rem'}}>
+                    <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
                         <SettingsIcon />
                     </Link>
                         ) : (  
                     <div></div>
                 )} 
-                <Button size="small" variant="contained" color="primary" style={buttonStyle} onClick={logout}>LOG OUT</Button>
+                <Button size="small" variant="contained" color="primary" style={buttonStyle} onClick={logout}>LOGGA UT</Button>
             </div>
         </div>
     )    
