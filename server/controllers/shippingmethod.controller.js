@@ -1,5 +1,5 @@
 const UserModel = require("../models/shippingmethod.model");
-const shippingMethodModel = require("../models/shippingmethod.model");
+const { shippingMethodModel }  = require("../models/shippingmethod.model");
 const OrderModel = require("../models/order.model")
 
 exports.getAllShippingMethods = async (req, res) => {

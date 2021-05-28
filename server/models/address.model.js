@@ -6,7 +6,7 @@ const AddressSchema = new mongoose.Schema({
     phoneNr: {type: Number, required: true},
     streetAdress: {type: String, required: true},
     zipCode: {type: Number, required: true},
-    city: {type: String},
+    city: {type: String, required: true},
 }, { id: false })
 
 module.exports = AddressSchema;

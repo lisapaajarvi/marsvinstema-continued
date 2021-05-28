@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-export const shippingMethodSchema = new mongoose.Schema({
+const shippingMethodSchema = new mongoose.Schema({
    name: {type: String, required: true},
    expectedDeliveryTime: {type: Number, required: true},
    price: {type: Number, required: true}
@@ -8,4 +8,4 @@ export const shippingMethodSchema = new mongoose.Schema({
 
 const ShippingMethodModel = mongoose.model('shippingMethod', shippingMethodSchema);
 
-module.exports = ShippingMethodModel;
+module.exports = { ShippingMethodModel, shippingMethodSchema };
