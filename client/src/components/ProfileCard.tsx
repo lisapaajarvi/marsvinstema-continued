@@ -14,10 +14,10 @@ function ProfileCard() {
         
         <div style={profileContainer}>
             <div style={userNameStyle}>
-                <p style={{color:'white'}}>{user.username}</p>
+                <p style={{color:'white', marginLeft: '0.5rem', fontFamily: 'Helvetica'}}>{user.username}</p>
                 { user.access === "admin" ? (
                     <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
-                        <SettingsIcon />
+                        <SettingsIcon style={{color: '#F0F0F0'}}/>
                     </Link>
                         ) : (  
                     <div></div>
@@ -39,7 +39,6 @@ const userNameStyle: CSSProperties = {
     alignItems: 'center'
 }
 const buttonStyle: CSSProperties = {
-    // color: 'white',
     margin: '1rem'
 }
 

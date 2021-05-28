@@ -44,13 +44,13 @@ export default function AdminPage() {
                               </div>
                               <div className={classes.paper} style={container}>
                                   <Link className={classes.link} to="/crud">
-                                      <Button variant="contained" color="primary" size="large" style={{ margin: '1rem' }}>Hantera produkter</Button>
+                                      <Button variant="contained" color="primary" size="medium" style={{ margin: '1rem' }}>Hantera produkter</Button>
                                   </Link>
                                   <Link className={classes.link} to="/orders">
-                                      <Button variant="contained" color="primary" size="large" style={{ margin: '1rem' }}>Hantera ordrar</Button>
+                                      <Button variant="contained" color="primary" size="medium" style={{ margin: '1rem' }}>Hantera ordrar</Button>
                                   </Link>
                                   <Link className={classes.link} to="/">
-                                      <Button variant="contained" color="primary" size="large" style={{ margin: '1rem' }}>Tillbaka</Button>
+                                      <Button variant="contained" color="primary" size="medium" style={{ margin: '1rem' }}>Tillbaka</Button>
                                   </Link>
                                   <Footer/>
                               </div>
