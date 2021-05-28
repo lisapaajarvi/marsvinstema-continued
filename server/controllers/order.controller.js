@@ -1,7 +1,15 @@
 const OrderModel = require("../models/order.model");
 
 exports.addNewOrder = async (req, res) => {
-    const addedOrder = await (await OrderModel.create(req.body));
+    const order = {
+        user: req.session.id,
+        createdAt: new Date(),
+        totalPrice: req.body.totalPrice,
+        products: req.body.products,
+        shippingAddress: req.body.shippingAddress,
+        shippingMethod: req.body.shippingMethod
+    }
+    const addedOrder = await OrderModel.create(order);
     res.status(201).json(addedOrder);
 }
 
