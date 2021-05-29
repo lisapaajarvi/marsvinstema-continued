@@ -1,0 +1,13 @@
+POST http://localhost:4000/upload
+Content-Type: multipart/form-data; boundary=Row
+
+--Row
+Content-Disposition: form-data; name="image"; filename="lektalt.jpg"
+Content-Type: image/jpeg
+
+< ./lektalt.jpg
+--Row--
+
+###
+
+GET http://localhost:4000/uploads/1622204736833-lektalt.jpg
