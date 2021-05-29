@@ -49,7 +49,7 @@ export default function OrderPage() {
                                       Orderhantering
                                    </div>
                               </Typography>
-                              <div style={{ borderBottom: '0.1rem solid lightgrey', width: '16rem', margin: 'auto', marginBottom: '2rem' }}>
+                              <div style={{ borderBottom: '0.1rem solid lightgrey', width: '12rem', margin: 'auto', marginBottom: '2rem' }}>
                               </div>
                               <Grid container spacing={2}>
                                   <Grid item xs={3} sm={2} md={2} lg={1}>
@@ -78,9 +78,9 @@ export default function OrderPage() {
                               {/* ORDER MAPPING GOES HERE */}
 
                               {/* {orders.map((orders, index) => (
-                              <Grid item xs={12} key={index}>
-                              <OrderItem orders={orders} />
-                              </Grid>
+                                <Grid item xs={12} key={index}>
+                                  <OrderItem orders={orders} />
+                                </Grid>
                               ))} */}
 
                               <div className={classes.paper} style={container}>

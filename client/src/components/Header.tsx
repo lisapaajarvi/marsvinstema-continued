@@ -12,7 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import { Button } from '@material-ui/core';
+import { Button, Hidden } from '@material-ui/core';
 import { UserContext } from './contexts/UserContext';
 import CategoryBar from './CategoryBar';
 import '../css/header.css';
@@ -107,102 +107,118 @@ function Header() {
                                 	</Link>
 								</Typography>
 							</div>
-							<div>
+							<Hidden smUp>
 								<Link style={cartStyle} to="/kundvagn">
 									<IconButton aria-label="cart">
-										<StyledBadge badgeContent={cartLength} color="secondary" style={{color: '#F0F0F0', marginRight: '1rem', marginLeft: '0rem'}}>
+										<StyledBadge badgeContent={cartLength} color="secondary" style={{ color: '#F0F0F0', marginRight: '1rem', marginLeft: '0rem' }}>
 											<ShoppingCartIcon />
 										</StyledBadge>
 									</IconButton>
 								</Link>
-							</div>
+							</Hidden>
 							<div style={{ display: 'flex', marginRight: '1rem', alignItems: 'center' }}>
-								{!user ? (
-									<div className="buttonContainer" style={{marginLeft: '0.5rem'}}>
-										<Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openLoginModal}>LOGGA IN</Button>
-										<Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openSignupModal}>REGISTRERA</Button>
-										<Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
-											<DialogTitle id="login">Logga in</DialogTitle>
-											<DialogContent>
-												<TextField
-													autoFocus
-													margin="dense"
-													id="email"
-													label="E-mail"
-													type="text"
-													onChange={handleLoginEmail}
-													defaultValue={email}
-													fullWidth
-												/>
-												<TextField
-													margin="dense"
-													id="password"
-													label="Lösenord"
-													type="password"
-													onChange={handleLoginPassword}
-													defaultValue={password}
-													fullWidth
-												/>
-											</DialogContent>
-											<DialogActions>
-												<Button onClick={handleLoginClose} color="primary">
-													Tillbaka
-                  						</Button>
-												<Button onClick={handleLogin} variant="contained" color="primary">
-													Bekräfta
-                  						</Button>
-											</DialogActions>
-										</Dialog>
-										<Dialog open={openSignup} onClose={handleSignupClose} aria-labelledby="form-dialog-signup">
-											<DialogTitle id="signup">Registrering</DialogTitle>
-											<DialogContent>
-												<TextField
-													autoFocus
-													margin="dense"
-													id="username"
-													label="Användarnamn"
-													type="text"
-													value={username}
-													onChange={handleSignupUsername}
-													fullWidth
-												/>
-												<TextField
-													margin="dense"
-													id="email"
-													label="E-mail"
-													type="text"
-													value={email}
-													onChange={handleSignupEmail}
-													fullWidth
-												/>
-												<TextField
-													margin="dense"
-													id="password"
-													label="Lösenord"
-													type="password"
-													onChange={handleSignupPassword}
-													value={password}
-													fullWidth
-												/>
-											</DialogContent>
-											<DialogActions>
-												<Button onClick={handleSignupClose} color="primary" style={buttonStyle}>
-													Tillbaka
+								<div>
+									<Hidden xsDown>
+										<Link style={cartStyle} to="/kundvagn">
+											<IconButton aria-label="cart">
+												<StyledBadge badgeContent={cartLength} color="secondary" style={{ color: '#F0F0F0', marginRight: '1rem', marginLeft: '0rem' }}>
+													<ShoppingCartIcon />
+												</StyledBadge>
+											</IconButton>
+										</Link>
+									</Hidden>
+								</div>
+								<div>
+									{!user ? (
+										<div className="buttonContainer">
+											<Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openLoginModal}>
+												LOGGA IN
+										</Button>
+											<Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openSignupModal}>
+												REGISTRERA
+										</Button>
+											<Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
+												<DialogTitle id="login">Logga in</DialogTitle>
+												<DialogContent>
+													<TextField
+														autoFocus
+														margin="dense"
+														id="email"
+														label="E-mail"
+														type="text"
+														onChange={handleLoginEmail}
+														defaultValue={email}
+														fullWidth
+													/>
+													<TextField
+														margin="dense"
+														id="password"
+														label="Lösenord"
+														type="password"
+														onChange={handleLoginPassword}
+														defaultValue={password}
+														fullWidth
+													/>
+												</DialogContent>
+												<DialogActions>
+													<Button onClick={handleLoginClose} color="primary">
+														Tillbaka
+                  								</Button>
+													<Button onClick={handleLogin} variant="contained" color="primary">
+														Bekräfta
+                  								</Button>
+												</DialogActions>
+											</Dialog>
+											<Dialog open={openSignup} onClose={handleSignupClose} aria-labelledby="form-dialog-signup">
+												<DialogTitle id="signup">Registrering</DialogTitle>
+												<DialogContent>
+													<TextField
+														autoFocus
+														margin="dense"
+														id="username"
+														label="Användarnamn"
+														type="text"
+														value={username}
+														onChange={handleSignupUsername}
+														fullWidth
+													/>
+													<TextField
+														margin="dense"
+														id="email"
+														label="E-mail"
+														type="text"
+														value={email}
+														onChange={handleSignupEmail}
+														fullWidth
+													/>
+													<TextField
+														margin="dense"
+														id="password"
+														label="Lösenord"
+														type="password"
+														onChange={handleSignupPassword}
+														value={password}
+														fullWidth
+													/>
+												</DialogContent>
+												<DialogActions>
+													<Button onClick={handleSignupClose} color="primary" style={buttonStyle}>
+														Tillbaka
                  				 				</Button>
-												<Button onClick={handleSignup} variant="contained" color="primary" style={buttonStyle}>
-													Bekräfta
+													<Button onClick={handleSignup} variant="contained" color="primary" style={buttonStyle}>
+														Bekräfta
                 			  					</Button>
-											</DialogActions>
-										</Dialog>
+												</DialogActions>
+											</Dialog>
+										</div>
+									) : (
+										<div style={{ marginLeft: '1rem' }}>
+											<ProfileCard />
+										</div>
+									)}
+								</div>
 
-									</div>
-								) : (
-									<div style={{marginLeft: '1rem'}}>
-										<ProfileCard />
-									</div>
-								)}
 							</div>
-							
 						</div>
 						<div>
 							<CategoryBar />

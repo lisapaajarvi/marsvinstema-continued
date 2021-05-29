@@ -22,7 +22,9 @@ function ProfileCard() {
                         ) : (  
                     <div></div>
                 )} 
-                <Button size="small" variant="contained" color="primary" style={buttonStyle} onClick={logout}>LOGGA UT</Button>
+                <Button size="small" variant="contained" color="primary" style={buttonStyle} onClick={logout}>
+                    LOGGA UT
+                </Button>
             </div>
         </div>
     )    
@@ -39,7 +41,7 @@ const userNameStyle: CSSProperties = {
     alignItems: 'center'
 }
 const buttonStyle: CSSProperties = {
-    margin: '1rem'
+    margin: '1rem',
 }
 
 export default ProfileCard;
