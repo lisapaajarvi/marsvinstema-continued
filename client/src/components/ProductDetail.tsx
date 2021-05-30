@@ -3,7 +3,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, Typography } from '@material-ui/core';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { CartContext } from './contexts/CartContext';
-import { Product } from '../ProductList';
+import { Product, ProductContext } from './contexts/ProductContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,11 +26,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function ProductDetail() {
-  const productList = JSON.parse(localStorage.getItem('productList')!);
   const classes = useStyles();
-  const { params } = useRouteMatch<{ url: string }>();
+  const { params } = useRouteMatch<{ _id: string }>();
   const cart = useContext(CartContext);
-  const product = productList.find((p: Product) => p.url === params.url);
+  const { products } = useContext(ProductContext);
+  const product = products.find((p: Product) => p._id === params._id);
 
   return (
     <Container maxWidth="sm">
@@ -52,11 +52,11 @@ export default function ProductDetail() {
               <CardMedia
                 className={classes.media}
                 image={product.img}
-                title={product.name}
+                title={product.title}
               />
               <CardContent>
                 <Typography gutterBottom variant="h4">
-                  {product.name}
+                  {product.title}
                 </Typography>
                 <Typography paragraph>
                   {product.description}

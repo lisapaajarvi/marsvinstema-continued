@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+// import IconButton from '@material-ui/core/IconButton';
+// import DeleteIcon from '@material-ui/icons/Delete';
+// import EditIcon from '@material-ui/icons/Edit';
 import { Grid, Hidden, Typography } from '@material-ui/core';
-import { Product } from '../ProductList';
+import { Product } from './contexts/ProductContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,13 +47,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 interface Props {
   product: Product;
-  removeFromProductList: (product:Product) => void;
-  openEditProductModal: (product:Product) => void;
+  // removeFromProductList: (product:Product) => void;
+  // openEditProductModal: (product:Product) => void;
 }
 
 export default function CrudItem(props: Props) {
   const classes = useStyles();
-  const { name, img, price, url, description } = props.product;
+  const { title, img, price, description, stock } = props.product;
 
   return (
     <div className={classes.root}>
@@ -61,13 +61,8 @@ export default function CrudItem(props: Props) {
         <Grid item xs={3} sm={2} md={2} lg={1} className={classes.gridItem}>
           <CardMedia className={classes.media} image={img} />
         </Grid>
-        <Hidden xsDown>
-          <Grid item xs={3} sm={2} md={2} lg={1} className={classes.gridItem}>
-            <Typography variant="body1"><i>{url}</i></Typography>
-          </Grid>
-        </Hidden>
         <Grid item xs={5} sm={3} md={2} lg={2} className={classes.gridItem}>
-          <Typography variant="body1">{name}</Typography>
+          <Typography variant="body1">{title}</Typography>
         </Grid>
         <Hidden smDown>
           <Grid item xs={6} sm={4} md={4} lg={6} className={classes.gridItem}>
@@ -77,14 +72,17 @@ export default function CrudItem(props: Props) {
         <Grid item xs={4} sm={3} md={1} lg={1} className={classes.gridItem}>
           <Typography variant="body1">{price} kr</Typography>
         </Grid>
-        <Grid item xs={12} sm={1} className={classes.icons}>
+        <Grid item xs={4} sm={3} md={1} lg={1} className={classes.gridItem}>
+          <Typography variant="body1">{stock} st</Typography>
+        </Grid>
+        {/* <Grid item xs={12} sm={1} className={classes.icons}>
           <IconButton className={classes.iconButton} edge="end" aria-label="edit" onClick={() => props.openEditProductModal(props.product)}>
             <EditIcon className={classes.deleteIcon} />
           </IconButton>
           <IconButton className={classes.iconButton} edge="end" aria-label="delete" onClick={() => props.removeFromProductList(props.product)}>
             <DeleteIcon className={classes.deleteIcon} />
           </IconButton>
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );

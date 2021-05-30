@@ -38,7 +38,6 @@ exports.login = async (req, res) => {
         req.session.username = user.username
         req.session.access = user.access
         req.session.email = user.email
-        
         delete user.password;
         res.status(200).json(user); 
     }   
@@ -61,7 +60,6 @@ exports.getAllUsers = async (req, res) => {
     const users = await UserModel.find({});
     res.status(200).json(users);
 }
-
 
 //ADDRESS FUNCTIONS
 

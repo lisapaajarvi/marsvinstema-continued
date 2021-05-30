@@ -38,7 +38,7 @@ export default function Cart() {
   return (
     <div className={classes.root}>
       <Container maxWidth="md">
-        <Box pt={3} pb={1}>
+        <Box pt={3} pb={3}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>

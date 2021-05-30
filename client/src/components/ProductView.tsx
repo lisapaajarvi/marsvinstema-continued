@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Box, Container } from '@material-ui/core';
-// import  { mockedProducts, Product } from '../ProductList'
 import ProductCard from './ProductCard';
 import { Footer } from './Footer';
 import { ProductContext } from './contexts/ProductContext';
@@ -46,8 +45,7 @@ export default function ProductView() {
           <Grid container spacing={3}>
             {products.map((product, index) => (
               <Grid item className={classes.item} xs={12} sm={6} md={3} key={index}>
-               <ProductCard product={product}/>
-                {product.price}
+                <ProductCard product={product}/>
               </Grid>
             ))}
           </Grid>

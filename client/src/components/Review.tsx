@@ -72,8 +72,8 @@ export default function Review(props: Props) {
       </Typography>
       <List disablePadding>
         {cart.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} />
+          <ListItem className={classes.listItem} key={product.title}>
+            <ListItemText primary={product.title} />
             <Typography variant="body1">{product.quantity} st à {product.price} kr</Typography>
           </ListItem>
         ))}
