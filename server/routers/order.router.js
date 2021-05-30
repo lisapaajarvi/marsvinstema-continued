@@ -7,6 +7,6 @@ orderRouter
     .get("/orders", checkAdminAccess, controller.getAllOrders)
     .get("/orders/:id", controller.getOrder)
     .post("/orders", controller.addNewOrder)
-    .put("/orders/:id", controller.editOrderStatus)
+    .put("/orders/:id", checkAdminAccess, controller.editOrderStatus)
 
 module.exports = orderRouter;

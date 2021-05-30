@@ -25,8 +25,7 @@ exports.getOrder = async (req, res) => {
 }
 
 exports.editOrderStatus = async (req, res) => {
-    const { _id } = req.body;
-    const updatedOrder = await OrderModel.findOneAndUpdate({ _id: _id }, req.body);
-    res.status(200).json(updatedOrder);
+    await OrderModel.findOneAndUpdate({ _id: req.body._id }, req.body);
+    res.status(200).json("Order was updated");
 }
 
