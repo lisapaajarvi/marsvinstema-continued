@@ -20,8 +20,7 @@ exports.getAllOrders = async (req, res) => {
 }
 
 exports.getOrder = async (req, res) => {
-    const { _id } = req.body;
-    const order = await OrderModel.findOne({ _id: _id });
+    const order = await OrderModel.findOne({ _id: req.body._id });
     res.status(200).json(order);
 }
 

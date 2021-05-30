@@ -1,4 +1,17 @@
 
+
+GET http://localhost:4000/api/orders
+Content-Type: application/json
+
+###
+
+GET http://localhost:4000/api/orders/:id
+Content-Type: application/json
+
+{
+    "_id": "60b37358d39acd4d7c1fe3aa"
+}
+
 POST http://localhost:4000/api/orders
 Content-Type: application/json
 
