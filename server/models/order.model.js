@@ -5,11 +5,11 @@ const { shippingMethodSchema } = require('./shippingmethod.model')
 
 const orderSchema = new mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, required: true},
-    //createdAt: {type: Date, required: true},
-    //totalPrice: {type: Number, required: true},
-    //products: { type: [productSchema], required: true},
-    //shippingAddress: { type: addressSchema, required: true},
-    //shippingMethod: { type: shippingMethodSchema, required: true},
+    createdAt: {type: Date, required: true},
+    totalPrice: {type: Number, required: true},
+    products: { type: [productSchema], required: true},
+    shippingAddress: { type: addressSchema, required: true},
+    shippingMethod: { type: shippingMethodSchema, required: true},
 })
 
 const OrderModel = mongoose.model('order', orderSchema);

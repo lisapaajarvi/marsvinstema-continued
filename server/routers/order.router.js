@@ -5,7 +5,7 @@ const controller = require("../controllers/order.controller");
 orderRouter
     .get("/orders", controller.getAllOrders)
     .get("/orders/:id", controller.getOrder)
-    .post("/orders/", controller.addNewOrder)
+    .post("/orders", controller.addNewOrder)
     .put("/orders/:id", controller.editOrderStatus)
 
 module.exports = orderRouter;
