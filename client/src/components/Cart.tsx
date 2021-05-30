@@ -4,6 +4,8 @@ import { Box, Button, Container, Grid, Paper, Typography } from '@material-ui/co
 import { Link } from 'react-router-dom';
 import { CartContext } from './contexts/CartContext';
 import CartItem from './CartItem';
+import { UserContext } from './contexts/UserContext';
+import CustomerForm from './CustomerForm';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,30 +13,33 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(3),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-        backgroundImage: 'linear-gradient(20deg, rgb(230, 230, 230), white)',
-        boxShadow: '0 6px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 20%)'
-      },
+      padding: theme.spacing(3),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+      backgroundImage: 'linear-gradient(20deg, rgb(230, 230, 230), white)',
+      boxShadow: '0 6px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 20%)'
+    },
   }),
 );
 
 export default function Cart() {
   const classes = useStyles();
-  const {cart} = useContext(CartContext)
+  const { cart } = useContext(CartContext)
+  const { user } = useContext(UserContext)
+
 
   function getTotalPrice() {
     let total = 0;
-    cart.forEach(item => { 
+    cart.forEach(item => {
       const subtotal = item.price * item.quantity;
-      total += subtotal;  
+      total += subtotal;
     });
     return total;
-  }  
+  }
 
   const totalPrice = getTotalPrice();
-  
+
+
   return (
     <div className={classes.root}>
       <Container maxWidth="md">
@@ -62,11 +67,17 @@ export default function Cart() {
                         <Button variant="contained" color="primary">Tillbaka</Button>
                       </Link>
                     </Box>
-                    <Box m={1}>
-                      <Link style={linkStyle} to="/checkout">
-                        <Button variant="contained" color="primary">Gå till kassan</Button>
+                    {user ? (
+                      <Box m={1}>
+                        <Link style={linkStyle} to="/checkout">
+                          <Button variant="contained" color="primary">Gå till kassan</Button>
+                        </Link>
+                      </Box>
+                    ) : (
+                      <Link style={linkStyle} to="/">
+                        <Button variant="contained" color="primary">"Logga in!"</Button>
                       </Link>
-                    </Box>
+                    )}
                   </Grid>
                 </Box>
               </Paper>
@@ -79,5 +90,5 @@ export default function Cart() {
 }
 
 const linkStyle: CSSProperties = {
-    textDecoration: 'none'
+  textDecoration: 'none'
 }
