@@ -10,7 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { ProductContext } from './contexts/ProductContext';
+import { Product, ProductContext } from './contexts/ProductContext';
 import axios from "axios";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,11 +34,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function CrudPage() {
-  const { products } = useContext(ProductContext)
+  const { products, editProduct } = useContext(ProductContext)
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   // const [url, setUrl] = React.useState('');
+  const [editingProduct, setEditingProduct] = React.useState<Product>();
   const [title, setTitle] = React.useState('');
+  const [stock, setStock] = React.useState<number>();
   const [description, setDescription] = React.useState('');
   const [categories, setCategories] = React.useState([]);
   const [price, setPrice] = React.useState('')
@@ -47,6 +49,7 @@ export default function CrudPage() {
   // const [isFieldDisabled, setIsFieldDisabled] = React.useState(true)
   // const [urlError, setUrlError] = React.useState<boolean>(false);
   const [titleError, setTitleError] = React.useState<boolean>(false);
+  const [stockError, setStockError] = React.useState<boolean>(false);
   const [descriptionError, setDescriptionError] = React.useState<boolean>(false);
   const [categoriesError, setCategoriesError] = React.useState<boolean>(false);
   const [priceError, setPriceError] = React.useState<boolean>(false);
@@ -74,35 +77,35 @@ export default function CrudPage() {
     }
   };
 
-  const editProduct = async () => {
-    const response = await fetch('/api/products');
-    if (response.ok) {
-        const products = await response.json();
-        // this.setState({products});
-        // this.setState({products});
-        console.log(products)
-    }
-    return [];
-}
+//   const editProduct = async () => {
+//     const response = await fetch('/api/product:id');
+//     if (response.ok) {
+//         const products = await response.json();
+//         console.log(products)
+//     }
+//     return [];
+// }
 
   function isAllRequiredFieldsOk() {
     return (
-      title
-      && description
-      && categories
-      && price
-      && img
+      stock
+      // && title
+      // && description
+      // && categories
+      // && price
+      // && img
     )
   }
 
   function isFormValid() {
     return (
       isAllRequiredFieldsOk()
-      && !titleError
-      && !descriptionError
-      && !categoriesError
-      && !priceError
-      && !imgError
+      && !stockError
+      // && !titleError
+      // && !descriptionError
+      // && !categoriesError
+      // && !priceError
+      // && !imgError
     )
   }
 
@@ -118,15 +121,21 @@ export default function CrudPage() {
   //   localStorage.setItem('productList', JSON.stringify(newProductList))
   // }
 
-  // function openEditProductModal(product:Product) {
-  //   // setIsFieldDisabled(true)
-  //   setTitle(product.title)
-  //   setDescription(product.description)
-  //   // setCategories(product.categories)
-  //   setPrice(product.price.toString())
-  //   setImg(product.img)
-  //   setOpen(true);
-  // }
+  function saveEditedProduct() {
+    editProduct({ ...editingProduct, stock } as Product)
+  }
+
+  function openEditProductModal(product: Product) {
+    // setIsFieldDisabled(true)
+    // setTitle(product.title)
+    // setDescription(products.description)
+    setStock(product.stock)
+    // setCategories(product.categories)
+    // setPrice(product.price.toString())
+    // setImg(product.img)
+    setEditingProduct(product)
+    setOpen(true);
+  }
 
   function openAddProductModal() {
     setTitle('')
@@ -172,6 +181,16 @@ export default function CrudPage() {
       setTitleError(true);
     }
     setTitle(e.target.value)
+  };
+
+  const handleStockInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (/^[0-9]+$/.test(e.target.value)) {  
+      setStockError(false);
+    }
+    else {
+      setStockError(true);
+    }
+    setStock(Number(e.target.value))
   };
   const handleDescriptionInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (/^.{3,}$/.test(e.target.value)) {  
@@ -237,13 +256,13 @@ export default function CrudPage() {
                 </div>
               </Typography>
 
-              <Button onClick={editProduct} color="primary" variant="contained">EDIT</Button>
+              <Button onClick={saveEditedProduct} color="primary" variant="contained">EDIT</Button>
 
               </Grid>
               <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="edit-product">Ändra / lägg till produkt</DialogTitle>
                 <DialogContent>
-                  <TextField
+                  {/* <TextField
                     margin="dense"
                     id="title"
                     label="Namn"
@@ -263,8 +282,19 @@ export default function CrudPage() {
                     onChange={handleDescriptionInput}
                     fullWidth
                     error={descriptionError}
-                  />
+                  /> */}
                   <TextField
+                    margin="dense"
+                    id="stock"
+                    label="Lagersaldo"
+                    multiline
+                    defaultValue={stock}
+                    type="text"
+                    onChange={handleStockInput}
+                    fullWidth
+                    error={stockError}
+                  />
+                  {/* <TextField
                     margin="dense"
                     id="categories"
                     label="Kategori"
@@ -284,8 +314,8 @@ export default function CrudPage() {
                     onChange={handlePriceInput}
                     fullWidth
                     error={priceError}
-                  />
-                  <TextField
+                  /> */}
+                  {/* <TextField
                     margin="dense"
                     id="img"
                     label="Länk till bild"
@@ -295,13 +325,13 @@ export default function CrudPage() {
                     onChange={handleImgInput}
                     fullWidth
                     error={imgError}
-                  />
+                  /> */}
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
                     Tillbaka
                   </Button>
-                  <Button disabled={!isFormValid()} variant="contained" color="primary">
+                  <Button onClick={saveEditedProduct} disabled={!isFormValid()} variant="contained" color="primary">
                     Spara
                   </Button>
                 </DialogActions>
@@ -315,14 +345,14 @@ export default function CrudPage() {
                       Namn
                     </Typography>
                   </Grid>
-                  <Hidden smDown>
+                  {/* <Hidden smDown>
                     <Grid item xs={6} sm={4} md={4} lg={6}>
                       <Typography variant="body1">Beskrivning</Typography>
                     </Grid>
-                  </Hidden>
-                  <Grid item xs={4} sm={3} md={1} lg={1}>
+                  </Hidden> */}
+                  {/* <Grid item xs={4} sm={3} md={1} lg={1}>
                     <Typography variant="body1">Pris</Typography>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={4} sm={3} md={1} lg={1}>
                     <Typography variant="body1">Lagersaldo</Typography>
                   </Grid>
@@ -334,7 +364,8 @@ export default function CrudPage() {
               {products.map((product, index) => (
                 <Grid item xs={12} key={index}>
                   {/* <CrudItem products={products} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} /> */}
-                  <CrudItem product={product} />
+                  <CrudItem product={product} openEditProductModal={openEditProductModal} />
+                  {/* <CrudItem product={product} /> */}
                 </Grid>
               ))}
               <Grid item xs={12} sm={6} className={classes.paper}>
