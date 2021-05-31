@@ -1,4 +1,4 @@
-const ProductModel = require("../models/product.model");
+const { ProductModel } = require("../models/product.model");
 
 exports.getProduct = async (req, res) => {
     const { _id } = req.body;
