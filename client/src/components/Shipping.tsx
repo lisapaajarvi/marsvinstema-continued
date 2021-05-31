@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
+import { OrderContext } from './contexts/OrderContext';
 
 interface Props {
   handleNext: () => void;
@@ -15,6 +16,7 @@ interface Props {
 
 export default function Shipping(props: Props) {
   const { shippingOption, onShippingChange } = props
+  const { shippingMethods } = useContext(OrderContext)
   
   const handleShippingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onShippingChange(event.target.value);
@@ -35,21 +37,16 @@ export default function Shipping(props: Props) {
         <FormControl component="fieldset">
           <FormLabel component="legend">Välj fraktsätt</FormLabel>
           <RadioGroup aria-label="shipping" name="shipping1" value={shippingOption} onChange={handleShippingChange}>
-            <FormControlLabel value="postnord" control={<Radio color="primary" />} label="Postnord" />
-            <Typography style={{ fontWeight: 600 }}>
-              Fraktkostnad: 49 kr
-            </Typography>
-            <span>Leveransdatum: {calculateDeliveryDate(5)} (5 dagar)</span>
-            <FormControlLabel value="ups" control={<Radio color="primary" />} label="UPS" />
-            <Typography style={{ fontWeight: 600 }}>
-              Fraktkostnad: 89 kr
-            </Typography>
-            <span>Leveransdatum: {calculateDeliveryDate(2)} (2 dagar)</span>
-            <FormControlLabel value="dhl" control={<Radio color="primary" />} label="DHL" />
-            <Typography style={{ fontWeight: 600 }}>
-              Fraktkostnad: 149 kr
-            </Typography>
-            <span>Leveransdatum: {calculateDeliveryDate(1)} (1 dag)</span>
+
+          {shippingMethods!.map((method, index) => (
+            <>
+              <FormControlLabel key= {index} value={method.name} control={<Radio color="primary" />} label={method.name} />
+              <Typography style={{ fontWeight: 600 }}>
+                Fraktkostnad: {method.price} kr
+              </Typography>
+              <span>Leveransdatum: {calculateDeliveryDate(Number(method.expectedDeliveryTime))} ({method.expectedDeliveryTime} dagar)</span>
+            </>
+                ))}
           </RadioGroup>
         </FormControl>
         <Grid container justify="space-evenly">

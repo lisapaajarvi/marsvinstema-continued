@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Component, createContext } from 'react';
 import { Customer } from '../CustomerForm';
 import { Product } from './ProductContext';
@@ -21,10 +22,9 @@ interface ShippingMethod {
     name: string
     expectedDeliveryTime: number
     price: number
-
 }
 interface ContextValue extends State {
-    // addProduct: (newProduct: Product) => void;
+    // addNewOrder: () => {}
 }    
 
 export const OrderContext = createContext<ContextValue>({
@@ -39,21 +39,27 @@ class OrderProvider extends Component<{}, State> {
     state: State = {}
     
     async getOrders() {
-        const response = await fetch('/api/orders');
-        if (response.ok) {
-            const orders = await response.json();
-            this.setState({orders});
-        }
-        return [];
+        axios
+        .get('/api/orders')
+        .then(res => {
+            this.setState({ orders: res.data })
+            console.log(this.state.orders)
+        })
+        .catch(err =>{
+            console.log(err);
+        })    
     }
 
     async getShippingMethods() {
-        const response = await fetch('/api/shippingmethods');
-        if (response.ok) {
-            const shippingMethods = await response.json();
-            this.setState({shippingMethods});
-        }
-        return [];
+        axios
+        .get('/api/shippingMethods')
+        .then(res => {
+          this.setState({ shippingMethods: res.data })
+          console.log(this.state.shippingMethods)
+        })
+        .catch(err =>{
+          console.log(err);
+        })
     }
  
     componentDidMount() {
