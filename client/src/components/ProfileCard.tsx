@@ -5,29 +5,29 @@ import { Link } from "react-router-dom";
 import { CSSProperties } from '@material-ui/styles';
 import { UserContext } from './contexts/UserContext';
 
-function ProfileCard() {  
+function ProfileCard() {
     const { user, logout } = useContext(UserContext)
 
-    if(!user) return null;
-    
-    return (   
-        
+    if (!user) return null;
+
+    return (
+
         <div style={profileContainer}>
             <div style={userNameStyle}>
-                <p style={{color:'white', marginLeft: '0.5rem', fontFamily: 'Helvetica'}}>{user.username}</p>
-                { user.access === "admin" ? (
-                    <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
-                        <SettingsIcon style={{color: '#F0F0F0'}}/>
+                <p style={{ color: 'white', marginLeft: '0.5rem', fontFamily: 'Helvetica' }}>{user.username}</p>
+                {user.access === "admin" ? (
+                    <Link to="/admin" style={{ color: 'lightgray', marginLeft: '1rem' }}>
+                        <SettingsIcon style={{ color: '#F0F0F0' }} />
                     </Link>
-                        ) : (  
+                ) : (
                     <div></div>
-                )} 
+                )}
                 <Button size="small" variant="contained" color="primary" style={buttonStyle} onClick={logout}>
                     LOGGA UT
                 </Button>
             </div>
         </div>
-    )    
+    )
 }
 
 const profileContainer: CSSProperties = {

@@ -1,11 +1,16 @@
-import React, { CSSProperties, useContext } from 'react';
+import React, { CSSProperties, useContext, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Box, Button, Container, Grid, Paper, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { CartContext } from './contexts/CartContext';
 import CartItem from './CartItem';
 import { UserContext } from './contexts/UserContext';
-import CustomerForm from './CustomerForm';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,9 +29,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Cart() {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [openSignup, setOpenSignup] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [openLogin, setOpenLogin] = useState(false);
+  const { user, login, signup } = useContext(UserContext)
   const { cart } = useContext(CartContext)
-  const { user } = useContext(UserContext)
-
 
   function getTotalPrice() {
     let total = 0;
@@ -36,8 +45,59 @@ export default function Cart() {
     });
     return total;
   }
-
   const totalPrice = getTotalPrice();
+
+  const handleLoginClose = () => {
+    setOpenLogin(false);
+  };
+  function openLoginModal() {
+    setOpenLogin(true);
+  }
+  const handleSignupClose = () => {
+    setOpenSignup(false);
+  };
+  function openSignupModal() {
+    setOpenSignup(true);
+  }
+  const handleSignupUsername = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setUsername(e.target.value)
+  }
+  const handleSignupEmail = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setEmail(e.target.value)
+  }
+  const handleSignupPassword = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setPassword(e.target.value)
+  }
+  const handleLoginEmail = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setEmail(e.target.value)
+  }
+  const handleLoginPassword = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setPassword(e.target.value)
+  }
+  const handleLogin = () => {
+    const loginBody = {
+      email: email,
+      password: password
+    }
+    login(loginBody)
+    setOpenLogin(false);
+    setPassword('')
+    setEmail('')
+  }
+  const handleSignup = () => {
+    const newUser = {
+      username: username,
+      email: email,
+      password: password,
+    }
+    signup(newUser)
+    setUsername('')
+    setEmail('')
+    setPassword('')
+    setOpenSignup(false);
+    alert('New user created!');
+  }
+
 
 
   return (
@@ -74,9 +134,85 @@ export default function Cart() {
                         </Link>
                       </Box>
                     ) : (
-                      <Link style={linkStyle} to="/">
-                        <Button variant="contained" color="primary">"Logga in!"</Button>
-                      </Link>
+                      <div>
+                        <Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openLoginModal}>Logga in</Button>
+                        <Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openSignupModal}>Registrera</Button>
+                        <p>Logga in eller registrera dig för att fortsätta till kassan</p>
+
+                        <Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
+                          <DialogTitle id="login">Logga in</DialogTitle>
+                          <DialogContent>
+                            <TextField
+                              autoFocus
+                              margin="dense"
+                              id="email"
+                              label="E-mail"
+                              type="text"
+                              onChange={handleLoginEmail}
+                              defaultValue={email}
+                              fullWidth
+                            />
+                            <TextField
+                              margin="dense"
+                              id="password"
+                              label="Lösenord"
+                              type="password"
+                              onChange={handleLoginPassword}
+                              defaultValue={password}
+                              fullWidth
+                            />
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={handleLoginClose} color="primary">
+                              Tillbaka
+                  								</Button>
+                            <Button onClick={handleLogin} variant="contained" color="primary">
+                              Bekräfta
+                  								</Button>
+                          </DialogActions>
+                        </Dialog>
+                        <Dialog open={openSignup} onClose={handleSignupClose} aria-labelledby="form-dialog-signup">
+                          <DialogTitle id="signup">Registrering</DialogTitle>
+                          <DialogContent>
+                            <TextField
+                              autoFocus
+                              margin="dense"
+                              id="username"
+                              label="Användarnamn"
+                              type="text"
+                              value={username}
+                              onChange={handleSignupUsername}
+                              fullWidth
+                            />
+                            <TextField
+                              margin="dense"
+                              id="email"
+                              label="E-mail"
+                              type="text"
+                              value={email}
+                              onChange={handleSignupEmail}
+                              fullWidth
+                            />
+                            <TextField
+                              margin="dense"
+                              id="password"
+                              label="Lösenord"
+                              type="password"
+                              onChange={handleSignupPassword}
+                              value={password}
+                              fullWidth
+                            />
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={handleSignupClose} color="primary" style={buttonStyle}>
+                              Tillbaka
+                 				 				</Button>
+                            <Button onClick={handleSignup} variant="contained" color="primary" style={buttonStyle}>
+                              Bekräfta
+                			  					</Button>
+                          </DialogActions>
+                        </Dialog>
+                      </div>
                     )}
                   </Grid>
                 </Box>
@@ -92,3 +228,7 @@ export default function Cart() {
 const linkStyle: CSSProperties = {
   textDecoration: 'none'
 }
+
+const buttonStyle: CSSProperties = {
+  margin: '0.5rem',
+};
