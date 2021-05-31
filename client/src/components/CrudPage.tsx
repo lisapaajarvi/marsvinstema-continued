@@ -11,7 +11,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { ProductContext } from './contexts/ProductContext';
-// import  { mockedProducts, Product } from '../ProductList'
 import axios from "axios";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -74,6 +73,17 @@ export default function CrudPage() {
       console.log(ex);
     }
   };
+
+  const editProduct = async () => {
+    const response = await fetch('/api/products');
+    if (response.ok) {
+        const products = await response.json();
+        // this.setState({products});
+        // this.setState({products});
+        console.log(products)
+    }
+    return [];
+}
 
   function isAllRequiredFieldsOk() {
     return (
@@ -226,6 +236,9 @@ export default function CrudPage() {
                   Produktlista
                 </div>
               </Typography>
+
+              <Button onClick={editProduct} color="primary" variant="contained">EDIT</Button>
+
               </Grid>
               <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="edit-product">Ändra / lägg till produkt</DialogTitle>
