@@ -7,11 +7,10 @@ productRouter
 	// Working
 	.get("/products", controller.getAllProducts)
 	.get("/product/:id", controller.getProduct)
-	// .post("/products", controller.addProduct)
 	.get("/products/categories", controller.getAllCategories)
 	.get('/products/category', controller.getProductsByCategory)
 	.put("/product/:id", checkAdminAccess, checkUserLogin, controller.editProduct)
-// .post("/products", controller.addNewProduct)
-// .delete("/product/:id", controller.deleteProduct);
+	.post("/products", checkAdminAccess, controller.addProduct)
+	.delete("/product/:id", checkAdminAccess, controller.deleteProduct)
 
 module.exports = productRouter;
