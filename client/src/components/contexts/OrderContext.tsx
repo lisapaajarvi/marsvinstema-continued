@@ -8,7 +8,7 @@ interface State {
     shippingMethods?: ShippingMethod[]      
 }
 
-interface Order {
+export interface Order {
     _id: string
     createdAt: Date
     user: string
@@ -18,19 +18,26 @@ interface Order {
     shippingAddress: Customer
 }
 
+export interface NewOrder {
+    totalPrice: number
+    cart: Product[]
+    shippingMethod: ShippingMethod
+    customer: Customer
+}
+
 export interface ShippingMethod {
     name: string
     expectedDeliveryTime: number
     price: number
 }
 interface ContextValue extends State {
-    // addNewOrder: () => {}
+    addNewOrder: (newOrder:NewOrder) => void
 }    
 
 export const OrderContext = createContext<ContextValue>({
     orders: [],
-    shippingMethods: []
-    // addNewOrder: () => {}
+    shippingMethods: [],
+    addNewOrder: () => {}
 });
 
 
@@ -61,6 +68,17 @@ class OrderProvider extends Component<{}, State> {
           console.log(err);
         })
     }
+
+    async addNewOrder(newOrder:NewOrder) {
+        axios
+        .post('/api/orders', newOrder)
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err =>{
+            console.log(err);
+        })    
+    }
  
     componentDidMount() {
         this.getShippingMethods()
@@ -69,7 +87,7 @@ class OrderProvider extends Component<{}, State> {
     render() {
         return (
             <OrderContext.Provider value={{
-                // addNewOrder: this.addNewOrder,
+                addNewOrder: this.addNewOrder,
                 orders: this.state.orders,
                 shippingMethods: this.state.shippingMethods
             }}>

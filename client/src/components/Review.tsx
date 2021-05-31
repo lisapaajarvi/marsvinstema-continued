@@ -20,6 +20,7 @@ interface Props {
   shippingMethod: ShippingMethod;
   isLoading: boolean;
   cardInfo: CardInfo;
+  totalPrice: number;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -37,19 +38,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review(props: Props) {
   const classes = useStyles();
-  const {customer, paymentOption, shippingMethod, isLoading, cardInfo} = props;
+  const {customer, paymentOption, shippingMethod, isLoading, cardInfo, totalPrice} = props;
   const {cart} = useContext(CartContext)
-
-  function calculateTotalPrice() {
-    let total = 0;
-    cart.forEach(item => { 
-      const subtotal = item.price * item.quantity;
-      total += subtotal;  
-    });
-    total += shippingMethod.price
-    return total;
-  }  
-  const totalPrice = calculateTotalPrice();
 
   return (
     <React.Fragment>

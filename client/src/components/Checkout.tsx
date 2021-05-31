@@ -11,9 +11,8 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import Shipping from './Shipping';
 import { CardInfo } from './CardPayment';
-import { Order, sendOrderToApi } from '../mockedApi';
 import { CartContext } from './contexts/CartContext';
-import { OrderContext, ShippingMethod } from './contexts/OrderContext';
+import { NewOrder, OrderContext, ShippingMethod } from './contexts/OrderContext';
 import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -65,15 +64,28 @@ export default function Checkout() {
   const [customer, setCustomer] = useState<Customer>({  firstName: '', lastName: '', address: '', zip: '',  city: '', phoneNumber: '', email: ''})
   const [isLoading, setIsLoading] = useState(false);
   const {cart, emptyCart} = useContext(CartContext)
+  const [totalPrice] = useState(calculateTotalPrice())
+  const { addNewOrder } = useContext(OrderContext)
 
+  function calculateTotalPrice() {
+    let total = 0;
+    cart.forEach(item => { 
+      const subtotal = item.price * item.quantity;
+      total += subtotal;  
+    });
+    total += shippingMethod.price
+    return total;
+  }  
+  //const totalPrice = calculateTotalPrice();
 
   const handleNext = async () => {
     if (activeStep === 3) {
       const orderId = createFakeOrderID(); 
-      const order: Order = {
+      const newOrder: NewOrder = {
         //orderNumber: orderId, ska genereras automatiskt i databasen?
         customer,
         shippingMethod,
+        totalPrice,
         //paymentOption: {paymentOption},
         //cardInfo: {cardInfo},
         cart
@@ -81,8 +93,10 @@ export default function Checkout() {
       setIsLoading(true)
 
       // här ska ordern skickas in till databasen?
-      await sendOrderToApi(order);
-      console.log(order)
+
+
+      //await sendOrderToApi(order);
+      addNewOrder(newOrder)
       setOrderNumber(orderId)
       setIsLoading(false)
       emptyCart();
@@ -105,7 +119,7 @@ export default function Checkout() {
       case 2:
           return <PaymentForm handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} customer={customer} onPaymentOptionChange={setPaymentOption} cardInfo={cardInfo} onCardInfoChange={setCardInfo} />;
       case 3:
-        return <Review handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} shippingMethod={shippingMethod} customer={customer} isLoading={isLoading} cardInfo={cardInfo}/>;
+        return <Review handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} shippingMethod={shippingMethod} customer={customer} isLoading={isLoading} cardInfo={cardInfo} totalPrice={totalPrice}/>;
       default:
         throw new Error('Unknown step');
     }

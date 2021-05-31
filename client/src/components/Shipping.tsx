@@ -42,13 +42,13 @@ export default function Shipping(props: Props) {
           <RadioGroup aria-label="shipping" name="shipping1" value={chosenShippingMethod.name} onChange={handleShippingChange}>
 
           {shippingMethods!.map((method, index) => (
-            <>
-              <FormControlLabel key= {index} value={method.name} control={<Radio color="primary" />} label={method.name} />
+            <div key= {index}>
+              <FormControlLabel value={method.name} control={<Radio color="primary" />} label={method.name} />
               <Typography style={{ fontWeight: 600 }}>
                 Fraktkostnad: {method.price} kr
               </Typography>
               <span>Leveransdatum: {calculateDeliveryDate(Number(method.expectedDeliveryTime))} ({method.expectedDeliveryTime} dagar)</span>
-            </>
+            </div>
                 ))}
           </RadioGroup>
         </FormControl>
