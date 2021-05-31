@@ -65,19 +65,23 @@ export default function Checkout() {
   const [isLoading, setIsLoading] = React.useState(false);
   const { cart, emptyCart } = useContext(CartContext)
 
+
   const handleNext = async () => {
     if (activeStep === 3) {
       const orderId = createFakeOrderID();
       const order: Order = {
-        orderNumber: orderId,
-        customer: { customer },
-        shippingOption: { shippingOption },
-        paymentOption: { paymentOption },
-        cardInfo: { cardInfo },
-        cart: { cart }
+        //orderNumber: orderId, ska genereras automatiskt i databasen?
+        customer,
+        shippingOption,
+        //paymentOption: {paymentOption},
+        //cardInfo: {cardInfo},
+        cart
       }
       setIsLoading(true)
+
+      // här ska ordern skickas in till databasen?
       await sendOrderToApi(order);
+      console.log(order)
       setOrderNumber(orderId)
       setIsLoading(false)
       emptyCart();

@@ -1,15 +1,15 @@
-const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
-
+const { productSchema } = require('./product.model');
+const addressSchema = require('./address.model');
+const { shippingMethodSchema } = require('./shippingmethod.model')
 
 const orderSchema = new mongoose.Schema({
-    id: {type: mongoose.Schema.Types.ObjectId},
-    user: {type: mongoose.Schema.Types.ObjectId},
-    createdAt: {type: Number, required: true},
-    totalPrice: {type: Number, required:  true},
-    // products: product,
-    // shippingAdress: Adress,
-    // shippingMethod: shippingMethod,
+    user: {type: mongoose.Schema.Types.ObjectId, required: true},
+    createdAt: {type: Date, required: true},
+    totalPrice: {type: Number, required: true},
+    products: { type: [productSchema], required: true},
+    shippingAddress: { type: addressSchema, required: true},
+    shippingMethod: { type: shippingMethodSchema, required: true},
 })
 
 const OrderModel = mongoose.model('order', orderSchema);
