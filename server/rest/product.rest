@@ -49,6 +49,6 @@ Content-Type: application/json
 
 ###
 
-DELETE  http://localhost:4000/api/product/60ae123c284ea099688aad77
+DELETE  http://localhost:4000/api/product/60b4cbbc7129e600f4a7dd81
 
 ###

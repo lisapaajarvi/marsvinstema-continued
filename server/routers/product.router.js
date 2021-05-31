@@ -10,7 +10,7 @@ productRouter
 	.get("/products/categories", controller.getAllCategories)
 	.get('/products/category', controller.getProductsByCategory)
 	.put("/product/:id", checkAdminAccess, checkUserLogin, controller.editProduct)
-	.post("/products", controller.addProduct)
-	.delete("/product/:id", controller.deleteProduct)
+	.post("/products", checkAdminAccess, controller.addProduct)
+	.delete("/product/:id", checkAdminAccess, controller.deleteProduct)
 
 module.exports = productRouter;
