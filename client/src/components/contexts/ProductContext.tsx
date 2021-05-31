@@ -66,7 +66,6 @@ class ProductProvider extends Component<{}, State> {
         if (response.ok) {
             const updatedProduct = await response.json();
             console.log(updatedProduct)
-            // this.setState({categories});
         }
     }
     

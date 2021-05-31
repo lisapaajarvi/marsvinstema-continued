@@ -37,17 +37,17 @@ export default function CrudPage() {
   const { products, editProduct } = useContext(ProductContext)
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  // const [url, setUrl] = React.useState('');
   const [editingProduct, setEditingProduct] = React.useState<Product>();
   const [title, setTitle] = React.useState('');
   const [stock, setStock] = React.useState<number>();
   const [description, setDescription] = React.useState('');
   const [categories, setCategories] = React.useState([]);
-  const [price, setPrice] = React.useState('')
+  const [price, setPrice] = React.useState<number>();
   const [img, setImg] = React.useState('')
   // const [productList, setProductList] = React.useState(getProductList())
   // const [isFieldDisabled, setIsFieldDisabled] = React.useState(true)
   // const [urlError, setUrlError] = React.useState<boolean>(false);
+  // const [url, setUrl] = React.useState('');
   const [titleError, setTitleError] = React.useState<boolean>(false);
   const [stockError, setStockError] = React.useState<boolean>(false);
   const [descriptionError, setDescriptionError] = React.useState<boolean>(false);
@@ -77,22 +77,13 @@ export default function CrudPage() {
     }
   };
 
-//   const editProduct = async () => {
-//     const response = await fetch('/api/product:id');
-//     if (response.ok) {
-//         const products = await response.json();
-//         console.log(products)
-//     }
-//     return [];
-// }
-
   function isAllRequiredFieldsOk() {
     return (
       stock
       && title
+      && price
       // && description
       // && categories
-      // && price
       // && img
     )
   }
@@ -102,9 +93,9 @@ export default function CrudPage() {
       isAllRequiredFieldsOk()
       && !stockError
       && !titleError
+      && !priceError
       // && !descriptionError
       // && !categoriesError
-      // && !priceError
       // && !imgError
     )
   }
@@ -122,7 +113,7 @@ export default function CrudPage() {
   // }
 
   function saveEditedProduct() {
-    editProduct({ ...editingProduct, stock, title } as Product)
+    editProduct({ ...editingProduct, stock, title, price } as Product)
     setOpen(false);
   }
 
@@ -132,7 +123,7 @@ export default function CrudPage() {
     // setDescription(products.description)
     setStock(product.stock)
     // setCategories(product.categories)
-    // setPrice(product.price.toString())
+    setPrice(product.price)
     // setImg(product.img)
     setEditingProduct(product)
     setOpen(true);
@@ -141,7 +132,7 @@ export default function CrudPage() {
   function openAddProductModal() {
     setTitle('')
     setDescription('')
-    setPrice('')
+    // setPrice()
     setCategories([])
     setImg('')
     // setIsFieldDisabled(false)
@@ -220,7 +211,7 @@ export default function CrudPage() {
     else {
       setPriceError(true);
     }
-    setPrice(e.target.value)
+    setPrice(Number(e.target.value))
   };
 
   const handleImgInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -252,13 +243,23 @@ export default function CrudPage() {
                   <TextField
                     margin="dense"
                     id="title"
-                    label="Namn"
+                    label="Produktnamn"
                     defaultValue={title}
                     type="text"
                     onChange={handleTitleInput}
                     fullWidth
                     error={titleError}
                   />
+                  <TextField
+                    margin="dense"
+                    id="price"
+                    label="Pris"
+                    defaultValue={price}
+                    type="text"
+                    onChange={handlePriceInput}
+                    fullWidth
+                    error={priceError}
+                  /> 
                   {/* <TextField
                     margin="dense"
                     id="description"
@@ -291,17 +292,8 @@ export default function CrudPage() {
                     onChange={handleCategoriesInput}
                     fullWidth
                     error={categoriesError}
-                  />
-                  <TextField
-                    margin="dense"
-                    id="price"
-                    label="Pris"
-                    defaultValue={price}
-                    type="text"
-                    onChange={handlePriceInput}
-                    fullWidth
-                    error={priceError}
-                  /> */}
+                  />*/}
+
                   {/* <TextField
                     margin="dense"
                     id="img"
@@ -329,7 +321,7 @@ export default function CrudPage() {
                   </Grid>
                   <Grid item xs={5} sm={3} md={2} lg={2}>
                     <Typography variant="body1">
-                      Namn
+                      Produktnamn
                     </Typography>
                   </Grid>
                   {/* <Hidden smDown>
