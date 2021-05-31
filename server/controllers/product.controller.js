@@ -1,4 +1,4 @@
-const ProductModel = require("../models/product.model");
+const { ProductModel } = require("../models/product.model");
 
 exports.getProduct = async (req, res) => {
     const { _id } = req.body;
@@ -32,18 +32,24 @@ exports.editProduct = async (req, res) => {
     const { _id } = req.body;
     const updatedProduct = await ProductModel.findOneAndUpdate({ _id: _id }, req.body);
     res.status(200).json(updatedProduct);
-
-
 }
 
-// exports.addProduct = async (req, res) => {
-//     const addedProduct = await (await ProductModel.create(req.body));
-//     res.status(201).json(addedProduct);
-// }
+exports.deleteProduct = async (req, res) => {
+    const deletedProduct = await ProductModel.findOneAndDelete({ _id: req.params.id });
+    res.status(200).json(deletedProduct);
+}
 
-// exports.addNewProduct = async (req, res) => {
+exports.addProduct = async (req, res) => {
+    const productToCreate = {
+      title: req.body.title,
+      price: req.body.price,
+      stock: req.body.stock,
+      categories: req.body.categories,
+      description: req.body.description,
+      img: req.body.img,
+      url: req.body.url
+    };
 
-// }
-// exports.deleteProduct = async (req, res) => {
-
-// }
+    const newProduct = await ProductModel.create(productToCreate);
+    res.status(201).json(newProduct);
+}

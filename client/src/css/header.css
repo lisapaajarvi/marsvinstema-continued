@@ -1,0 +1,62 @@
+@media (min-width: 1px) {
+    .headerContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    .logoStyle {
+        line-height: normal;
+        text-decoration: none;
+        color: white;
+        font-family: 'Changa One';
+        font-size: 2rem;
+    }
+    .headerStyle {
+        height: 8rem;
+        background: linear-gradient(90deg, rgba(7,0,129,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .buttonContainer {
+        display: flex;
+        align-items: flex-end;
+        margin-left: 0.5rem;
+    }
+}
+
+@media (min-width: 480px) {
+    .logoStyle {
+        flex-direction: row;
+        font-size: 2rem;
+    }
+    .headerStyle {
+        width: 100%;
+    }
+}
+
+@media (min-width: 600px) {
+    .headerContainer {
+        display: flex;
+    }
+    .headerStyle {
+        height: 6rem;
+        width: 100%;
+    }
+    .buttonContainer {
+        margin-left: 0rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .logoStyle {
+        font-size: 4.5rem;
+    }
+}
+
+/* @media (min-width: 1024px) {
+    .logoStyle {
+        font-size: 4.5rem;
+    }
+} */

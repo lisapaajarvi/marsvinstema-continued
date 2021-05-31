@@ -7,8 +7,6 @@ import { UserContext } from './contexts/UserContext';
 
 function ProfileCard() {  
     const { user, logout } = useContext(UserContext)
-    
-    console.log({ user });
 
     if(!user) return null;
     
@@ -16,15 +14,17 @@ function ProfileCard() {
         
         <div style={profileContainer}>
             <div style={userNameStyle}>
-                <p style={{color:'white'}}>{user.username}</p>
+                <p style={{color:'white', marginLeft: '0.5rem', fontFamily: 'Helvetica'}}>{user.username}</p>
                 { user.access === "admin" ? (
-                    <Link to="/crud" style={{color: 'lightgray', marginLeft: '1rem'}}>
-                        <SettingsIcon />
+                    <Link to="/admin" style={{color: 'lightgray', marginLeft: '1rem'}}>
+                        <SettingsIcon style={{color: '#F0F0F0'}}/>
                     </Link>
                         ) : (  
                     <div></div>
                 )} 
-                <Button size="small" variant="contained" color="primary" style={buttonStyle} onClick={logout}>LOG OUT</Button>
+                <Button size="small" variant="contained" color="primary" style={buttonStyle} onClick={logout}>
+                    LOGGA UT
+                </Button>
             </div>
         </div>
     )    
@@ -41,8 +41,7 @@ const userNameStyle: CSSProperties = {
     alignItems: 'center'
 }
 const buttonStyle: CSSProperties = {
-    // color: 'white',
-    margin: '1rem'
+    margin: '1rem',
 }
 
 export default ProfileCard;
