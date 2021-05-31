@@ -11,6 +11,7 @@ import { Customer } from './CustomerForm';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { CardInfo } from './CardPayment';
 import { ShippingMethod } from './contexts/OrderContext';
+import { UserContext } from './contexts/UserContext';
 
 interface Props {
   handleBack: () => void;
@@ -40,6 +41,7 @@ export default function Review(props: Props) {
   const classes = useStyles();
   const {customer, paymentOption, shippingMethod, isLoading, cardInfo, totalPrice} = props;
   const {cart} = useContext(CartContext)
+  const {user} = useContext(UserContext)
 
   return (
     <React.Fragment>
@@ -76,11 +78,11 @@ export default function Review(props: Props) {
             Dina uppgifter
           </Typography>
           <Typography gutterBottom>{customer.firstName} {customer.lastName}</Typography>
-          <Typography gutterBottom>{customer.address}</Typography>
-          <Typography gutterBottom>{customer.zip} {customer.city}</Typography>
+          <Typography gutterBottom>{customer.streetAddress}</Typography>
+          <Typography gutterBottom>{customer.zipCode} {customer.city}</Typography>
           <br/>
-          <Typography gutterBottom>{customer.phoneNumber}</Typography>
-          <Typography gutterBottom>{customer.email}</Typography>
+          <Typography gutterBottom>{customer.phoneNr}</Typography>
+          <Typography gutterBottom>{user!.email}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>

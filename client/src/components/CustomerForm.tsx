@@ -13,11 +13,10 @@ interface Props {
 export interface Customer {
   firstName?: string
   lastName?: string
-  address?: string
-  zip?: string
+  streetAddress?: string
+  zipCode?: string
   city?: string
-  phoneNumber?: string
-  email?: string
+  phoneNr?: string
 }
 
 export default function CustomerForm(props: Props) {
@@ -28,17 +27,15 @@ export default function CustomerForm(props: Props) {
   const [zipError, setZipError] = useState<boolean>(false);
   const [cityError, setCityError] = useState<boolean>(false);
   const [phoneNumberError, setPhoneNumberError] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState<boolean>(false);
   
   function isAllRequiredFieldsOk() {
     return (
       customer.firstName
       && customer.lastName
-      && customer.address
-      && customer.zip
+      && customer.streetAddress
+      && customer.zipCode
       && customer.city
-      && customer.phoneNumber
-      && customer.email
+      && customer.phoneNr
     )
   }
 
@@ -51,7 +48,6 @@ export default function CustomerForm(props: Props) {
       && !zipError
       && !cityError
       && !phoneNumberError
-      && !emailError
     )
   }
 
@@ -82,7 +78,7 @@ export default function CustomerForm(props: Props) {
     else {
       setAddressError(true);
     }
-    onCustomerChange({ ...customer, address: e.target.value });
+    onCustomerChange({ ...customer, streetAddress: e.target.value });
   };
   
   const handleZipChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -92,7 +88,7 @@ export default function CustomerForm(props: Props) {
     else {
      setZipError(true);
     }
-    onCustomerChange({ ...customer, zip: e.target.value });
+    onCustomerChange({ ...customer, zipCode: e.target.value });
   };
   
   const handleCityChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -112,17 +108,7 @@ export default function CustomerForm(props: Props) {
     else {
       setPhoneNumberError(true);
     }
-    onCustomerChange({ ...customer, phoneNumber: e.target.value });
-  };
-  
-  const handleEmailChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^\S+@\S+\.\S+$/.test(e.target.value)) {  
-      setEmailError(false);
-    }
-    else {
-      setEmailError(true);
-    }
-    onCustomerChange({ ...customer, email: e.target.value });
+    onCustomerChange({ ...customer, phoneNr: e.target.value });
   };
 
   return (
@@ -161,7 +147,7 @@ export default function CustomerForm(props: Props) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            value={customer.address}
+            value={customer.streetAddress}
             onChange={handleAddressChange}
             required
             id="address"
@@ -175,7 +161,7 @@ export default function CustomerForm(props: Props) {
         </Grid> 
         <Grid item xs={12} sm={6}>
           <TextField
-            value={customer.zip}
+            value={customer.zipCode}
             onChange={handleZipChange}
             required
             id="zip"
@@ -203,7 +189,7 @@ export default function CustomerForm(props: Props) {
         </Grid>  
         <Grid item xs={12} sm={6}>
           <TextField
-            value={customer.phoneNumber}
+            value={customer.phoneNr}
             onChange={handlePhoneNumberChange}
             required
             id="phoneNumber"
@@ -213,20 +199,6 @@ export default function CustomerForm(props: Props) {
             autoComplete="tel"
             helperText={phoneNumberError && "Ange ett korrekt mobilnummer"}
             error={phoneNumberError}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            value={customer.email}
-            onChange={handleEmailChange}
-            required
-            id="email"
-            name="email"
-            label="E-post"
-            fullWidth
-            autoComplete="email"
-            helperText={emailError && "Ange en korrekt e-postadress"}
-            error={emailError}
           />
         </Grid>
         <Grid container justify="space-evenly">

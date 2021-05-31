@@ -68,7 +68,7 @@ export default function PaymentForm(props: Props) {
             Swish
           </Typography>
           <Typography>
-            Mobilnummer {customer.phoneNumber}
+            Mobilnummer {customer.phoneNr}
           </Typography>
         </Grid>
       }
@@ -81,10 +81,10 @@ export default function PaymentForm(props: Props) {
             {customer.firstName} {customer.lastName}
           </Typography>
           <Typography>
-            {customer.address}
+            {customer.streetAddress}
           </Typography>
           <Typography>
-            {customer.zip} {customer.city}
+            {customer.zipCode} {customer.city}
           </Typography>
         </Grid>
       }

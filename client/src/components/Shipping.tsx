@@ -21,6 +21,7 @@ export default function Shipping(props: Props) {
   const handleShippingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newShippingMethod = shippingMethods?.find(({ name }) => name === event.target.value)
     if(newShippingMethod) {
+      console.log(newShippingMethod)
       setChosenShippingMethod(newShippingMethod);
     }
   };

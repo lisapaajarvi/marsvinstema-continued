@@ -61,7 +61,7 @@ export default function Checkout() {
   const [cardInfo, setCardInfo] = useState<CardInfo>( { name: '', cardNumber: '', expireDate: '', cvv: '' } );
   const [shippingMethod, setShippingMethod] = useState<ShippingMethod>({ name: "PostNord", price: 49, expectedDeliveryTime: 5 });
   const [paymentOption, setPaymentOption] = useState('Bankkort');
-  const [customer, setCustomer] = useState<Customer>({  firstName: '', lastName: '', address: '', zip: '',  city: '', phoneNumber: '', email: ''})
+  const [customer, setCustomer] = useState<Customer>({  firstName: '', lastName: '', streetAddress: '', zipCode: '',  city: '', phoneNr: ''})
   const [isLoading, setIsLoading] = useState(false);
   const {cart, emptyCart} = useContext(CartContext)
   const [totalPrice] = useState(calculateTotalPrice())
@@ -76,11 +76,11 @@ export default function Checkout() {
     total += shippingMethod.price
     return total;
   }  
-  //const totalPrice = calculateTotalPrice();
 
   const handleNext = async () => {
     if (activeStep === 3) {
       const orderId = createFakeOrderID(); 
+      console.log(shippingMethod)
       const newOrder: NewOrder = {
         //orderNumber: orderId, ska genereras automatiskt i databasen?
         customer,
