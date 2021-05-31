@@ -10,13 +10,14 @@ import { CartContext } from './contexts/CartContext';
 import { Customer } from './CustomerForm';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { CardInfo } from './CardPayment';
+import { ShippingMethod } from './contexts/OrderContext';
 
 interface Props {
   handleBack: () => void;
   handleNext: () => void;
   customer: Customer;
   paymentOption: string;
-  shippingOption: string;
+  shippingMethod: ShippingMethod;
   isLoading: boolean;
   cardInfo: CardInfo;
 }
@@ -36,23 +37,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review(props: Props) {
   const classes = useStyles();
-  const {customer, paymentOption, isLoading, cardInfo} = props;
+  const {customer, paymentOption, shippingMethod, isLoading, cardInfo} = props;
   const {cart} = useContext(CartContext)
-
-  function calculateShippingPrice() {
-    let price;
-    if(props.shippingOption==='postnord') {
-      price = 49;
-    }
-    else if(props.shippingOption==='dhl') {
-      price = 149;
-    }
-    else {
-      price = 89;
-    }
-    return price;
-  }
-  const shippingPrice = calculateShippingPrice();
 
   function calculateTotalPrice() {
     let total = 0;
@@ -60,7 +46,7 @@ export default function Review(props: Props) {
       const subtotal = item.price * item.quantity;
       total += subtotal;  
     });
-    total += shippingPrice
+    total += shippingMethod.price
     return total;
   }  
   const totalPrice = calculateTotalPrice();
@@ -79,7 +65,7 @@ export default function Review(props: Props) {
         ))}
         <ListItem className={classes.listItem} >
             <ListItemText primary="Fraktkostnad" />
-            <Typography variant="body1">{shippingPrice} kr</Typography>
+            <Typography variant="body1">{shippingMethod.price} kr</Typography>
           </ListItem>
         <ListItem className={classes.total}>
           <ListItemText primary="Att betala:" />

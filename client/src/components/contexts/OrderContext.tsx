@@ -18,7 +18,7 @@ interface Order {
     shippingAddress: Customer
 }
 
-interface ShippingMethod {
+export interface ShippingMethod {
     name: string
     expectedDeliveryTime: number
     price: number

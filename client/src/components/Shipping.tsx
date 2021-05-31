@@ -5,21 +5,24 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
-import { OrderContext } from './contexts/OrderContext';
+import { OrderContext, ShippingMethod } from './contexts/OrderContext';
 
 interface Props {
   handleNext: () => void;
   handleBack: () => void;
-  shippingOption: string
-  onShippingChange: (shippingInfo: string) => void;
+  chosenShippingMethod: ShippingMethod
+  setChosenShippingMethod: (newShippingMethod: ShippingMethod) => void;
 }
 
 export default function Shipping(props: Props) {
-  const { shippingOption, onShippingChange } = props
+  const { chosenShippingMethod, setChosenShippingMethod } = props
   const { shippingMethods } = useContext(OrderContext)
   
   const handleShippingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onShippingChange(event.target.value);
+    const newShippingMethod = shippingMethods?.find(({ name }) => name === event.target.value)
+    if(newShippingMethod) {
+      setChosenShippingMethod(newShippingMethod);
+    }
   };
 
   function calculateDeliveryDate(days: number) {
@@ -36,7 +39,7 @@ export default function Shipping(props: Props) {
       <React.Fragment>
         <FormControl component="fieldset">
           <FormLabel component="legend">Välj fraktsätt</FormLabel>
-          <RadioGroup aria-label="shipping" name="shipping1" value={shippingOption} onChange={handleShippingChange}>
+          <RadioGroup aria-label="shipping" name="shipping1" value={chosenShippingMethod.name} onChange={handleShippingChange}>
 
           {shippingMethods!.map((method, index) => (
             <>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -13,6 +13,7 @@ import Shipping from './Shipping';
 import { CardInfo } from './CardPayment';
 import { Order, sendOrderToApi } from '../mockedApi';
 import { CartContext } from './contexts/CartContext';
+import { OrderContext, ShippingMethod } from './contexts/OrderContext';
 import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,13 +57,13 @@ const steps = ['Dina uppgifter', 'Fraktsätt', 'Betalsätt', 'Granska din bestä
 
 export default function Checkout() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [orderNumber, setOrderNumber] = React.useState(0);
-  const [cardInfo, setCardInfo] = React.useState<CardInfo>( { name: '', cardNumber: '', expireDate: '', cvv: '' } );
-  const [shippingOption, setShippingOption] = React.useState('postnord');
-  const [paymentOption, setPaymentOption] = React.useState('Bankkort');
-  const [customer, setCustomer] = React.useState<Customer>({  firstName: '', lastName: '', address: '', zip: '',  city: '', phoneNumber: '', email: ''})
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+  const [orderNumber, setOrderNumber] = useState(0);
+  const [cardInfo, setCardInfo] = useState<CardInfo>( { name: '', cardNumber: '', expireDate: '', cvv: '' } );
+  const [shippingMethod, setShippingMethod] = useState<ShippingMethod>({ name: "PostNord", price: 49, expectedDeliveryTime: 5 });
+  const [paymentOption, setPaymentOption] = useState('Bankkort');
+  const [customer, setCustomer] = useState<Customer>({  firstName: '', lastName: '', address: '', zip: '',  city: '', phoneNumber: '', email: ''})
+  const [isLoading, setIsLoading] = useState(false);
   const {cart, emptyCart} = useContext(CartContext)
 
 
@@ -72,7 +73,7 @@ export default function Checkout() {
       const order: Order = {
         //orderNumber: orderId, ska genereras automatiskt i databasen?
         customer,
-        shippingOption,
+        shippingMethod,
         //paymentOption: {paymentOption},
         //cardInfo: {cardInfo},
         cart
@@ -100,11 +101,11 @@ export default function Checkout() {
       case 0:
         return <CustomerForm handleNext={handleNext} customer={customer} onCustomerChange={setCustomer} />;
       case 1:
-        return <Shipping handleNext={handleNext} handleBack={handleBack} shippingOption={shippingOption} onShippingChange={setShippingOption}/>;
+        return <Shipping handleNext={handleNext} handleBack={handleBack} chosenShippingMethod={shippingMethod} setChosenShippingMethod={setShippingMethod}/>;
       case 2:
           return <PaymentForm handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} customer={customer} onPaymentOptionChange={setPaymentOption} cardInfo={cardInfo} onCardInfoChange={setCardInfo} />;
       case 3:
-        return <Review handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} shippingOption={shippingOption} customer={customer} isLoading={isLoading} cardInfo={cardInfo}/>;
+        return <Review handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} shippingMethod={shippingMethod} customer={customer} isLoading={isLoading} cardInfo={cardInfo}/>;
       default:
         throw new Error('Unknown step');
     }
