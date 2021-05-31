@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { ProductContext } from './contexts/ProductContext';
 // import  { mockedProducts, Product } from '../ProductList'
+import axios from "axios";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,6 +52,28 @@ export default function CrudPage() {
   const [categoriesError, setCategoriesError] = React.useState<boolean>(false);
   const [priceError, setPriceError] = React.useState<boolean>(false);
   const [imgError, setImgError] = React.useState<boolean>(false);
+  const [file, setFile] = React.useState("");
+  const [fileName, setFileName] = React.useState("");
+
+  const saveFile = (e: any) => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
+
+  const uploadFile = async (e: any) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("fileName", fileName);
+    try {
+      const res = await axios.post(
+        "http://localhost:4000/upload",
+        formData
+      );
+      console.log(res);
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
 
   function isAllRequiredFieldsOk() {
     return (
@@ -189,6 +212,8 @@ export default function CrudPage() {
               <Grid item xs={12} className={classes.paper}>
                 <h2>Produktlista</h2>
               </Grid>
+                <input type="file" onChange={saveFile} />
+                <button onClick={uploadFile}>Ladda upp</button>
               <Grid item xs={12} sm={6} className={classes.paper}>
                 <Link className={classes.link} to="/">
                   <Button variant="contained" color="primary">Gå tillbaka till butiken</Button>

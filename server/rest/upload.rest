@@ -2,7 +2,7 @@ POST http://localhost:4000/upload
 Content-Type: multipart/form-data; boundary=Row
 
 --Row
-Content-Disposition: form-data; name="image"; filename="lektalt.jpg"
+Content-Disposition: form-data; name="file"; filename="lektalt.jpg"
 Content-Type: image/jpeg
 
 < ./lektalt.jpg
@@ -10,4 +10,4 @@ Content-Type: image/jpeg
 
 ###
 
-GET http://localhost:4000/uploads/1622204736833-lektalt.jpg
+GET http://localhost:4000/uploads/1622405777256-lektalt.jpg

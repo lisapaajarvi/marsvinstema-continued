@@ -12,6 +12,7 @@ const fileUpload = require('express-fileupload');
 dotenv.config()
 
 // Static path for uploaded images
+app.use(fileUpload());
 app.use('/uploads', express.static('uploads'));
 
 // connects to the DB
@@ -39,20 +40,20 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
     app.use("/api", shippingMethodRouter);
     
     // File Upload
-    app.post('/upload', fileUpload({ createParentPath: true }), (req, res) => {
-        console.log(req.files);
-        if(req.files?.image) {
-            const fileName = Date.now() + '-' + req.files.image.name
-            req.files.image.mv('uploads/' + fileName, () => {
-                res.status(200).send(fileName);
-            })
-        } else {
-            res.status(500).send();
-        }
-    });
+    app.post("/upload", (req, res) => {
+        const newpath = __dirname + "/uploads/";
+        const file = req.files.file;
+        const filename = Date.now() + '-' + file.name;
+      
+        file.mv(`${newpath}${filename}`, (err) => {
+          if (err) {
+            res.status(500).send("File upload failed");
+          }
+          res.status(200).send("File Uploaded");
+        });
+      });
     app.listen(4000); 
 })
 .catch((error)  => {
     console.error(error)
-
 });
