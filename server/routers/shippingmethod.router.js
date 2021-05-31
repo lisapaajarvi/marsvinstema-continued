@@ -4,7 +4,8 @@ const controller = require("../controllers/shippingmethod.controller");
 
 
 shippingMethodRouter
-.get("/shippingMethod/", controller.getAllShippingMethods)
-.get("/shippingMethod/:id", controller.getChosenShippingMethod)
+.get("/shippingMethods/", controller.getAllShippingMethods)
+.get("/shippingMethods/:id", controller.getChosenShippingMethod)
+.post("/shippingMethods/", controller.addShippingMethod)
 
 module.exports = shippingMethodRouter;

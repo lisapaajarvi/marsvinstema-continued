@@ -1,12 +1,11 @@
-const UserModel = require("../models/shippingmethod.model");
-const { shippingMethodModel }  = require("../models/shippingmethod.model");
-const OrderModel = require("../models/order.model")
+
+const { ShippingMethodModel }  = require("../models/shippingmethod.model");
 
 exports.getAllShippingMethods = async (req, res) => {
     console.log('Shipping method');
-    const shippingMethod = await shippingMethodModel.find({})
-    console.log(shippingMethod)
-    res.status(200).json(shippingMethod);
+    const shippingMethods = await ShippingMethodModel.find({})
+    console.log(shippingMethods)
+    res.status(200).json(shippingMethods);
 }
 
 
@@ -19,7 +18,18 @@ exports.getChosenShippingMethod = async (req, res) => {
     } else {
         res.status(500).json("Cant find your object!")
     }
+}
 
+exports.addShippingMethod = async (req, res) => {
+
+    const newShippingMethod = {
+        name: req.body.name,
+        expectedDeliveryTime: req.body.time,
+        price: req.body.price
+    };
+
+    const addedShippingMethod = await ShippingMethodModel.create(newShippingMethod);
+      res.status(201).json(addedShippingMethod);
 }
 
 

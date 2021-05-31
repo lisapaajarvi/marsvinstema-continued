@@ -4,7 +4,7 @@ import { Product } from './ProductContext';
 
 interface State {
     orders?: Order[]
-    //shippingMethods: ShippingMethod[]      
+    shippingMethods?: ShippingMethod[]      
 }
 
 interface Order {
@@ -28,7 +28,8 @@ interface ContextValue extends State {
 }    
 
 export const OrderContext = createContext<ContextValue>({
-    orders: []
+    orders: [],
+    shippingMethods: []
     // addNewOrder: () => {}
 });
 
@@ -45,16 +46,26 @@ class OrderProvider extends Component<{}, State> {
         }
         return [];
     }
+
+    async getShippingMethods() {
+        const response = await fetch('/api/shippingmethods');
+        if (response.ok) {
+            const shippingMethods = await response.json();
+            this.setState({shippingMethods});
+        }
+        return [];
+    }
  
     componentDidMount() {
-        
+        this.getShippingMethods()
     }
     
     render() {
         return (
             <OrderContext.Provider value={{
                 // addNewOrder: this.addNewOrder,
-                orders: this.state.orders
+                orders: this.state.orders,
+                shippingMethods: this.state.shippingMethods
             }}>
             {this.props.children}
         </OrderContext.Provider>
