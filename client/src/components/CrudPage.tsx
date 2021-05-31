@@ -89,7 +89,7 @@ export default function CrudPage() {
   function isAllRequiredFieldsOk() {
     return (
       stock
-      // && title
+      && title
       // && description
       // && categories
       // && price
@@ -101,7 +101,7 @@ export default function CrudPage() {
     return (
       isAllRequiredFieldsOk()
       && !stockError
-      // && !titleError
+      && !titleError
       // && !descriptionError
       // && !categoriesError
       // && !priceError
@@ -122,12 +122,13 @@ export default function CrudPage() {
   // }
 
   function saveEditedProduct() {
-    editProduct({ ...editingProduct, stock } as Product)
+    editProduct({ ...editingProduct, stock, title } as Product)
+    setOpen(false);
   }
 
   function openEditProductModal(product: Product) {
     // setIsFieldDisabled(true)
-    // setTitle(product.title)
+    setTitle(product.title)
     // setDescription(products.description)
     setStock(product.stock)
     // setCategories(product.categories)
@@ -238,31 +239,17 @@ export default function CrudPage() {
         <Container maxWidth="lg">
           <Box pt={5} pb={5}>
             <Grid container spacing={2}>
-              <Grid item xs={12} className={classes.paper}>
-                <h2>Produktlista</h2>
-              </Grid>
-                <input type="file" onChange={saveFile} />
-                <button onClick={uploadFile}>Ladda upp</button>
               <Grid item xs={12} sm={6} className={classes.paper}>
-                <Link className={classes.link} to="/">
-                  <Button variant="contained" color="primary">Gå tillbaka till butiken</Button>
-                </Link>
-              </Grid>
-              <Grid item xs={12} sm={6} className={classes.paper}>
-                <Button variant="contained" color="primary" onClick={openAddProductModal}>Lägg till en produkt <AddCircleIcon className={classes.icon} /></Button>
               <Typography variant="h5">
                 <div style={{ marginBottom: '1rem' }}>
                   Produktlista
                 </div>
               </Typography>
-
-              <Button onClick={saveEditedProduct} color="primary" variant="contained">EDIT</Button>
-
               </Grid>
               <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="edit-product">Ändra / lägg till produkt</DialogTitle>
                 <DialogContent>
-                  {/* <TextField
+                  <TextField
                     margin="dense"
                     id="title"
                     label="Namn"
@@ -272,7 +259,7 @@ export default function CrudPage() {
                     fullWidth
                     error={titleError}
                   />
-                  <TextField
+                  {/* <TextField
                     margin="dense"
                     id="description"
                     label="Beskrivning"
@@ -376,6 +363,10 @@ export default function CrudPage() {
               <Grid item xs={12} sm={6} className={classes.paper}>
                 <Button variant="contained" color="primary" onClick={openAddProductModal}>Lägg till<AddCircleIcon className={classes.icon} /></Button>
               </Grid>
+              <div>
+                <input type="file" onChange={saveFile} />
+                <button onClick={uploadFile}>Ladda upp</button>
+              </div>
             </Grid>
           </Box>
         </Container>
