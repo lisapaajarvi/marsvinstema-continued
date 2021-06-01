@@ -11,14 +11,13 @@ exports.addNewOrder = async (req, res) => {
         shippingMethod: req.body.shippingMethod
     }
     const addedOrder = await OrderModel.create(newOrder);
-    console.log(addedOrder)
 
-    for (const product of newOrder.products) {
+    for (const product of addedOrder.products) {
         const productInDB = await ProductModel.findOne({_id:product._id})
         productInDB.stock -= product.quantity
         productInDB.save()
       }
-    res.status(201).json(addedOrder);
+    res.status(201).json(addedOrder._id);
 }
 
 exports.getAllOrders = async (req, res) => {
@@ -35,4 +34,3 @@ exports.editOrderStatus = async (req, res) => {
     await OrderModel.findOneAndUpdate({ _id: req.body._id }, req.body);
     res.status(200).json("Order was updated");
 }
-
