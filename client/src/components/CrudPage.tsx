@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { CSSProperties, useContext } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Box, Button, Container, Hidden, Typography } from '@material-ui/core';
+import { Box, Button, Container, Divider, Hidden, Typography } from '@material-ui/core';
 import CrudItem from './CrudItem';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Product, ProductContext } from './contexts/ProductContext';
 import axios from "axios";
+import { Footer } from './Footer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -225,20 +226,181 @@ export default function CrudPage() {
   };
 
   return (
-    <>
-      <div className={classes.root}>
-        <Container maxWidth="lg">
-          <Box pt={5} pb={5}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} className={classes.paper}>
+    // <>
+    //   <div className={classes.root}>
+    //     <Container maxWidth="lg">
+    //       <Box pt={5} pb={5}>
+    //         <Grid container spacing={2}>
+    //           <Grid item xs={12} sm={6} className={classes.paper}>
+    //           <Typography variant="h5">
+    //             <div style={{ marginBottom: '1rem' }}>
+    //               Produktlista
+    //             </div>
+    //           </Typography>
+    //           </Grid>
+    //           <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+    //             <DialogTitle id="edit-product">Ändra / lägg till produkt</DialogTitle>
+    //             <DialogContent>
+    //               <TextField
+    //                 margin="dense"
+    //                 id="title"
+    //                 label="Produktnamn"
+    //                 defaultValue={title}
+    //                 type="text"
+    //                 onChange={handleTitleInput}
+    //                 fullWidth
+    //                 error={titleError}
+    //               />
+    //               <TextField
+    //                 margin="dense"
+    //                 id="price"
+    //                 label="Pris"
+    //                 defaultValue={price}
+    //                 type="text"
+    //                 onChange={handlePriceInput}
+    //                 fullWidth
+    //                 error={priceError}
+    //               /> 
+    //               {/* <TextField
+    //                 margin="dense"
+    //                 id="description"
+    //                 label="Beskrivning"
+    //                 multiline
+    //                 defaultValue={description}
+    //                 type="text"
+    //                 onChange={handleDescriptionInput}
+    //                 fullWidth
+    //                 error={descriptionError}
+    //               /> */}
+    //               <TextField
+    //                 margin="dense"
+    //                 id="stock"
+    //                 label="Lagersaldo"
+    //                 multiline
+    //                 defaultValue={stock}
+    //                 type="text"
+    //                 onChange={handleStockInput}
+    //                 fullWidth
+    //                 error={stockError}
+    //               />
+    //               {/* <TextField
+    //                 margin="dense"
+    //                 id="categories"
+    //                 label="Kategori"
+    //                 multiline
+    //                 defaultValue={categories}
+    //                 type="text"
+    //                 onChange={handleCategoriesInput}
+    //                 fullWidth
+    //                 error={categoriesError}
+    //               />*/}
+
+    //               {/* <TextField
+    //                 margin="dense"
+    //                 id="img"
+    //                 label="Länk till bild"
+    //                 multiline
+    //                 defaultValue={img}
+    //                 type="text"
+    //                 onChange={handleImgInput}
+    //                 fullWidth
+    //                 error={imgError}
+    //               /> */}
+    //             </DialogContent>
+    //             <DialogActions>
+    //               <Button onClick={handleClose} color="primary">
+    //                 Tillbaka
+    //               </Button>
+    //               <Button onClick={saveEditedProduct} disabled={!isFormValid()} variant="contained" color="primary">
+    //                 Spara
+    //               </Button>
+    //             </DialogActions>
+    //           </Dialog>
+    //           <Hidden xsDown>
+    //             <Grid container spacing={2}>
+    //               <Grid item xs={3} sm={2} md={2} lg={1}>
+    //               </Grid>
+    //               <Grid item xs={5} sm={3} md={2} lg={2}>
+    //                 <Typography variant="body1">
+    //                   Produktnamn
+    //                 </Typography>
+    //               </Grid>
+    //               {/* <Hidden smDown>
+    //                 <Grid item xs={6} sm={4} md={4} lg={6}>
+    //                   <Typography variant="body1">Beskrivning</Typography>
+    //                 </Grid>
+    //               </Hidden> */}
+    //               {/* <Grid item xs={4} sm={3} md={1} lg={1}>
+    //                 <Typography variant="body1">Pris</Typography>
+    //               </Grid> */}
+    //               <Grid item xs={4} sm={3} md={1} lg={1}>
+    //                 <Typography variant="body1">Lagersaldo</Typography>
+    //               </Grid>
+    //               <Grid item xs={12} sm={1}>
+    //                 <Typography variant="body1"></Typography>
+    //               </Grid>
+    //             </Grid>
+    //           </Hidden>
+    //           {products.map((product, index) => (
+    //             <Grid item xs={12} key={index}>
+    //               {/* <CrudItem products={products} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} /> */}
+    //               <CrudItem product={product} openEditProductModal={openEditProductModal} />
+    //               {/* <CrudItem product={product} /> */}
+    //             </Grid>
+    //           ))}
+    //           <Grid item xs={12} sm={6} className={classes.paper}>
+    //             <Link className={classes.link} to="/admin">
+    //               <Button variant="contained" color="primary">Tillbaka</Button>
+    //             </Link>
+    //           </Grid>
+    //           <Grid item xs={12} sm={6} className={classes.paper}>
+    //             <Button variant="contained" color="primary" onClick={openAddProductModal}>Lägg till<AddCircleIcon className={classes.icon} /></Button>
+    //           </Grid>
+    //           <div>
+    //             <input type="file" onChange={saveFile} />
+    //             <button onClick={uploadFile}>Ladda upp</button>
+    //           </div>
+    //         </Grid>
+    //       </Box>
+    //     </Container>
+    //   </div>
+    // </>
+
+    <div className={classes.root}>
+      <Container maxWidth="sm">
+        <Box pt={5} pb={5}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} className={classes.paper}>
               <Typography variant="h5">
                 <div style={{ marginBottom: '1rem' }}>
                   Produktlista
                 </div>
               </Typography>
+              <div style={{ borderBottom: '0.1rem solid lightgrey', marginBottom: '2rem', width: '12rem', margin: 'auto'}}>
+              </div>
+              <Grid container spacing={2}>
+                <Grid item xs={3} sm={2} md={2} lg={1}>
+                </Grid>
+                {/* <Grid item xs={5} sm={3} md={2} lg={2}>
+                  <Typography variant="body1">Namn</Typography>
+                </Grid> */}
               </Grid>
+
+              <>
+                {/* PRODUCT MAP */}
+                {products.map((product, index) => (
+                  <Grid item xs={12} key={index}>
+                    {/* <CrudItem products={products} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} /> */}
+                    <CrudItem product={product} openEditProductModal={openEditProductModal} />
+                    {/* <CrudItem product={product} /> */}
+                    <Divider/>
+                  </Grid>
+                ))}
+              </>
+              
+              {/* DIALOG MODALS */}
               <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="edit-product">Ändra / lägg till produkt</DialogTitle>
+                <DialogTitle id="edit-product">Ändra produkt</DialogTitle>
                 <DialogContent>
                   <TextField
                     margin="dense"
@@ -259,7 +421,7 @@ export default function CrudPage() {
                     onChange={handlePriceInput}
                     fullWidth
                     error={priceError}
-                  /> 
+                  />
                   {/* <TextField
                     margin="dense"
                     id="description"
@@ -315,54 +477,31 @@ export default function CrudPage() {
                   </Button>
                 </DialogActions>
               </Dialog>
-              <Hidden xsDown>
-                <Grid container spacing={2}>
-                  <Grid item xs={3} sm={2} md={2} lg={1}>
-                  </Grid>
-                  <Grid item xs={5} sm={3} md={2} lg={2}>
-                    <Typography variant="body1">
-                      Produktnamn
-                    </Typography>
-                  </Grid>
-                  {/* <Hidden smDown>
-                    <Grid item xs={6} sm={4} md={4} lg={6}>
-                      <Typography variant="body1">Beskrivning</Typography>
-                    </Grid>
-                  </Hidden> */}
-                  {/* <Grid item xs={4} sm={3} md={1} lg={1}>
-                    <Typography variant="body1">Pris</Typography>
-                  </Grid> */}
-                  <Grid item xs={4} sm={3} md={1} lg={1}>
-                    <Typography variant="body1">Lagersaldo</Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={1}>
-                    <Typography variant="body1"></Typography>
-                  </Grid>
-                </Grid>
-              </Hidden>
-              {products.map((product, index) => (
-                <Grid item xs={12} key={index}>
-                  {/* <CrudItem products={products} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} /> */}
-                  <CrudItem product={product} openEditProductModal={openEditProductModal} />
-                  {/* <CrudItem product={product} /> */}
-                </Grid>
-              ))}
-              <Grid item xs={12} sm={6} className={classes.paper}>
+
+              {/* BUTTONS */}
+              <div className={classes.paper} style={container}>
                 <Link className={classes.link} to="/admin">
-                  <Button variant="contained" color="primary">Tillbaka</Button>
+                  <Button variant="contained" color="primary" style={{ margin: '1rem' }}>Tillbaka</Button>
                 </Link>
-              </Grid>
-              <Grid item xs={12} sm={6} className={classes.paper}>
-                <Button variant="contained" color="primary" onClick={openAddProductModal}>Lägg till<AddCircleIcon className={classes.icon} /></Button>
-              </Grid>
+                <Link className={classes.link} to="/admin">
+                  <Button variant="contained" color="primary" style={{ margin: '1rem' }}>Lägg till</Button>
+                </Link>
+               </div>
               <div>
-                <input type="file" onChange={saveFile} />
-                <button onClick={uploadFile}>Ladda upp</button>
+                <Footer />
               </div>
             </Grid>
-          </Box>
-        </Container>
-      </div>
-    </>
+          </Grid>
+        </Box>
+      </Container>
+    </div>
   );
+}
+
+const container: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginTop: '1rem'
 }
