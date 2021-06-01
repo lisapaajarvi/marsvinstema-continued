@@ -1,4 +1,5 @@
 const OrderModel = require("../models/order.model");
+const { ProductModel } = require("../models/product.model");
 
 exports.addNewOrder = async (req, res) => {
     const newOrder = {
@@ -9,8 +10,14 @@ exports.addNewOrder = async (req, res) => {
         shippingAddress: req.body.customer,
         shippingMethod: req.body.shippingMethod
     }
-    console.log(newOrder)
     const addedOrder = await OrderModel.create(newOrder);
+    console.log(addedOrder)
+
+    for (const product of newOrder.products) {
+        const productInDB = await ProductModel.findOne({_id:product._id})
+        productInDB.stock -= product.quantity
+        productInDB.save()
+      }
     res.status(201).json(addedOrder);
 }
 
