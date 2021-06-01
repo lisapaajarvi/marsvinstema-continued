@@ -1,7 +1,7 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Box, Container } from '@material-ui/core';
+import { Box, Button, Container } from '@material-ui/core';
 import ProductCard from './ProductCard';
 import { Footer } from './Footer';
 import { ProductContext } from './contexts/ProductContext';
@@ -9,6 +9,9 @@ import { ProductContext } from './contexts/ProductContext';
 export default function ProductView() {
 	const { products } = useContext(ProductContext);
 	const classes = useStyles();
+
+	// HÄR BEHÖVER VI TA EMOT ETT VÄRDE FRÅN CATEGORYBAR
+	// SOM VI SEDAN DYNAMISKT MAPPAR UT DESSA FILTRERADE PRODUKTER
 
 	return (
 		<div className={classes.root}>
@@ -28,6 +31,9 @@ export default function ProductView() {
 							</Grid>
 						))}
 					</Grid>
+					<Button variant="contained">HEJ</Button>
+					<Button variant="contained">PÅ</Button>
+					<Button variant="contained">DIG</Button>
 				</Box>
 				<Footer />
 			</Container>

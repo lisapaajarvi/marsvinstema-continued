@@ -2,7 +2,7 @@
   "name": "marsvinstema-continued",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "npm-run-all --parallel start-client start-server",
     "start-server": "cd server && npm start",
