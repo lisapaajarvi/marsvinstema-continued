@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   stepper: {
-    padding: theme.spacing(3, 0, 5), 
+    padding: theme.spacing(3, 0, 5),
   },
   buttons: {
     display: 'flex',
@@ -58,17 +58,17 @@ export default function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [orderNumber, setOrderNumber] = React.useState(0);
-  const [cardInfo, setCardInfo] = React.useState<CardInfo>( { name: '', cardNumber: '', expireDate: '', cvv: '' } );
+  const [cardInfo, setCardInfo] = React.useState<CardInfo>({ name: '', cardNumber: '', expireDate: '', cvv: '' });
   const [shippingOption, setShippingOption] = React.useState('postnord');
   const [paymentOption, setPaymentOption] = React.useState('Bankkort');
-  const [customer, setCustomer] = React.useState<Customer>({  firstName: '', lastName: '', address: '', zip: '',  city: '', phoneNumber: '', email: ''})
+  const [customer, setCustomer] = React.useState<Customer>({ firstName: '', lastName: '', address: '', zip: '', city: '', phoneNumber: '', email: '' })
   const [isLoading, setIsLoading] = React.useState(false);
-  const {cart, emptyCart} = useContext(CartContext)
+  const { cart, emptyCart } = useContext(CartContext)
 
 
   const handleNext = async () => {
     if (activeStep === 3) {
-      const orderId = createFakeOrderID(); 
+      const orderId = createFakeOrderID();
       const order: Order = {
         //orderNumber: orderId, ska genereras automatiskt i databasen?
         customer,
@@ -90,21 +90,21 @@ export default function Checkout() {
       setActiveStep(activeStep + 1);
     }
   };
-  
+
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-  
+
   function getStepContent(step: number) {
     switch (step) {
       case 0:
         return <CustomerForm handleNext={handleNext} customer={customer} onCustomerChange={setCustomer} />;
       case 1:
-        return <Shipping handleNext={handleNext} handleBack={handleBack} shippingOption={shippingOption} onShippingChange={setShippingOption}/>;
+        return <Shipping handleNext={handleNext} handleBack={handleBack} shippingOption={shippingOption} onShippingChange={setShippingOption} />;
       case 2:
-          return <PaymentForm handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} customer={customer} onPaymentOptionChange={setPaymentOption} cardInfo={cardInfo} onCardInfoChange={setCardInfo} />;
+        return <PaymentForm handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} customer={customer} onPaymentOptionChange={setPaymentOption} cardInfo={cardInfo} onCardInfoChange={setCardInfo} />;
       case 3:
-        return <Review handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} shippingOption={shippingOption} customer={customer} isLoading={isLoading} cardInfo={cardInfo}/>;
+        return <Review handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} shippingOption={shippingOption} customer={customer} isLoading={isLoading} cardInfo={cardInfo} />;
       default:
         throw new Error('Unknown step');
     }
