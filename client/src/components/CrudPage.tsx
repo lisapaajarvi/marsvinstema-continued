@@ -42,7 +42,7 @@ export default function CrudPage() {
   const [title, setTitle] = useState('');
   const [stock, setStock] = useState<number>();
   const [description, setDescription] = useState('');
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<[string] | any>();
   const [price, setPrice] = useState<number>();
   const [img, setImg] = useState('')
   // const [productList, setProductList] = React.useState(getProductList())
@@ -84,7 +84,7 @@ export default function CrudPage() {
       && price
       && description
       && img
-      // && categories
+      && categories
     )
   }
 
@@ -96,7 +96,7 @@ export default function CrudPage() {
       && !priceError
       && !descriptionError
       && !imgError
-      // && !categoriesError
+      && !categoriesError
     )
   }
 
@@ -121,7 +121,7 @@ export default function CrudPage() {
 
 
   function saveEditedProduct() {
-    editProduct({ ...editingProduct, stock, title, price, description, img } as Product)
+    editProduct({ ...editingProduct, stock, title, price, description, img, categories } as Product)
     setOpen(false);
     //reloada cruditem.tsx
   }
@@ -131,7 +131,7 @@ export default function CrudPage() {
     setTitle(product.title)
     setDescription(product.description)
     setStock(product.stock)
-    // setCategories(product.categories)
+    setCategories(product.categories)
     setPrice(product.price)
     setImg(product.img)
     setEditingProduct(product)
@@ -210,7 +210,7 @@ export default function CrudPage() {
     else {
       setCategoriesError(true);
     }
-    // setCategories(e.target.value)
+    setCategories((e.target.value))
   };
 
   const handlePriceInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -457,7 +457,7 @@ export default function CrudPage() {
                     fullWidth
                     error={stockError}
                   />
-                  {/* <TextField
+                  <TextField
                     margin="dense"
                     id="categories"
                     label="Kategori"
@@ -467,7 +467,7 @@ export default function CrudPage() {
                     onChange={handleCategoriesInput}
                     fullWidth
                     error={categoriesError}
-                  />*/}
+                  />
 
                   <TextField
                     margin="dense"
