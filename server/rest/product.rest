@@ -1,10 +1,10 @@
 ###
 
-GET http://localhost:4000/api/product/:id
+GET http://localhost:4000/api/products/:id
 Content-Type: application/json
 
 {
-    "_id": "60acae4ca5c1a830591e98e6"
+    "_id": "60b600d63df309246cd3b6c2"
 }
 
 ###
@@ -14,12 +14,12 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:4000/api/product/:id
+PUT http://localhost:4000/api/products/:id
 Content-Type: application/json
 
 {
-    "_id": "60b407fdc3b69b2f34ef9064",
-    "stock": "3000"
+    "_id": "60b600d63df309246cd3b6c2",
+    "stock": "200"
 }
 
 ###
@@ -47,6 +47,6 @@ Content-Type: application/json
 
 ###
 
-DELETE  http://localhost:4000/api/product/60b4cbbc7129e600f4a7dd81
+DELETE  http://localhost:4000/api/products/60b4cbbc7129e600f4a7dd81
 
 ###

@@ -55,7 +55,7 @@ class ProductProvider extends Component<{}, State> {
 
     async editProduct(editedProduct: Product) {
         console.log(editedProduct)
-        const response = await fetch('/api/product/' + editedProduct._id.toString(), {
+        const response = await fetch('/api/products/' + editedProduct._id.toString(), {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
