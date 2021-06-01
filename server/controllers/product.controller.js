@@ -30,8 +30,8 @@ exports.getProductsByCategory = async (req, res) => {
 
 exports.editProduct = async (req, res) => {
     const { _id } = req.body;
-    const updatedProduct = await ProductModel.findOneAndUpdate({ _id: _id }, req.body);
-    res.status(200).json(updatedProduct);
+    await ProductModel.findOneAndUpdate({ _id: _id }, req.body);
+    res.status(200).json("Product was edited");
 }
 
 exports.deleteProduct = async (req, res) => {
