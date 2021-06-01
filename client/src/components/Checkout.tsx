@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   stepper: {
-    padding: theme.spacing(3, 0, 5), 
+    padding: theme.spacing(3, 0, 5),
   },
   buttons: {
     display: 'flex',
@@ -56,6 +56,7 @@ const steps = ['Dina uppgifter', 'Fraktsätt', 'Betalsätt', 'Granska din bestä
 
 export default function Checkout() {
   const classes = useStyles();
+
   const [activeStep, setActiveStep] = useState(0);
   const [orderNumber, setOrderNumber] = useState(0);
   const [cardInfo, setCardInfo] = useState<CardInfo>( { name: '', cardNumber: '', expireDate: '', cvv: '' } );
@@ -105,11 +106,11 @@ export default function Checkout() {
       setActiveStep(activeStep + 1);
     }
   };
-  
+
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-  
+
   function getStepContent(step: number) {
     switch (step) {
       case 0:
@@ -117,7 +118,7 @@ export default function Checkout() {
       case 1:
         return <Shipping handleNext={handleNext} handleBack={handleBack} chosenShippingMethod={shippingMethod} setChosenShippingMethod={setShippingMethod}/>;
       case 2:
-          return <PaymentForm handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} customer={customer} onPaymentOptionChange={setPaymentOption} cardInfo={cardInfo} onCardInfoChange={setCardInfo} />;
+        return <PaymentForm handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} customer={customer} onPaymentOptionChange={setPaymentOption} cardInfo={cardInfo} onCardInfoChange={setCardInfo} />;
       case 3:
         return <Review handleNext={handleNext} handleBack={handleBack} paymentOption={paymentOption} shippingMethod={shippingMethod} customer={customer} isLoading={isLoading} cardInfo={cardInfo} totalPrice={totalPrice}/>;
       default:

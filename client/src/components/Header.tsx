@@ -64,9 +64,9 @@ function Header() {
 		const loginBody = {
 			email: email,
 			password: password
-		  }
-		login(loginBody)	
-		setOpenLogin(false);          
+		}
+		login(loginBody)
+		setOpenLogin(false);
 		setPassword('')
 		setEmail('')
 	}
@@ -75,8 +75,8 @@ function Header() {
 			username: username,
 			email: email,
 			password: password,
-		  }
-		signup(newUser)	
+		}
+		signup(newUser)
 		setUsername('')
 		setEmail('')
 		setPassword('')
@@ -231,12 +231,12 @@ function Header() {
 }
 
 const buttonStyle: CSSProperties = {
-    margin: '0.5rem',
+	margin: '0.5rem',
 };
 
 const cartStyle: CSSProperties = {
-        textDecoration: 'none',
-        color: 'white'
+	textDecoration: 'none',
+	color: 'white'
 }
 
 export default Header;
