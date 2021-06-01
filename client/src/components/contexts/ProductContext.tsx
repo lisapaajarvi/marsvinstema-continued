@@ -47,7 +47,6 @@ class ProductProvider extends Component<{}, State> {
         const response = await fetch('/api/products/categories');
         if (response.ok) {
             const categories = await response.json();
-            console.log(categories)
             this.setState({categories});
         }
         return [];

@@ -1,10 +1,11 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useContext, useEffect, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Box, Button, Container, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Footer } from './Footer';
 import Switch from '@material-ui/core/Switch';
+import { OrderContext } from './contexts/OrderContext'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,15 +28,29 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function OrderPage() {
+  const { orders, getOrders } = useContext(OrderContext);
   const classes = useStyles();
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     checkedA: true,
     checkedB: true,
+  });
+
+  useEffect(() => {
+    getOrders()
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
+
+  // function getDay(date:Date) {
+  //   const dd = String(date.getDate()).padStart(2, '0');
+  //   const mm = String(date.getMonth() + 1).padStart(2, '0'); 
+  //   const yyyy = date.getFullYear();
+  //   let day = yyyy + '-' + mm + '-' + dd;
+  //   return day;
+  // }
+
 
   return (
       <>
@@ -75,13 +90,12 @@ export default function OrderPage() {
                                   </Grid>
                               </Grid>
 
-                              {/* ORDER MAPPING GOES HERE */}
-
-                              {/* {orders.map((orders, index) => (
+                              {orders&& (      
+                                orders.map((order, index) => (
                                 <Grid item xs={12} key={index}>
-                                  <OrderItem orders={orders} />
+                                  <p>{order.createdAt}</p>
                                 </Grid>
-                              ))} */}
+                              )))}
 
                               <div className={classes.paper} style={container}>
                                   <Link className={classes.link} to="/admin">

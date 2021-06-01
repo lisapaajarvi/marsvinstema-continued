@@ -31,15 +31,16 @@ export interface ShippingMethod {
     price: number
 }
 interface ContextValue extends State {
-    addNewOrder: (newOrder:NewOrder) => void
+    addNewOrder: (newOrder:NewOrder) => void,
+    getOrders: () => void
 }    
 
 export const OrderContext = createContext<ContextValue>({
     orders: [],
     shippingMethods: [],
-    addNewOrder: () => {}
+    addNewOrder: () => {},
+    getOrders: () => {},
 });
-
 
 class OrderProvider extends Component<{}, State> {
    
@@ -62,7 +63,6 @@ class OrderProvider extends Component<{}, State> {
         .get('/api/shippingMethods')
         .then(res => {
           this.setState({ shippingMethods: res.data })
-          console.log(this.state.shippingMethods)
         })
         .catch(err =>{
           console.log(err);
@@ -82,12 +82,14 @@ class OrderProvider extends Component<{}, State> {
  
     componentDidMount() {
         this.getShippingMethods()
+        this.getOrders()
     }
     
     render() {
         return (
             <OrderContext.Provider value={{
                 addNewOrder: this.addNewOrder,
+                getOrders: this.getOrders,
                 orders: this.state.orders,
                 shippingMethods: this.state.shippingMethods
             }}>
