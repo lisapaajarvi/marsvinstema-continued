@@ -1,4 +1,5 @@
 const OrderModel = require("../models/order.model");
+const { ProductModel } = require("../models/product.model");
 
 exports.addNewOrder = async (req, res) => {
     const newOrder = {
@@ -9,9 +10,14 @@ exports.addNewOrder = async (req, res) => {
         shippingAddress: req.body.customer,
         shippingMethod: req.body.shippingMethod
     }
-    console.log(newOrder)
     const addedOrder = await OrderModel.create(newOrder);
-    res.status(201).json(addedOrder);
+
+    for (const product of addedOrder.products) {
+        const productInDB = await ProductModel.findOne({_id:product._id})
+        productInDB.stock -= product.quantity
+        productInDB.save()
+      }
+    res.status(201).json(addedOrder._id);
 }
 
 exports.getAllOrders = async (req, res) => {
@@ -28,4 +34,3 @@ exports.editOrderStatus = async (req, res) => {
     await OrderModel.findOneAndUpdate({ _id: req.body._id }, req.body);
     res.status(200).json("Order was updated");
 }
-
