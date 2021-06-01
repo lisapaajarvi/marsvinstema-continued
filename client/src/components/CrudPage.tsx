@@ -394,11 +394,6 @@ export default function CrudPage() {
                 </Grid> */}
               </Grid>
 
-              <div>
-                 <input type="file" onChange={saveFile} />
-                 <button onClick={uploadFile}>Ladda upp</button>
-               </div>
-
               <>
                 {/* PRODUCT MAP */}
                 {products.map((product, index) => (
@@ -480,6 +475,11 @@ export default function CrudPage() {
                     fullWidth
                     error={imgError}
                   />
+                  {/* FILE UPLOAD */}
+                  <div style={{marginTop: '1rem'}}>
+                    <input type="file" onChange={saveFile} />
+                    <button onClick={uploadFile}>Ladda upp</button>
+                  </div>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
@@ -497,7 +497,7 @@ export default function CrudPage() {
                   <Button variant="contained" color="primary" style={{ margin: '1rem' }}>Tillbaka</Button>
                 </Link>
                 <Link className={classes.link} to="/admin">
-                  <Button variant="contained" color="primary" style={{ margin: '1rem' }}>Lägg till</Button>
+                  <Button disabled variant="contained" color="primary" style={{ margin: '1rem' }}>Lägg till</Button>
                 </Link>
                </div>
               <div>
