@@ -18,8 +18,8 @@ PUT http://localhost:4000/api/product/:id
 Content-Type: application/json
 
 {
-    "_id": "60b407fdc3b69b2f34ef9064",
-    "stock": "3000"
+    "_id": "60b600d63df309246cd3b6c2",
+    "img": "http://localhost:4000/uploads/1622553282193-1.jpg"
 }
 
 ###
