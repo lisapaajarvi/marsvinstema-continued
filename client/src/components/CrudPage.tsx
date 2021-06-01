@@ -1,7 +1,7 @@
 import React, { CSSProperties, useContext, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Box, Button, Container, Divider, Hidden, Typography } from '@material-ui/core';
+import { Box, Button, Container, Divider, Typography } from '@material-ui/core';
 import CrudItem from './CrudItem';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,7 +9,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+// import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Product, ProductContext } from './contexts/ProductContext';
 import axios from "axios";
 import { Footer } from './Footer';
@@ -138,15 +138,15 @@ export default function CrudPage() {
     setOpen(true);
   }
 
-  function openAddProductModal() {
-    setTitle('')
-    setDescription('')
-    // setPrice()
-    setCategories([])
-    setImg('')
-    // setIsFieldDisabled(false)
-    setOpen(true);
-  }
+  // function openAddProductModal() {
+  //   setTitle('')
+  //   setDescription('')
+  //   // setPrice()
+  //   setCategories([])
+  //   setImg('')
+  //   // setIsFieldDisabled(false)
+  //   setOpen(true);
+  // }
 
   const handleClose = () => {
     setOpen(false);
@@ -475,11 +475,6 @@ export default function CrudPage() {
                     fullWidth
                     error={imgError}
                   />
-                  {/* FILE UPLOAD */}
-                  <div style={{marginTop: '1rem'}}>
-                    <input type="file" onChange={saveFile} />
-                    <button onClick={uploadFile}>Ladda upp</button>
-                  </div>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
@@ -490,6 +485,17 @@ export default function CrudPage() {
                   </Button>
                 </DialogActions>
               </Dialog>
+
+              {/* FILE UPLOAD */}
+              <Typography variant="h6">
+                <div style={{ marginTop: '1rem' }}>
+                  Bilduppladdning
+                </div>
+              </Typography>
+              <div style={{marginTop: '2rem', marginBottom: '2rem'}}>
+                <input type="file" onChange={saveFile} />
+                <button onClick={uploadFile}>Ladda upp</button>
+              </div>
 
               {/* BUTTONS */}
               <div className={classes.paper} style={container}>
