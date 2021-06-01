@@ -10,15 +10,18 @@ import { CartContext } from './contexts/CartContext';
 import { Customer } from './CustomerForm';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { CardInfo } from './CardPayment';
+import { ShippingMethod } from './contexts/OrderContext';
+import { UserContext } from './contexts/UserContext';
 
 interface Props {
   handleBack: () => void;
   handleNext: () => void;
   customer: Customer;
   paymentOption: string;
-  shippingOption: string;
+  shippingMethod: ShippingMethod;
   isLoading: boolean;
   cardInfo: CardInfo;
+  totalPrice: number;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -36,34 +39,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review(props: Props) {
   const classes = useStyles();
-  const {customer, paymentOption, isLoading, cardInfo} = props;
+  const {customer, paymentOption, shippingMethod, isLoading, cardInfo, totalPrice} = props;
   const {cart} = useContext(CartContext)
-
-  function calculateShippingPrice() {
-    let price;
-    if(props.shippingOption==='postnord') {
-      price = 49;
-    }
-    else if(props.shippingOption==='dhl') {
-      price = 149;
-    }
-    else {
-      price = 89;
-    }
-    return price;
-  }
-  const shippingPrice = calculateShippingPrice();
-
-  function calculateTotalPrice() {
-    let total = 0;
-    cart.forEach(item => { 
-      const subtotal = item.price * item.quantity;
-      total += subtotal;  
-    });
-    total += shippingPrice
-    return total;
-  }  
-  const totalPrice = calculateTotalPrice();
+  const {user} = useContext(UserContext)
 
   return (
     <React.Fragment>
@@ -79,7 +57,7 @@ export default function Review(props: Props) {
         ))}
         <ListItem className={classes.listItem} >
             <ListItemText primary="Fraktkostnad" />
-            <Typography variant="body1">{shippingPrice} kr</Typography>
+            <Typography variant="body1">{shippingMethod.price} kr</Typography>
           </ListItem>
         <ListItem className={classes.total}>
           <ListItemText primary="Att betala:" />
@@ -100,11 +78,11 @@ export default function Review(props: Props) {
             Dina uppgifter
           </Typography>
           <Typography gutterBottom>{customer.firstName} {customer.lastName}</Typography>
-          <Typography gutterBottom>{customer.address}</Typography>
-          <Typography gutterBottom>{customer.zip} {customer.city}</Typography>
+          <Typography gutterBottom>{customer.streetAddress}</Typography>
+          <Typography gutterBottom>{customer.zipCode} {customer.city}</Typography>
           <br/>
-          <Typography gutterBottom>{customer.phoneNumber}</Typography>
-          <Typography gutterBottom>{customer.email}</Typography>
+          <Typography gutterBottom>{customer.phoneNr}</Typography>
+          <Typography gutterBottom>{user!.email}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>

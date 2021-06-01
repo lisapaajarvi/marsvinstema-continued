@@ -2,23 +2,27 @@
 ###
 
 
-GET http://localhost:4000/api/shippingMethod/
+GET http://localhost:4000/api/shippingMethods
 Content-Type: application/json
-
-
-
 
 ###
 
 
-GET http://localhost:4000/api/shippingMethod/:id
+GET http://localhost:4000/api/shippingMethods/:id
 Content-Type: application/json
 
 {
     "_id": "60acae4ca5c1a830591e98e6"
 }
 
-
-
-
 ###
+
+POST http://localhost:4000/api/shippingMethods
+Content-Type: application/json
+
+{
+    "name": "DHL",
+    "time": 1,
+    "price": 149
+}
+

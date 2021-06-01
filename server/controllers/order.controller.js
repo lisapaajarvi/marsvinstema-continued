@@ -7,7 +7,7 @@ exports.addNewOrder = async (req, res) => {
         totalPrice: req.body.totalPrice,
         products: req.body.cart,
         shippingAddress: req.body.customer,
-        shippingMethod: req.body.shippingOption
+        shippingMethod: req.body.shippingMethod
     }
     console.log(newOrder)
     const addedOrder = await OrderModel.create(newOrder);
