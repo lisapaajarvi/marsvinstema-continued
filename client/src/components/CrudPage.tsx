@@ -1,4 +1,4 @@
-import React, { CSSProperties, useContext } from 'react';
+import React, { CSSProperties, useContext, useState } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Box, Button, Container, Divider, Hidden, Typography } from '@material-ui/core';
@@ -37,27 +37,26 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function CrudPage() {
   const { products, editProduct } = useContext(ProductContext)
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [editingProduct, setEditingProduct] = React.useState<Product>();
-  const [title, setTitle] = React.useState('');
-  const [stock, setStock] = React.useState<number>();
-  const [description, setDescription] = React.useState('');
-  const [categories, setCategories] = React.useState([]);
-  const [price, setPrice] = React.useState<number>();
-  const [img, setImg] = React.useState('')
+  const [open, setOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product>();
+  const [title, setTitle] = useState('');
+  const [stock, setStock] = useState<number>();
+  const [description, setDescription] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [price, setPrice] = useState<number>();
+  const [img, setImg] = useState('')
   // const [productList, setProductList] = React.useState(getProductList())
   // const [isFieldDisabled, setIsFieldDisabled] = React.useState(true)
   // const [urlError, setUrlError] = React.useState<boolean>(false);
   // const [url, setUrl] = React.useState('');
-  const [titleError, setTitleError] = React.useState<boolean>(false);
-  const [stockError, setStockError] = React.useState<boolean>(false);
-  const [descriptionError, setDescriptionError] = React.useState<boolean>(false);
-  const [categoriesError, setCategoriesError] = React.useState<boolean>(false);
-  const [priceError, setPriceError] = React.useState<boolean>(false);
-  const [imgError, setImgError] = React.useState<boolean>(false);
-  const [file, setFile] = React.useState("");
-  const [fileName, setFileName] = React.useState("");
-
+  const [titleError, setTitleError] = useState<boolean>(false);
+  const [stockError, setStockError] = useState<boolean>(false);
+  const [descriptionError, setDescriptionError] = useState<boolean>(false);
+  const [categoriesError, setCategoriesError] = useState<boolean>(false);
+  const [priceError, setPriceError] = useState<boolean>(false);
+  const [imgError, setImgError] = useState<boolean>(false);
+  const [file, setFile] = useState("");
+  const [fileName, setFileName] = useState("");
   const saveFile = (e: any) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
@@ -83,9 +82,9 @@ export default function CrudPage() {
       stock
       && title
       && price
-      // && description
+      && description
+      && img
       // && categories
-      // && img
     )
   }
 
@@ -95,11 +94,15 @@ export default function CrudPage() {
       && !stockError
       && !titleError
       && !priceError
-      // && !descriptionError
+      && !descriptionError
+      && !imgError
       // && !categoriesError
-      // && !imgError
     )
   }
+
+//   useEffect(() => {    
+//     saveEditedProduct()
+// })     
 
   // // Denna funktionen måste ändras!
 
@@ -113,19 +116,24 @@ export default function CrudPage() {
   //   localStorage.setItem('productList', JSON.stringify(newProductList))
   // }
 
+
+
+
+
   function saveEditedProduct() {
-    editProduct({ ...editingProduct, stock, title, price } as Product)
+    editProduct({ ...editingProduct, stock, title, price, description, img } as Product)
     setOpen(false);
+    //reloada cruditem.tsx
   }
 
   function openEditProductModal(product: Product) {
     // setIsFieldDisabled(true)
     setTitle(product.title)
-    // setDescription(products.description)
+    setDescription(product.description)
     setStock(product.stock)
     // setCategories(product.categories)
     setPrice(product.price)
-    // setImg(product.img)
+    setImg(product.img)
     setEditingProduct(product)
     setOpen(true);
   }
@@ -206,7 +214,7 @@ export default function CrudPage() {
   };
 
   const handlePriceInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^[0-9]{1,15}$/.test(e.target.value)) {  
+    if (/^[0-9]+$/.test(e.target.value)) {  
       setPriceError(false);
     }
     else {
@@ -386,6 +394,11 @@ export default function CrudPage() {
                 </Grid> */}
               </Grid>
 
+              <div>
+                 <input type="file" onChange={saveFile} />
+                 <button onClick={uploadFile}>Ladda upp</button>
+               </div>
+
               <>
                 {/* PRODUCT MAP */}
                 {products.map((product, index) => (
@@ -422,7 +435,7 @@ export default function CrudPage() {
                     fullWidth
                     error={priceError}
                   />
-                  {/* <TextField
+                  <TextField
                     margin="dense"
                     id="description"
                     label="Beskrivning"
@@ -432,7 +445,7 @@ export default function CrudPage() {
                     onChange={handleDescriptionInput}
                     fullWidth
                     error={descriptionError}
-                  /> */}
+                  />
                   <TextField
                     margin="dense"
                     id="stock"
@@ -456,7 +469,7 @@ export default function CrudPage() {
                     error={categoriesError}
                   />*/}
 
-                  {/* <TextField
+                  <TextField
                     margin="dense"
                     id="img"
                     label="Länk till bild"
@@ -466,7 +479,7 @@ export default function CrudPage() {
                     onChange={handleImgInput}
                     fullWidth
                     error={imgError}
-                  /> */}
+                  />
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
