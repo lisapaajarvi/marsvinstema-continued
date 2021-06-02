@@ -10,6 +10,7 @@ const orderSchema = new mongoose.Schema({
     products: { type: [productSchema], required: true},
     shippingAddress: { type: addressSchema, required: true},
     shippingMethod: { type: shippingMethodSchema, required: true},
+    isShipped: Boolean
 })
 
 const OrderModel = mongoose.model('order', orderSchema);

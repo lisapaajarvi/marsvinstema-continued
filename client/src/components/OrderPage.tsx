@@ -51,7 +51,7 @@ export default function OrderPage() {
                               </div>
                               <Grid container spacing={2}>
                                   <Grid item xs={4} >
-                                      <Typography variant="body1">Skapad</Typography>
+                                      <Typography variant="body1">Orderdatum</Typography>
                                   </Grid>
                                   <Grid item xs={4} >
                                       <Typography variant="body1">OrderId</Typography>
