@@ -64,25 +64,23 @@ export default function OrderItem(props: Props) {
             <Dialog open={modalOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle>Orderdetaljer</DialogTitle>
                 <DialogContent>
-                    <Typography variant="body1">Orderdatum: {getOrderDate()}</Typography>
-                    <Typography variant="body1">Produkter: 
+                    <Typography><b>Orderdatum:</b> {getOrderDate()}</Typography>
+                    <Typography><b>Produkter: </b>
                         <ul>
                             {products.map((product, index) => (
-                                <li>
-                                    {product.quantity} st {product.title}
+                                <li key={index}>
+                                    {product.quantity} st {product.title} à {product.price} kr
                                 </li>
                             ))}
                         </ul>
                     </Typography>
-                    <Typography variant="body1">Fraktsätt: {shippingMethod.name}</Typography>
-                    <Typography variant="body1">Leveransadress:</Typography>
-                    <Typography variant="body1"> {shippingAddress.firstName} {shippingAddress.lastName}</Typography>
-                    <Typography variant="body1"> {shippingAddress.streetAddress}</Typography>
-                    <Typography variant="body1"> {shippingAddress.zipCode} {shippingAddress.city}</Typography>
-                    <Typography variant="body1"> Ordersumma: {totalPrice} kr</Typography>
-                    <Typography variant="body1"> Orderstatus: {isShipped?("Skickad"):("Ej skickad")}</Typography>
-
-                    
+                    <Typography><b>Fraktsätt:</b> {shippingMethod.name}</Typography>
+                    <Typography><b>Leveransadress:</b></Typography>
+                    <Typography> {shippingAddress.firstName} {shippingAddress.lastName}</Typography>
+                    <Typography> {shippingAddress.streetAddress}</Typography>
+                    <Typography> {shippingAddress.zipCode} {shippingAddress.city}</Typography>
+                    <Typography> <b>Ordersumma:</b> {totalPrice} kr</Typography>
+                    <Typography> <b>Orderstatus:</b> {isShipped?("Skickad"):("Ej skickad")}</Typography>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
