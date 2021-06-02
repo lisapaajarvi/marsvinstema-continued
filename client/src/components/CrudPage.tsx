@@ -65,7 +65,7 @@ export default function CrudPage() {
     formData.append("fileName", fileName);
     try {
       const res = await axios.post(
-        "http://localhost:4000/upload",
+        "/api/upload",
         formData
       );
       console.log(res);
@@ -296,7 +296,6 @@ export default function CrudPage() {
                     fullWidth
                     error={categoriesError}
                     />
-
                   <TextField
                     margin="dense"
                     id="img"
@@ -307,8 +306,7 @@ export default function CrudPage() {
                     onChange={handleImgInput}
                     fullWidth
                     error={imgError}
-                    />
-                  
+                    /> 
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
