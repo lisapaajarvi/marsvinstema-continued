@@ -33,7 +33,7 @@ export default function OrderPage() {
 
   useEffect(() => {
     getOrders()
-  });
+  }, [getOrders]);
 
   return (
     <>

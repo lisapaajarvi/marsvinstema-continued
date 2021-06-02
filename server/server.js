@@ -46,6 +46,8 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
         const newpath = __dirname + "/uploads/";
         const file = req.files.file;
         const filename = Date.now() + '-' + file.name;
+        console.log(file)
+        // TODO: save to db ImageModel.create(file)
       
         file.mv(`${newpath}${filename}`, (err) => {
           if (err) {
@@ -54,6 +56,13 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
           res.status(200).send("File Uploaded");
         });
       });
+
+    app.get("/upload/:id", (req, res) => {
+      const image = ImageModel.findById(req.params.id)
+      res.set('Content-type', image.mimetype)
+      res.send(image.buffer)
+    })
+
     app.listen(4000); 
 })
 .catch((error)  => {

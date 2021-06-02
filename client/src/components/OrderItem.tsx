@@ -36,13 +36,13 @@ export default function OrderItem(props: Props) {
 
     return (
         <>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
                 <Typography variant="body1">{getOrderDate()}</Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
                 <Typography variant="body1">{_id}</Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
                 <Switch
                     checked={state.shipped}
                     onChange={handleChange}
