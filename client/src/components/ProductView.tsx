@@ -5,7 +5,7 @@ import { Box, Container } from '@material-ui/core';
 import ProductCard from './ProductCard';
 import { Footer } from './Footer';
 import { Product, ProductContext } from './contexts/ProductContext';
-import './ProductView.css';
+import '../css/ProductView.css';
 
 interface CategoryButtonProps {
 	name: string;
