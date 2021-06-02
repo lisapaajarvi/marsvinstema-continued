@@ -10,9 +10,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
 // import AddCircleIcon from '@material-ui/icons/AddCircle';
+
 import { Product, ProductContext } from './contexts/ProductContext';
 import axios from "axios";
 import { Footer } from './Footer';
+import { AnyAaaaRecord } from 'dns';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -100,9 +102,7 @@ export default function CrudPage() {
     )
   }
 
-//   useEffect(() => {    
-//     saveEditedProduct()
-// })     
+
 
   // // Denna funktionen måste ändras!
 
@@ -123,7 +123,6 @@ export default function CrudPage() {
   function saveEditedProduct() {
     editProduct({ ...editingProduct, stock, title, price, description, img, categories } as Product)
     setOpen(false);
-    //reloada cruditem.tsx
   }
 
   function openEditProductModal(product: Product) {
@@ -175,7 +174,7 @@ export default function CrudPage() {
   // }
 
   const handleTitleInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^.{3,}$/.test(e.target.value)) {  
+    if (/^.{3,}$/.test(e.target.value)) {
       setTitleError(false);
     }
     else {
@@ -185,7 +184,7 @@ export default function CrudPage() {
   };
 
   const handleStockInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^[0-9]+$/.test(e.target.value)) {  
+    if (/^[0-9]+$/.test(e.target.value)) {
       setStockError(false);
     }
     else {
@@ -194,7 +193,7 @@ export default function CrudPage() {
     setStock(Number(e.target.value))
   };
   const handleDescriptionInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^.{3,}$/.test(e.target.value)) {  
+    if (/^.{3,}$/.test(e.target.value)) {
       setDescriptionError(false);
     }
     else {
@@ -204,7 +203,7 @@ export default function CrudPage() {
   };
 
   const handleCategoriesInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^.{3,}$/.test(e.target.value)) {  
+    if (/^.{3,}$/.test(e.target.value)) {
       setCategoriesError(false);
     }
     else {
@@ -214,7 +213,7 @@ export default function CrudPage() {
   };
 
   const handlePriceInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^[0-9]+$/.test(e.target.value)) {  
+    if (/^[0-9]+$/.test(e.target.value)) {
       setPriceError(false);
     }
     else {
@@ -224,11 +223,11 @@ export default function CrudPage() {
   };
 
   const handleImgInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)/.test(e.target.value)) {  
+    if (/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)/.test(e.target.value)) {
       setImgError(false);
     }
     else {
-     setImgError(true);
+      setImgError(true);
     }
     setImg(e.target.value)
   };
@@ -384,7 +383,7 @@ export default function CrudPage() {
                   Produktlista
                 </div>
               </Typography>
-              <div style={{ borderBottom: '0.1rem solid lightgrey', marginBottom: '2rem', width: '12rem', margin: 'auto'}}>
+              <div style={{ borderBottom: '0.1rem solid lightgrey', marginBottom: '2rem', width: '12rem', margin: 'auto' }}>
               </div>
               <Grid container spacing={2}>
                 <Grid item xs={3} sm={2} md={2} lg={1}>
@@ -401,11 +400,11 @@ export default function CrudPage() {
                     {/* <CrudItem products={products} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} /> */}
                     <CrudItem product={product} openEditProductModal={openEditProductModal} />
                     {/* <CrudItem product={product} /> */}
-                    <Divider/>
+                    <Divider />
                   </Grid>
                 ))}
               </>
-              
+
               {/* DIALOG MODALS */}
               <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="edit-product">Ändra produkt</DialogTitle>
@@ -475,6 +474,13 @@ export default function CrudPage() {
                     fullWidth
                     error={imgError}
                   />
+
+                  {/* FILE UPLOAD */}
+                  <div style={{ marginTop: '1rem' }}>
+                    <input type="file" onChange={saveFile} />
+                    <button onClick={uploadFile}>Ladda upp</button>
+                  </div>
+                  
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
@@ -505,7 +511,7 @@ export default function CrudPage() {
                 <Link className={classes.link} to="/admin">
                   <Button disabled variant="contained" color="primary" style={{ margin: '1rem' }}>Lägg till</Button>
                 </Link>
-               </div>
+              </div>
               <div>
                 <Footer />
               </div>
