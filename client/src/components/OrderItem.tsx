@@ -1,22 +1,25 @@
 import { Grid, Switch, Typography } from "@material-ui/core";
-import React, { useState } from "react";
-import { Order } from "./contexts/OrderContext";
+import React, { useContext, useState } from "react";
+import { Order, OrderContext } from "./contexts/OrderContext";
+
+
 
 interface Props {
     order: Order;
   }
 
-  
-  
-  export default function OrderItem(props: Props) {
+export default function OrderItem(props: Props) {
     const { createdAt, _id, isShipped} = props.order;
-    
+    const { editOrderStatus } = useContext(OrderContext);
     const [state, setState] = useState({
         shipped: isShipped,
         });
             
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, [event.target.name]: event.target.checked });
+        props.order.isShipped = !props.order.isShipped
+        console.log(props.order)
+        editOrderStatus(props.order)
         };
 
     const getOrderDate = () => {

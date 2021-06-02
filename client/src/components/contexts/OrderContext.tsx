@@ -32,8 +32,9 @@ export interface ShippingMethod {
     price: number
 }
 interface ContextValue extends State {
-    addNewOrder: (newOrder:NewOrder) => void,
+    addNewOrder: (newOrder:NewOrder) => void
     getOrders: () => void
+    editOrderStatus: (order:Order) => void
 }    
 
 export const OrderContext = createContext<ContextValue>({
@@ -41,6 +42,7 @@ export const OrderContext = createContext<ContextValue>({
     shippingMethods: [],
     addNewOrder: () => {},
     getOrders: () => {},
+    editOrderStatus: () => {}
 });
 
 class OrderProvider extends Component<{}, State> {
@@ -72,14 +74,39 @@ class OrderProvider extends Component<{}, State> {
 
     async addNewOrder(newOrder:NewOrder) {
         axios
-        .post('/api/orders', newOrder)
-        .then(res => {
-            console.log(res.data)
-        })
-        .catch(err =>{
-            console.log(err);
-        })    
+            .post('/api/orders', newOrder)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err =>{
+                console.log(err);
+            })    
     }
+    async editOrderStatus(order: Order) {
+        const response = await fetch('/api/orders/' + order._id.toString(), {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(order)
+        });
+
+        if (response.ok) {
+            const updatedOrder = await response.json();
+            console.log(updatedOrder)
+        }
+    }
+    // async editOrderStatus(order:Order) {
+    //     console.log(order)
+    //     axios
+    //         .put('/api/orders', JSON.stringify(order))
+    //         .then(res => {
+    //             console.log(res.data)
+    //         })   
+    //         .catch(err =>{
+    //             console.log(err);
+    //         })   
+    // }
  
     componentDidMount() {
         this.getShippingMethods()
@@ -91,6 +118,7 @@ class OrderProvider extends Component<{}, State> {
             <OrderContext.Provider value={{
                 addNewOrder: this.addNewOrder,
                 getOrders: this.getOrders,
+                editOrderStatus: this.editOrderStatus,
                 orders: this.state.orders,
                 shippingMethods: this.state.shippingMethods
             }}>

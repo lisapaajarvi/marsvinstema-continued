@@ -36,56 +36,54 @@ export default function OrderPage() {
   });
 
   return (
-      <>
-          <div className={classes.root}>
-              <Container maxWidth="sm">
-                  <Box pt={5} pb={5}>
-                      <Grid container spacing={2}>
-                          <Grid item xs={12} className={classes.paper}>
-                              <Typography variant="h5">
-                                  <div style={{ marginBottom: '1rem' }}>
-                                      Orderhantering
-                                   </div>
-                              </Typography>
-                              <div style={{ borderBottom: '0.1rem solid lightgrey', width: '12rem', margin: 'auto', marginBottom: '2rem' }}>
-                              </div>
-                              <Grid container spacing={2}>
-                                  <Grid item xs={4} >
-                                      <Typography variant="body1">Orderdatum</Typography>
-                                  </Grid>
-                                  <Grid item xs={4} >
-                                      <Typography variant="body1">OrderId</Typography>
-                                  </Grid>
-                                  <Grid item xs={4} >
-                                      <Typography variant="body1">Skickad</Typography>
-                                  </Grid>
+    <>
+      <div className={classes.root}>
+        <Container maxWidth="sm">
+          <Box pt={5} pb={5}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} className={classes.paper}>
+                <Typography variant="h5" style={header}>
+                    Orderhantering
+                </Typography>
+                <Grid container spacing={2}>
+                  <Grid item xs={4} >
+                    <Typography variant="body1">Orderdatum</Typography>
+                  </Grid>
+                  <Grid item xs={4} >
+                    <Typography variant="body1">OrderId</Typography>
+                  </Grid>
+                  <Grid item xs={4} >
+                    <Typography variant="body1">Skickad</Typography>
+                  </Grid>
 
-                              {orders&& (      
-                                orders.map((order, index) => (
-                                    <OrderItem order={order} key={index}/>
-                              )))}
-                              </Grid>
-
-
-                              <div className={classes.paper} style={container}>
-                                  <Link className={classes.link} to="/admin">
-                                      <Button variant="contained" color="primary" style={{ margin: '1rem' }}>Tillbaka</Button>
-                                  </Link>
-                                  <Footer />
-                              </div>
-                          </Grid>
-                      </Grid>
-                  </Box>
-              </Container>
-          </div>
-      </>
+                  {orders && (
+                    orders.map((order, index) => (
+                      <OrderItem order={order} key={index} />
+                    )))}
+                </Grid>
+                <div className={classes.paper} style={container}>
+                  <Link className={classes.link} to="/admin">
+                    <Button variant="contained" color="primary" style={{ margin: '1rem' }}>Tillbaka</Button>
+                  </Link>
+                  <Footer />
+                </div>
+              </Grid>
+            </Grid>
+          </Box>
+        </Container>
+      </div>
+    </>
   );
 }
 
 const container: CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: '1rem'
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginTop: '1rem'
+}
+
+const header: CSSProperties = {
+  marginBottom: '1rem'
 }
