@@ -9,14 +9,12 @@ interface Props {
   
   
   export default function OrderItem(props: Props) {
-
-      const [state, setState] = useState({
-          checkedA: true,
-          checkedB: true,
+    const { createdAt, _id, isShipped} = props.order;
+    
+    const [state, setState] = useState({
+        shipped: isShipped,
         });
-        
-        const { createdAt, _id} = props.order;
-        
+            
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, [event.target.name]: event.target.checked });
         };
@@ -46,10 +44,10 @@ interface Props {
             </Grid>
             <Grid item xs={4}>
                 <Switch
-                    checked={state.checkedB}
+                    checked={state.shipped}
                     onChange={handleChange}
                     color="primary"
-                    name="checkedB"
+                    name="shipped"
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
             </Grid>

@@ -16,6 +16,7 @@ export interface Order {
     products: Product[]
     shippingMethod: ShippingMethod
     shippingAddress: Customer
+    isShipped: boolean
 }
 
 export interface NewOrder {
