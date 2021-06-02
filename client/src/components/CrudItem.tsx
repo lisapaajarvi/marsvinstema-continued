@@ -73,7 +73,7 @@ export default function CrudItem(props: Props) {
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1}>
         </Grid>
-        <Grid item xs={4} sm={4} md={4} lg={4}>
+        <Grid item xs={2} sm={2} md={2} lg={2}>
           <p style={{ color: 'black', marginLeft: '0.5rem', fontFamily: 'Helvetica' }}>{title}</p>
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1}>
