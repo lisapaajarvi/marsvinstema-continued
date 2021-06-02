@@ -9,5 +9,16 @@ Content-Type: image/jpeg
 --Row--
 
 ###
+POST http://localhost:4000/upload
+Content-Type: multipart/form-data; boundary=Row
+
+--Row
+Content-Disposition: form-data; name="file"; filename="test.jpg"
+Content-Type: image/jpeg
+
+< ./test.jpg
+--Row--
+
+###
 
 GET http://localhost:4000/uploads/1622553282193-1.jpg
