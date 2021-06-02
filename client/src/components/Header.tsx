@@ -301,7 +301,6 @@ function Header() {
 const buttonStyle: CSSProperties = {
 	margin: '0.5rem',
 };
-
 const cartStyle: CSSProperties = {
 	textDecoration: 'none',
 	color: 'white',
