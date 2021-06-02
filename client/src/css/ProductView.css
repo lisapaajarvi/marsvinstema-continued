@@ -1,0 +1,13 @@
+.category {
+	outline: none;
+	border: none;
+	color: #eee;
+	margin: 0px 10px;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.active {
+	font-weight: 700;
+	border-bottom: 1px solid rgb(248, 247, 247);
+}
