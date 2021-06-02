@@ -9,12 +9,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
-// import AddCircleIcon from '@material-ui/icons/AddCircle';
-
 import { Product, ProductContext } from './contexts/ProductContext';
 import axios from "axios";
 import { Footer } from './Footer';
-import { AnyAaaaRecord } from 'dns';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function CrudPage() {
-  const { products, editProduct } = useContext(ProductContext)
+  const { products, editProduct, deleteProduct } = useContext(ProductContext)
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product>();
@@ -102,23 +99,14 @@ export default function CrudPage() {
     )
   }
 
-
-
   // // Denna funktionen måste ändras!
 
   // function removeFromProductList(product:Product) {
-  //   const updatedProductList = productList.filter(item => item._id !== product._id);
-  //   setProductList(updatedProductList);
-  //   updateProductListInLocalStorage(updatedProductList);
+  //   // const updatedProductList = productList.filter(item => item._id !== product._id);
+  //   // setProductList(updatedProductList);
+  //   // updateProductListInLocalStorage(updatedProductList);
+
   // }
-
-  // function updateProductListInLocalStorage(newProductList:Product[]) {
-  //   localStorage.setItem('productList', JSON.stringify(newProductList))
-  // }
-
-
-
-
 
   function saveEditedProduct() {
     editProduct({ ...editingProduct, stock, title, price, description, img, categories } as Product)
@@ -174,7 +162,7 @@ export default function CrudPage() {
   // }
 
   const handleTitleInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^.{3,}$/.test(e.target.value)) {
+    if (/^.{2,}$/.test(e.target.value)) {
       setTitleError(false);
     }
     else {
@@ -398,7 +386,7 @@ export default function CrudPage() {
                 {products.map((product, index) => (
                   <Grid item xs={12} key={index}>
                     {/* <CrudItem products={products} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} /> */}
-                    <CrudItem product={product} openEditProductModal={openEditProductModal} />
+                    <CrudItem product={product} deleteProduct={deleteProduct} openEditProductModal={openEditProductModal} />
                     {/* <CrudItem product={product} /> */}
                     <Divider />
                   </Grid>
@@ -474,12 +462,6 @@ export default function CrudPage() {
                     fullWidth
                     error={imgError}
                   />
-
-                  {/* FILE UPLOAD */}
-                  <div style={{ marginTop: '1rem' }}>
-                    <input type="file" onChange={saveFile} />
-                    <button onClick={uploadFile}>Ladda upp</button>
-                  </div>
                   
                 </DialogContent>
                 <DialogActions>

@@ -17,19 +17,16 @@ export interface Product {
 interface ContextValue extends State {
     // addProduct: (newProduct: Product) => void;
     editProduct: (newProduct: Product) => void;
-
+    deleteProduct: (deletedProduct: Product) => void;
 }
 
 export const ProductContext = createContext<ContextValue>({
     products: [],
     categories: [],
     // addProduct: () => {}
-    editProduct: () => { }
+    editProduct: () => {},
+    deleteProduct: () => {}
 });
-
-
-
-
 
 class ProductProvider extends Component<{}, State> {
 
@@ -74,6 +71,23 @@ class ProductProvider extends Component<{}, State> {
         }
     }
 
+    deleteProduct = async (deletedProduct: Product) => {
+        console.log(deletedProduct)
+        const response = await fetch('/api/product/' + deletedProduct._id.toString(), {
+            method: 'DELETE',
+            // headers: {
+            //     'Content-Type': 'application/json',
+            // },
+            body: JSON.stringify(deletedProduct)
+        });
+
+        if (response.ok) {
+            const deletedProduct = await response.json();
+            console.log(deletedProduct)
+            this.fetchProducts()
+        }
+    }
+
     // addProduct = () => {
     //     // logik för att lägga till produkt här
     // }
@@ -88,7 +102,8 @@ class ProductProvider extends Component<{}, State> {
             <ProductContext.Provider value={{
                 products: this.state.products,
                 categories: this.state.categories,
-                editProduct: this.editProduct
+                editProduct: this.editProduct,
+                deleteProduct: this.deleteProduct
                 // addProduct: this.addProduct,
             }}>
                 {this.props.children}
