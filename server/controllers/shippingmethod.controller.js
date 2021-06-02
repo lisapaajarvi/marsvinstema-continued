@@ -2,9 +2,7 @@
 const { ShippingMethodModel }  = require("../models/shippingmethod.model");
 
 exports.getAllShippingMethods = async (req, res) => {
-    console.log('Shipping method');
     const shippingMethods = await ShippingMethodModel.find({})
-    console.log(shippingMethods)
     res.status(200).json(shippingMethods);
 }
 
@@ -29,7 +27,7 @@ exports.addShippingMethod = async (req, res) => {
     };
 
     const addedShippingMethod = await ShippingMethodModel.create(newShippingMethod);
-      res.status(201).json(addedShippingMethod);
+    res.status(201).json(addedShippingMethod);
 }
 
 

@@ -48,6 +48,76 @@ PUT http://localhost:4000/api/orders/:id
 Content-Type: application/json
 
 {
-    "_id": "60b37358d39acd4d7c1fe3aa",
-    "totalPrice": 499
+    "_id": "60b5ffdbff398f4108a44a76",
+    "isShipped": true
 }
+
+###
+
+PUT http://localhost:4000/api/orders/:id 
+Content-Type: application/json
+  {
+    "_id": "60b7512b8f5d0130c0ed507d",
+    "user": "60acb4fe981f9a2448ad7c42",
+    "createdAt": "2021-06-02T09:36:43.736Z",
+    "totalPrice": 946,
+    "products": [
+      {
+        "categories": [
+          "Leksaker"
+        ],
+        "_id": "60b600fd3df309246cd3b6c3",
+        "title": "Myskorg kiwi",
+        "price": 399,
+        "stock": 99,
+        "description": "Stilfull myskorg i mjukaste fleece, formad som en kiwiskiva. FRUKTansvärt fin!",
+        "img": "http://localhost:4000/uploads/1622553287163-2.jpg",
+        "__v": 0,
+        "quantity": 1
+      },
+      {
+        "categories": [
+          "Leksaker"
+        ],
+        "_id": "60b601a13df309246cd3b6c5",
+        "title": "Fluffig myskorg",
+        "price": 299,
+        "stock": 99,
+        "description": "Vem vill inte sjunka ner i en rosa myskorg dekorerad med fluffiga enhörningar?",
+        "img": "http://localhost:4000/uploads/1622553296039-4.png",
+        "__v": 0,
+        "quantity": 1
+      },
+      {
+        "categories": [
+          "Leksaker"
+        ],
+        "_id": "60b601343df309246cd3b6c4",
+        "title": "Lektunnel",
+        "price": 199,
+        "stock": 99,
+        "description": "En flexibel tunnel att springa runt i.",
+        "img": "http://localhost:4000/uploads/1622553291216-3.jpg",
+        "__v": 0,
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "_id": "60b7512b8f5d0130c0ed5081",
+      "firstName": "Lisa",
+      "lastName": "Pääjärvi",
+      "streetAddress": "Väderkvarnsgatan 11A",
+      "zipCode": "417 04",
+      "city": "Göteborg",
+      "phoneNr": "0704662253"
+    },
+    "shippingMethod": {
+      "_id": "60b54b355fa20816ec076725",
+      "name": "DHL",
+      "expectedDeliveryTime": 1,
+      "price": 149,
+      "__v": 0
+    },
+    "isShipped": true,
+    "__v": 0
+  }
