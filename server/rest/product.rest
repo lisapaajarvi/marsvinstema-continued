@@ -37,11 +37,11 @@ POST http://localhost:4000/api/products
 Content-Type: application/json
 
 {
-    "title": "Korv",
-    "price": 5,
-    "stock": 100,
+    "title": "Körven",
+    "price": 100,
+    "stock": 1,
     "categories": ["Mat"],
-    "description": "OBS ej gjord av marsvin!",
+    "description": "OBS gjord av marsvin!",
     "img": "https://productimages.biltema.com/v1/image/imagebyfilename/49-388_xxl_1.jpg"
 }
 

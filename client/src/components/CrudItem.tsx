@@ -4,7 +4,7 @@ import { Grid, Hidden, IconButton } from '@material-ui/core';
 import { Product } from './contexts/ProductContext';
 import CardMedia from '@material-ui/core/CardMedia';
 import EditIcon from '@material-ui/icons/Edit';
-// import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,6 +48,7 @@ interface Props {
   product: Product;
   // removeFromProductList: (product:Product) => void;
   openEditProductModal: (product:Product) => void;
+  deleteProduct: (product:Product) => void;
 }
 
 export default function CrudItem(props: Props) {
@@ -60,11 +61,11 @@ export default function CrudItem(props: Props) {
         <Grid item xs={1} sm={1} md={1} lg={1}>
           <CardMedia className={classes.media} image={img} />
         </Grid>
-        {/* <Grid item xs={1} sm={1} md={1} lg={1}>
-          <IconButton edge="end" aria-label="delete" onClick={() => props.removeFromProductList(props.product)}>
+        <Grid item xs={1} sm={1} md={1} lg={1}>
+          <IconButton edge="end" aria-label="delete" onClick={() => props.deleteProduct(props.product)}>
           <DeleteIcon className={classes.deleteIcon} />
           </IconButton>
-        </Grid> */}
+        </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1}>
           <IconButton aria-label="edit" onClick={() => props.openEditProductModal(props.product)}>
             <EditIcon className={classes.deleteIcon} />

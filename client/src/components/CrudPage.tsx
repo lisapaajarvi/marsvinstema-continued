@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function CrudPage() {
-  const { products, editProduct } = useContext(ProductContext)
+  const { products, editProduct, deleteProduct } = useContext(ProductContext)
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product>();
@@ -99,23 +99,14 @@ export default function CrudPage() {
     )
   }
 
-
-
   // // Denna funktionen måste ändras!
 
   // function removeFromProductList(product:Product) {
-  //   const updatedProductList = productList.filter(item => item._id !== product._id);
-  //   setProductList(updatedProductList);
-  //   updateProductListInLocalStorage(updatedProductList);
+  //   // const updatedProductList = productList.filter(item => item._id !== product._id);
+  //   // setProductList(updatedProductList);
+  //   // updateProductListInLocalStorage(updatedProductList);
+
   // }
-
-  // function updateProductListInLocalStorage(newProductList:Product[]) {
-  //   localStorage.setItem('productList', JSON.stringify(newProductList))
-  // }
-
-
-
-
 
   function saveEditedProduct() {
     editProduct({ ...editingProduct, stock, title, price, description, img, categories } as Product)
@@ -395,7 +386,7 @@ export default function CrudPage() {
                 {products.map((product, index) => (
                   <Grid item xs={12} key={index}>
                     {/* <CrudItem products={products} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} /> */}
-                    <CrudItem product={product} openEditProductModal={openEditProductModal} />
+                    <CrudItem product={product} deleteProduct={deleteProduct} openEditProductModal={openEditProductModal} />
                     {/* <CrudItem product={product} /> */}
                     <Divider />
                   </Grid>
