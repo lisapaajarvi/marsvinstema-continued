@@ -5,6 +5,7 @@ import { Box, Container } from '@material-ui/core';
 import ProductCard from './ProductCard';
 import { Footer } from './Footer';
 import { Product, ProductContext } from './contexts/ProductContext';
+import './ProductView.css';
 
 interface CategoryButtonProps {
 	name: string;
@@ -30,25 +31,22 @@ export default function ProductView() {
 
 	return (
 		<div className={classes.root}>
-			<div className="categories">
+			<div className={classes.categories}>
 				<CategoryButton
 					name="Alla"
 					categoriesActive={categories === 'Alla' ? true : false}
 					handleSetCategories={setCategories}
 				/>{' '}
-				/
 				<CategoryButton
 					name="Leksaker"
 					categoriesActive={categories === 'Leksaker' ? true : false}
 					handleSetCategories={setCategories}
 				/>{' '}
-				/
 				<CategoryButton
 					name="Kläder"
 					categoriesActive={categories === 'Kläder' ? true : false}
 					handleSetCategories={setCategories}
 				/>{' '}
-				/
 				<CategoryButton
 					name="Mat"
 					categoriesActive={categories === 'Mat' ? true : false}
@@ -85,7 +83,8 @@ const CategoryButton = ({
 }: CategoryButtonProps) => {
 	return (
 		<button
-			className={`categories ${categoriesActive ? 'active' : null}`}
+			// className="category"
+			className={`category ${categoriesActive ? 'active' : null}`}
 			onClick={() => handleSetCategories(name)}
 		>
 			{name.toUpperCase()}
@@ -106,6 +105,32 @@ const useStyles = makeStyles((theme: Theme) =>
 		item: {
 			display: 'flex',
 			justifyContent: 'center',
+			margin: 'auto',
+		},
+		categories: {
+			textAlign: 'center',
+			padding: '20px 0px',
+			backgroundColor: 'rgb(43, 92, 226)',
+		},
+		category: {
+			outline: 'none',
+			border: 'none',
+			color: '#eee',
+			margin: '0px 10px',
+			backgroundColor: 'transparent',
+			cursor: 'pointer',
+		},
+		active: {
+			fontWeight: 'bold',
+			bordeBottom: '1px solid #eee',
 		},
 	}),
 );
+// const category: CSSProperties = {
+// 	outline: 'none',
+// 	border: 'none',
+// 	color: '#eee',
+// 	margin: '0px 10px',
+// 	backgroundColor: 'transparent',
+// 	cursor: 'pointer',
+// };
