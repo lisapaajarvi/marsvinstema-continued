@@ -1,13 +1,25 @@
-import { Grid, Typography } from "@material-ui/core";
-import React from "react";
+import { Grid, Switch, Typography } from "@material-ui/core";
+import React, { useState } from "react";
 import { Order } from "./contexts/OrderContext";
 
 interface Props {
     order: Order;
   }
+
   
-export default function OrderItem(props: Props) {
-    const { createdAt, _id} = props.order;
+  
+  export default function OrderItem(props: Props) {
+
+      const [state, setState] = useState({
+          checkedA: true,
+          checkedB: true,
+        });
+        
+        const { createdAt, _id} = props.order;
+        
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+        };
 
     const getOrderDate = () => {
         const orderDate = new Date(createdAt);
@@ -26,14 +38,20 @@ export default function OrderItem(props: Props) {
 
     return (
         <>
-            <Grid item xs={5} sm={3} md={2} lg={2}>
+            <Grid item xs={4}>
                 <Typography variant="body1">{getOrderDate()}</Typography>
             </Grid>
-            <Grid item xs={6} sm={4} md={4} lg={6}>
+            <Grid item xs={4}>
                 <Typography variant="body1">{_id}</Typography>
             </Grid>
-            <Grid item xs={4} sm={3} md={1} lg={1}>
-                <Typography variant="body1">Skickad</Typography>
+            <Grid item xs={4}>
+                <Switch
+                    checked={state.checkedB}
+                    onChange={handleChange}
+                    color="primary"
+                    name="checkedB"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
             </Grid>
         </>
     );

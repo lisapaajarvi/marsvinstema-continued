@@ -1,10 +1,9 @@
-import React, { CSSProperties, useContext, useEffect, useState } from 'react';
+import React, { CSSProperties, useContext, useEffect } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Box, Button, Container, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Footer } from './Footer';
-import Switch from '@material-ui/core/Switch';
 import { OrderContext } from './contexts/OrderContext'
 import OrderItem from './OrderItem';
 
@@ -31,18 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function OrderPage() {
   const { orders, getOrders } = useContext(OrderContext);
   const classes = useStyles();
-  const [state, setState] = useState({
-    checkedA: true,
-    checkedB: true,
-  });
 
   useEffect(() => {
     getOrders()
   });
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
 
   return (
       <>
@@ -59,33 +50,22 @@ export default function OrderPage() {
                               <div style={{ borderBottom: '0.1rem solid lightgrey', width: '12rem', margin: 'auto', marginBottom: '2rem' }}>
                               </div>
                               <Grid container spacing={2}>
-                                  <Grid item xs={3} sm={2} md={2} lg={1}>
-                                  </Grid>
-                                  <Grid item xs={5} sm={3} md={2} lg={2}>
+                                  <Grid item xs={4} >
                                       <Typography variant="body1">Skapad</Typography>
                                   </Grid>
-                                  <Grid item xs={6} sm={4} md={4} lg={6}>
-                                      <Typography variant="body1">Användare</Typography>
+                                  <Grid item xs={4} >
+                                      <Typography variant="body1">OrderId</Typography>
                                   </Grid>
-                                  <Grid item xs={4} sm={3} md={1} lg={1}>
+                                  <Grid item xs={4} >
                                       <Typography variant="body1">Skickad</Typography>
-                                      <Switch
-                                          checked={state.checkedB}
-                                          onChange={handleChange}
-                                          color="primary"
-                                          name="checkedB"
-                                          inputProps={{ 'aria-label': 'primary checkbox' }}
-                                      />
                                   </Grid>
-                                  <Grid item xs={12} sm={1}>
-                                      <Typography variant="body1"></Typography>
-                                  </Grid>
-                              </Grid>
 
                               {orders&& (      
                                 orders.map((order, index) => (
                                     <OrderItem order={order} key={index}/>
                               )))}
+                              </Grid>
+
 
                               <div className={classes.paper} style={container}>
                                   <Link className={classes.link} to="/admin">
