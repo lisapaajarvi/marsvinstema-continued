@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const uploadSchema = new mongoose.Schema({
+const imageSchema = new mongoose.Schema({
     name: { type: String },
     data: Buffer,
     size: { type: Number },
@@ -9,9 +9,9 @@ const uploadSchema = new mongoose.Schema({
     truncated: { type: Boolean },
     mimetype: { type: String },
     md5: { type: String },
-    mv: [Function, mv]
+    // mv: { type: [Function] }
 });
 
-const UploadModel = mongoose.model('upload', uploadSchema);
+const ImageModel = mongoose.model('image', imageSchema);
 
-module.exports = UploadModel;
+module.exports = ImageModel;

@@ -7,6 +7,7 @@ const userRouter = require("./routers/user.router");
 const productRouter = require("./routers/product.router");
 const orderRouter = require("./routers/order.router");
 const shippingMethodRouter = require("./routers/shippingmethod.router");
+// const imageRouter = require("./routers/image.router");
 const cookieSession = require('cookie-session');
 const fileUpload = require('express-fileupload');
 
@@ -40,6 +41,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
     app.use("/api", productRouter);
     app.use("/api", shippingMethodRouter);
     app.use("/api", orderRouter);
+    // app.use("/api", imageRouter);
     
     // File Upload
     app.post("/upload", (req, res) => {
@@ -48,7 +50,10 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
         const filename = Date.now() + '-' + file.name;
         console.log(file)
         // TODO: save to db ImageModel.create(file)
-      
+
+        // ImageModel.create(file)
+
+        
         file.mv(`${newpath}${filename}`, (err) => {
           if (err) {
             res.status(500).send("File upload failed");
