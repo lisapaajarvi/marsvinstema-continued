@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		categories: {
 			textAlign: 'center',
 			padding: '20px 0px',
-			backgroundColor: 'rgb(43, 92, 226)',
+			backgroundColor: '#074ba5',
 		},
 		category: {
 			outline: 'none',
