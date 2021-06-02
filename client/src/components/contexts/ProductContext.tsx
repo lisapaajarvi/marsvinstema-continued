@@ -13,6 +13,7 @@ export interface Product {
     categories: string[]
     description: string
     img: string
+    quantity?: number
 }
 interface ContextValue extends State {
     // addProduct: (newProduct: Product) => void;
