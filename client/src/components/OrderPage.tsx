@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Footer } from './Footer';
 import Switch from '@material-ui/core/Switch';
 import { OrderContext } from './contexts/OrderContext'
+import OrderItem from './OrderItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,15 +43,6 @@ export default function OrderPage() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
-
-  // function getDay(date:Date) {
-  //   const dd = String(date.getDate()).padStart(2, '0');
-  //   const mm = String(date.getMonth() + 1).padStart(2, '0'); 
-  //   const yyyy = date.getFullYear();
-  //   let day = yyyy + '-' + mm + '-' + dd;
-  //   return day;
-  // }
-
 
   return (
       <>
@@ -92,9 +84,7 @@ export default function OrderPage() {
 
                               {orders&& (      
                                 orders.map((order, index) => (
-                                <Grid item xs={12} key={index}>
-                                  <p>{order.createdAt}</p>
-                                </Grid>
+                                    <OrderItem order={order} key={index}/>
                               )))}
 
                               <div className={classes.paper} style={container}>
