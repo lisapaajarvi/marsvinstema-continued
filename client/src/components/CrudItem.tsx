@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 interface Props {
   product: Product;
-  // removeFromProductList: (product:Product) => void;
   openEditProductModal: (product:Product) => void;
   deleteProduct: (product:Product) => void;
 }

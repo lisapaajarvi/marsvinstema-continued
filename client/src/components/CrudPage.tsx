@@ -46,8 +46,6 @@ export default function CrudPage() {
   const [img, setImg] = useState('')
   // const [productList, setProductList] = React.useState(getProductList())
   // const [isFieldDisabled, setIsFieldDisabled] = React.useState(true)
-  // const [urlError, setUrlError] = React.useState<boolean>(false);
-  // const [url, setUrl] = React.useState('');
   const [titleError, setTitleError] = useState<boolean>(false);
   const [stockError, setStockError] = useState<boolean>(false);
   const [descriptionError, setDescriptionError] = useState<boolean>(false);
@@ -98,15 +96,6 @@ export default function CrudPage() {
       && !categoriesError
     )
   }
-
-  // // Denna funktionen måste ändras!
-
-  // function removeFromProductList(product:Product) {
-  //   // const updatedProductList = productList.filter(item => item._id !== product._id);
-  //   // setProductList(updatedProductList);
-  //   // updateProductListInLocalStorage(updatedProductList);
-
-  // }
 
   function saveEditedProduct() {
     editProduct({ ...editingProduct, stock, title, price, description, img, categories } as Product)
@@ -181,7 +170,7 @@ export default function CrudPage() {
     setStock(Number(e.target.value))
   };
   const handleDescriptionInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^.{3,}$/.test(e.target.value)) {
+    if (/^.{2,}$/.test(e.target.value)) {
       setDescriptionError(false);
     }
     else {
@@ -191,7 +180,7 @@ export default function CrudPage() {
   };
 
   const handleCategoriesInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/^.{3,}$/.test(e.target.value)) {
+    if (/^.{2,}$/.test(e.target.value)) {
       setCategoriesError(false);
     }
     else {
@@ -220,147 +209,7 @@ export default function CrudPage() {
     setImg(e.target.value)
   };
 
-  return (
-    // <>
-    //   <div className={classes.root}>
-    //     <Container maxWidth="lg">
-    //       <Box pt={5} pb={5}>
-    //         <Grid container spacing={2}>
-    //           <Grid item xs={12} sm={6} className={classes.paper}>
-    //           <Typography variant="h5">
-    //             <div style={{ marginBottom: '1rem' }}>
-    //               Produktlista
-    //             </div>
-    //           </Typography>
-    //           </Grid>
-    //           <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-    //             <DialogTitle id="edit-product">Ändra / lägg till produkt</DialogTitle>
-    //             <DialogContent>
-    //               <TextField
-    //                 margin="dense"
-    //                 id="title"
-    //                 label="Produktnamn"
-    //                 defaultValue={title}
-    //                 type="text"
-    //                 onChange={handleTitleInput}
-    //                 fullWidth
-    //                 error={titleError}
-    //               />
-    //               <TextField
-    //                 margin="dense"
-    //                 id="price"
-    //                 label="Pris"
-    //                 defaultValue={price}
-    //                 type="text"
-    //                 onChange={handlePriceInput}
-    //                 fullWidth
-    //                 error={priceError}
-    //               /> 
-    //               {/* <TextField
-    //                 margin="dense"
-    //                 id="description"
-    //                 label="Beskrivning"
-    //                 multiline
-    //                 defaultValue={description}
-    //                 type="text"
-    //                 onChange={handleDescriptionInput}
-    //                 fullWidth
-    //                 error={descriptionError}
-    //               /> */}
-    //               <TextField
-    //                 margin="dense"
-    //                 id="stock"
-    //                 label="Lagersaldo"
-    //                 multiline
-    //                 defaultValue={stock}
-    //                 type="text"
-    //                 onChange={handleStockInput}
-    //                 fullWidth
-    //                 error={stockError}
-    //               />
-    //               {/* <TextField
-    //                 margin="dense"
-    //                 id="categories"
-    //                 label="Kategori"
-    //                 multiline
-    //                 defaultValue={categories}
-    //                 type="text"
-    //                 onChange={handleCategoriesInput}
-    //                 fullWidth
-    //                 error={categoriesError}
-    //               />*/}
-
-    //               {/* <TextField
-    //                 margin="dense"
-    //                 id="img"
-    //                 label="Länk till bild"
-    //                 multiline
-    //                 defaultValue={img}
-    //                 type="text"
-    //                 onChange={handleImgInput}
-    //                 fullWidth
-    //                 error={imgError}
-    //               /> */}
-    //             </DialogContent>
-    //             <DialogActions>
-    //               <Button onClick={handleClose} color="primary">
-    //                 Tillbaka
-    //               </Button>
-    //               <Button onClick={saveEditedProduct} disabled={!isFormValid()} variant="contained" color="primary">
-    //                 Spara
-    //               </Button>
-    //             </DialogActions>
-    //           </Dialog>
-    //           <Hidden xsDown>
-    //             <Grid container spacing={2}>
-    //               <Grid item xs={3} sm={2} md={2} lg={1}>
-    //               </Grid>
-    //               <Grid item xs={5} sm={3} md={2} lg={2}>
-    //                 <Typography variant="body1">
-    //                   Produktnamn
-    //                 </Typography>
-    //               </Grid>
-    //               {/* <Hidden smDown>
-    //                 <Grid item xs={6} sm={4} md={4} lg={6}>
-    //                   <Typography variant="body1">Beskrivning</Typography>
-    //                 </Grid>
-    //               </Hidden> */}
-    //               {/* <Grid item xs={4} sm={3} md={1} lg={1}>
-    //                 <Typography variant="body1">Pris</Typography>
-    //               </Grid> */}
-    //               <Grid item xs={4} sm={3} md={1} lg={1}>
-    //                 <Typography variant="body1">Lagersaldo</Typography>
-    //               </Grid>
-    //               <Grid item xs={12} sm={1}>
-    //                 <Typography variant="body1"></Typography>
-    //               </Grid>
-    //             </Grid>
-    //           </Hidden>
-    //           {products.map((product, index) => (
-    //             <Grid item xs={12} key={index}>
-    //               {/* <CrudItem products={products} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} /> */}
-    //               <CrudItem product={product} openEditProductModal={openEditProductModal} />
-    //               {/* <CrudItem product={product} /> */}
-    //             </Grid>
-    //           ))}
-    //           <Grid item xs={12} sm={6} className={classes.paper}>
-    //             <Link className={classes.link} to="/admin">
-    //               <Button variant="contained" color="primary">Tillbaka</Button>
-    //             </Link>
-    //           </Grid>
-    //           <Grid item xs={12} sm={6} className={classes.paper}>
-    //             <Button variant="contained" color="primary" onClick={openAddProductModal}>Lägg till<AddCircleIcon className={classes.icon} /></Button>
-    //           </Grid>
-    //           <div>
-    //             <input type="file" onChange={saveFile} />
-    //             <button onClick={uploadFile}>Ladda upp</button>
-    //           </div>
-    //         </Grid>
-    //       </Box>
-    //     </Container>
-    //   </div>
-    // </>
-
+  return (    
     <div className={classes.root}>
       <Container maxWidth="sm">
         <Box pt={5} pb={5}>
@@ -376,9 +225,6 @@ export default function CrudPage() {
               <Grid container spacing={2}>
                 <Grid item xs={3} sm={2} md={2} lg={1}>
                 </Grid>
-                {/* <Grid item xs={5} sm={3} md={2} lg={2}>
-                  <Typography variant="body1">Namn</Typography>
-                </Grid> */}
               </Grid>
 
               <>
@@ -406,7 +252,7 @@ export default function CrudPage() {
                     onChange={handleTitleInput}
                     fullWidth
                     error={titleError}
-                  />
+                    />
                   <TextField
                     margin="dense"
                     id="price"
@@ -416,7 +262,7 @@ export default function CrudPage() {
                     onChange={handlePriceInput}
                     fullWidth
                     error={priceError}
-                  />
+                    />
                   <TextField
                     margin="dense"
                     id="description"
@@ -427,7 +273,7 @@ export default function CrudPage() {
                     onChange={handleDescriptionInput}
                     fullWidth
                     error={descriptionError}
-                  />
+                    />
                   <TextField
                     margin="dense"
                     id="stock"
@@ -438,7 +284,7 @@ export default function CrudPage() {
                     onChange={handleStockInput}
                     fullWidth
                     error={stockError}
-                  />
+                    />
                   <TextField
                     margin="dense"
                     id="categories"
@@ -449,7 +295,7 @@ export default function CrudPage() {
                     onChange={handleCategoriesInput}
                     fullWidth
                     error={categoriesError}
-                  />
+                    />
 
                   <TextField
                     margin="dense"
@@ -461,7 +307,7 @@ export default function CrudPage() {
                     onChange={handleImgInput}
                     fullWidth
                     error={imgError}
-                  />
+                    />
                   
                 </DialogContent>
                 <DialogActions>
