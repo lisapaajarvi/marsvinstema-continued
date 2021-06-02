@@ -6,7 +6,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import { CartContext, CartProduct } from './contexts/CartContext';
-import ProfileCard from './ProfileCard'
+import ProfileCard from './ProfileCard';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -14,7 +14,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { Button, Hidden } from '@material-ui/core';
 import { UserContext } from './contexts/UserContext';
-import CategoryBar from './CategoryBar';
 import '../css/header.css';
 
 const StyledBadge = withStyles((theme) => ({
@@ -22,7 +21,7 @@ const StyledBadge = withStyles((theme) => ({
 		right: -3,
 		top: 13,
 		border: `2px solid ${theme.palette.background.paper}`,
-		padding: "0px",
+		padding: '0px',
 	},
 }))(Badge);
 
@@ -32,7 +31,7 @@ function Header() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [email, setEmail] = useState('');
-	const { user, login, signup } = useContext(UserContext)
+	const { user, login, signup } = useContext(UserContext);
 	const handleLoginClose = () => {
 		setOpenLogin(false);
 	};
@@ -45,44 +44,54 @@ function Header() {
 	function openSignupModal() {
 		setOpenSignup(true);
 	}
-	const handleSignupUsername = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-		setUsername(e.target.value)
-	}
-	const handleSignupEmail = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-		setEmail(e.target.value)
-	}
-	const handleSignupPassword = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-		setPassword(e.target.value)
-	}
-	const handleLoginEmail = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-		setEmail(e.target.value)
-	}
-	const handleLoginPassword = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-		setPassword(e.target.value)
-	}
+	const handleSignupUsername = (
+		e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+	) => {
+		setUsername(e.target.value);
+	};
+	const handleSignupEmail = (
+		e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+	) => {
+		setEmail(e.target.value);
+	};
+	const handleSignupPassword = (
+		e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+	) => {
+		setPassword(e.target.value);
+	};
+	const handleLoginEmail = (
+		e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+	) => {
+		setEmail(e.target.value);
+	};
+	const handleLoginPassword = (
+		e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+	) => {
+		setPassword(e.target.value);
+	};
 	const handleLogin = () => {
 		const loginBody = {
 			email: email,
-			password: password
-		}
-		login(loginBody)
+			password: password,
+		};
+		login(loginBody);
 		setOpenLogin(false);
-		setPassword('')
-		setEmail('')
-	}
+		setPassword('');
+		setEmail('');
+	};
 	const handleSignup = () => {
 		const newUser = {
 			username: username,
 			email: email,
 			password: password,
-		}
-		signup(newUser)
-		setUsername('')
-		setEmail('')
-		setPassword('')
+		};
+		signup(newUser);
+		setUsername('');
+		setEmail('');
+		setPassword('');
 		setOpenSignup(false);
 		alert('New user created!');
-	}
+	};
 
 	return (
 		<CartContext.Consumer>
@@ -90,12 +99,12 @@ function Header() {
 				const getCartLength = (cartCount: CartProduct[]) => {
 					let length = 0;
 					cartCount.forEach((CartProduct) => {
-						length += CartProduct.quantity
-					})
+						length += CartProduct.quantity;
+					});
 					return length;
-				}
+				};
 
-				let cartLength = getCartLength(cart)
+				let cartLength = getCartLength(cart);
 
 				return (
 					<div className="headerContainer">
@@ -104,24 +113,46 @@ function Header() {
 								<Typography>
 									<Link className="logoStyle" to="/">
 										MARSVINSTEMA
-                                	</Link>
+									</Link>
 								</Typography>
 							</div>
 							<Hidden smUp>
 								<Link style={cartStyle} to="/kundvagn">
 									<IconButton aria-label="cart">
-										<StyledBadge badgeContent={cartLength} color="secondary" style={{ color: '#F0F0F0', marginRight: '1rem', marginLeft: '0rem' }}>
+										<StyledBadge
+											badgeContent={cartLength}
+											color="secondary"
+											style={{
+												color: '#F0F0F0',
+												marginRight: '1rem',
+												marginLeft: '0rem',
+											}}
+										>
 											<ShoppingCartIcon />
 										</StyledBadge>
 									</IconButton>
 								</Link>
 							</Hidden>
-							<div style={{ display: 'flex', marginRight: '1rem', alignItems: 'center' }}>
+							<div
+								style={{
+									display: 'flex',
+									marginRight: '1rem',
+									alignItems: 'center',
+								}}
+							>
 								<div>
 									<Hidden xsDown>
 										<Link style={cartStyle} to="/kundvagn">
 											<IconButton aria-label="cart">
-												<StyledBadge badgeContent={cartLength} color="secondary" style={{ color: '#F0F0F0', marginRight: '1rem', marginLeft: '0rem' }}>
+												<StyledBadge
+													badgeContent={cartLength}
+													color="secondary"
+													style={{
+														color: '#F0F0F0',
+														marginRight: '1rem',
+														marginLeft: '0rem',
+													}}
+												>
 													<ShoppingCartIcon />
 												</StyledBadge>
 											</IconButton>
@@ -131,14 +162,32 @@ function Header() {
 								<div>
 									{!user ? (
 										<div className="buttonContainer">
-											<Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openLoginModal}>
+											<Button
+												size="medium"
+												variant="contained"
+												color="primary"
+												style={buttonStyle}
+												onClick={openLoginModal}
+											>
 												LOGGA IN
-										</Button>
-											<Button size="medium" variant="contained" color="primary" style={buttonStyle} onClick={openSignupModal}>
+											</Button>
+											<Button
+												size="medium"
+												variant="contained"
+												color="primary"
+												style={buttonStyle}
+												onClick={openSignupModal}
+											>
 												REGISTRERA
-										</Button>
-											<Dialog open={openLogin} onClose={handleLoginClose} aria-labelledby="form-dialog-login">
-												<DialogTitle id="login">Logga in</DialogTitle>
+											</Button>
+											<Dialog
+												open={openLogin}
+												onClose={handleLoginClose}
+												aria-labelledby="form-dialog-login"
+											>
+												<DialogTitle id="login">
+													Logga in
+												</DialogTitle>
 												<DialogContent>
 													<TextField
 														autoFocus
@@ -161,16 +210,29 @@ function Header() {
 													/>
 												</DialogContent>
 												<DialogActions>
-													<Button onClick={handleLoginClose} color="primary">
+													<Button
+														onClick={handleLoginClose}
+														color="primary"
+													>
 														Tillbaka
-                  								</Button>
-													<Button onClick={handleLogin} variant="contained" color="primary">
+													</Button>
+													<Button
+														onClick={handleLogin}
+														variant="contained"
+														color="primary"
+													>
 														Bekräfta
-                  								</Button>
+													</Button>
 												</DialogActions>
 											</Dialog>
-											<Dialog open={openSignup} onClose={handleSignupClose} aria-labelledby="form-dialog-signup">
-												<DialogTitle id="signup">Registrering</DialogTitle>
+											<Dialog
+												open={openSignup}
+												onClose={handleSignupClose}
+												aria-labelledby="form-dialog-signup"
+											>
+												<DialogTitle id="signup">
+													Registrering
+												</DialogTitle>
 												<DialogContent>
 													<TextField
 														autoFocus
@@ -202,12 +264,21 @@ function Header() {
 													/>
 												</DialogContent>
 												<DialogActions>
-													<Button onClick={handleSignupClose} color="primary" style={buttonStyle}>
+													<Button
+														onClick={handleSignupClose}
+														color="primary"
+														style={buttonStyle}
+													>
 														Tillbaka
-                 				 				</Button>
-													<Button onClick={handleSignup} variant="contained" color="primary" style={buttonStyle}>
+													</Button>
+													<Button
+														onClick={handleSignup}
+														variant="contained"
+														color="primary"
+														style={buttonStyle}
+													>
 														Bekräfta
-                			  					</Button>
+													</Button>
 												</DialogActions>
 											</Dialog>
 										</div>
@@ -217,14 +288,11 @@ function Header() {
 										</div>
 									)}
 								</div>
-
 							</div>
 						</div>
-						<div>
-							<CategoryBar />
-						</div>
+						<div></div>
 					</div>
-				)
+				);
 			}}
 		</CartContext.Consumer>
 	);
@@ -236,7 +304,7 @@ const buttonStyle: CSSProperties = {
 
 const cartStyle: CSSProperties = {
 	textDecoration: 'none',
-	color: 'white'
-}
+	color: 'white',
+};
 
 export default Header;
