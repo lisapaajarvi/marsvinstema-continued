@@ -12,12 +12,7 @@
 	}
 	.headerStyle {
 		height: 8rem;
-		background: linear-gradient(
-			90deg,
-			rgba(7, 0, 129, 1) 0%,
-			rgba(9, 9, 121, 1) 35%,
-			rgba(0, 212, 255, 1) 100%
-		);
+		background: linear-gradient(90deg,rgba(7, 0, 129, 1) 0%,rgba(9, 9, 121, 1) 35%,rgba(0, 212, 255, 1) 100%);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -57,6 +52,5 @@
 @media (min-width: 900px) {
 	.logoStyle {
 		font-size: 4.5rem;
-		margin-left: 3rem;
 	}
 }
