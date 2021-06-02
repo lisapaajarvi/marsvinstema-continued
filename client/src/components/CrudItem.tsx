@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { Grid, IconButton } from '@material-ui/core';
+import { Grid, Hidden, IconButton } from '@material-ui/core';
 import { Product } from './contexts/ProductContext';
 import CardMedia from '@material-ui/core/CardMedia';
 import EditIcon from '@material-ui/icons/Edit';
@@ -52,7 +52,7 @@ interface Props {
 
 export default function CrudItem(props: Props) {
   const classes = useStyles();
-  const { title, img} = props.product;
+  const { title, img, stock } = props.product;
 
   return (
     <div style={{ margin: '0.5rem 0rem' }}>
@@ -72,9 +72,16 @@ export default function CrudItem(props: Props) {
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1}>
         </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1}>
+        <Grid item xs={4} sm={4} md={4} lg={4}>
           <p style={{ color: 'black', marginLeft: '0.5rem', fontFamily: 'Helvetica' }}>{title}</p>
         </Grid>
+        <Grid item xs={1} sm={1} md={1} lg={1}>
+        </Grid>
+        <Hidden xsDown>
+        <Grid item xs={4} sm={4} md={4} lg={4}>
+          <p style={{ color: 'black', marginLeft: '0.5rem', fontFamily: 'Helvetica' }}>Lager: {stock} st</p>
+        </Grid>
+        </Hidden>
       </Grid>
     </div>
   );
