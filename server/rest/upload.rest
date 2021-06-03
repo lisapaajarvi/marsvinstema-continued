@@ -21,4 +21,4 @@ Content-Type: image/jpeg
 
 ###
 
-GET http://localhost:4000/uploads/1622553282193-1.jpg
+GET http://localhost:4000/api/upload/60b88696c142853abc1ddcb4
