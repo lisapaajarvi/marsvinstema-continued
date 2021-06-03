@@ -9,7 +9,6 @@ const orderRouter = require("./routers/order.router");
 const shippingMethodRouter = require("./routers/shippingmethod.router");
 const imageRouter = require("./routers/image.router");
 const cookieSession = require('cookie-session');
-// const fileUpload = require('express-fileupload');
 
 dotenv.config()
 

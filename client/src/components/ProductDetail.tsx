@@ -51,7 +51,7 @@ export default function ProductDetail() {
             <CardActionArea>
               <CardMedia
                 className={classes.media}
-                image={product.img}
+                image={product.imageUrl || product.img}
                 title={product.title}
               />
               <CardContent>

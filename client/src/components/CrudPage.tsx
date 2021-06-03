@@ -72,8 +72,6 @@ export default function CrudPage() {
       );
       setEditingProduct((prev) => ({ ...prev, imageId} as Product))
       setIsUploading(false)
-      
-      console.log(imageId);
     } catch (ex) {
       console.log(ex);
     }
