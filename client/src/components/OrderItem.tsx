@@ -1,12 +1,16 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Switch, Typography } from "@material-ui/core";
 import React, { useContext, useState } from "react";
 import { Order, OrderContext } from "./contexts/OrderContext";
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+
 
 interface Props {
     order: Order;
 }
 
 export default function OrderItem(props: Props) {
+    	const classes = useStyles();
+
     const [modalOpen, setModalOpen] = useState(false);
     const { createdAt, _id, isShipped, products, shippingMethod, shippingAddress, totalPrice} = props.order;
     const { editOrderStatus } = useContext(OrderContext);
@@ -49,7 +53,7 @@ export default function OrderItem(props: Props) {
                 <Typography variant="body1">{getOrderDate()}</Typography>
             </Grid>
             <Grid item xs={12} sm={4} onClick={openOrderModal}>
-                <Typography variant="body1">{_id}</Typography>
+                <Typography className={classes.linkColor} variant="body1">{_id}</Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
                 <Switch
@@ -64,23 +68,23 @@ export default function OrderItem(props: Props) {
             <Dialog open={modalOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle>Orderdetaljer</DialogTitle>
                 <DialogContent>
-                    <Typography><b>Orderdatum:</b> {getOrderDate()}</Typography>
+                    <Typography className={classes.marginBottom}><b>Orderdatum:</b> {getOrderDate()}</Typography>
                     <Typography><b>Produkter: </b>
                         <ul>
                             {products.map((product, index) => (
-                                <li key={index}>
+                                <li className={classes.marginLeft} key={index}>
                                     {product.quantity} st {product.title} à {product.price} kr
                                 </li>
                             ))}
                         </ul>
                     </Typography>
-                    <Typography><b>Fraktsätt:</b> {shippingMethod.name}</Typography>
+                    <Typography className={classes.marginBottom}><b>Fraktsätt:</b> {shippingMethod.name}</Typography>
                     <Typography><b>Leveransadress:</b></Typography>
                     <Typography> {shippingAddress.firstName} {shippingAddress.lastName}</Typography>
                     <Typography> {shippingAddress.streetAddress}</Typography>
-                    <Typography> {shippingAddress.zipCode} {shippingAddress.city}</Typography>
-                    <Typography> <b>Ordersumma:</b> {totalPrice} kr</Typography>
-                    <Typography> <b>Orderstatus:</b> {isShipped?("Skickad"):("Ej skickad")}</Typography>
+                    <Typography className={classes.marginBottom}> {shippingAddress.zipCode} {shippingAddress.city}</Typography>
+                    <Typography className={classes.marginBottom}> <b>Ordersumma:</b> {totalPrice} kr</Typography>
+                    <Typography className={classes.marginBottom}> <b>Orderstatus:</b> {isShipped?("Skickad"):("Ej skickad")}</Typography>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
@@ -91,3 +95,18 @@ export default function OrderItem(props: Props) {
         </>
     );
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		marginLeft: {
+			marginLeft: '-1rem',
+        },
+        marginBottom: {
+			marginBottom: '0.5rem',
+        },
+    linkColor: {
+            cursor: 'pointer',
+			color: '#3f51b5',
+        },
+    }),
+);
