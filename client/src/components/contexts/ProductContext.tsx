@@ -13,6 +13,7 @@ export interface Product {
     categories: string[]
     description: string
     img: string
+    quantity?: number
     imageId: string
     imageUrl: string
 }
