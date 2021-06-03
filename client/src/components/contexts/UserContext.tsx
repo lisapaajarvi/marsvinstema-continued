@@ -26,12 +26,12 @@ interface ContextValue extends State {
     signup: (newUser: NewUser) => void;
     login: (loginBody: LoginBody) => void;
     logout: () => void;
-}    
+}
 
 export const UserContext = createContext<ContextValue>({
-    login: () => {},
-    logout: () => {},
-    signup: () => {}
+    login: () => { },
+    logout: () => { },
+    signup: () => { }
 });
 class UserProvider extends Component<{}, State> {
     state: State = {};
@@ -48,32 +48,33 @@ class UserProvider extends Component<{}, State> {
         this.fetchUser();
     }
 
-    signup = (newUser: any)=> {
+    signup = (newUser: any) => {
         axios
-          .post('/api/users/register', newUser)
-          .then(res => {
-            console.log(res)
+            .post('/api/users/register', newUser)
+            .then(res => {
+                console.log(res)
 
-        })
-        .catch(err => console.log(err))
-  
-      }
-  
-    login = (loginBody: any)=> {
-        axios
-          .post('/api/users/login', loginBody)
-          .then(({ data: user }) => {
-            this.setState({ user });
-        })
+            })
+            .catch(err => console.log(err))
+
     }
-    
+
+    login = (loginBody: any) => {
+        axios
+            .post('/api/users/login', loginBody)
+            .then(({ data: user }) => {
+                this.setState({ user });
+
+            })
+    }
+
     logout = () => {
         axios
-          .post('/api/users/logout')
-          .then(res => {
-            console.log(res)
-            this.setState({user: undefined})
-        })
+            .post('/api/users/logout')
+            .then(res => {
+                console.log(res)
+                this.setState({ user: undefined })
+            })
     }
 
     render() {
