@@ -54,6 +54,7 @@ export default function CrudPage() {
   const [imgError, setImgError] = useState<boolean>(false);
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
   const saveFile = (e: any) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
@@ -64,11 +65,15 @@ export default function CrudPage() {
     formData.append("file", file);
     formData.append("fileName", fileName);
     try {
-      const res = await axios.post(
-        "http://localhost:4000/upload",
+      setIsUploading(true)
+      const { data: imageId } = await axios.post(
+        "/api/upload",
         formData
       );
-      console.log(res);
+      setEditingProduct((prev) => ({ ...prev, imageId} as Product))
+      setIsUploading(false)
+      
+      console.log(imageId);
     } catch (ex) {
       console.log(ex);
     }
@@ -94,6 +99,7 @@ export default function CrudPage() {
       && !descriptionError
       && !imgError
       && !categoriesError
+      && !isUploading
     )
   }
 
@@ -296,7 +302,6 @@ export default function CrudPage() {
                     fullWidth
                     error={categoriesError}
                     />
-
                   <TextField
                     margin="dense"
                     id="img"
@@ -307,8 +312,13 @@ export default function CrudPage() {
                     onChange={handleImgInput}
                     fullWidth
                     error={imgError}
-                    />
-                  
+                    /> 
+                <div style={{marginTop: '2rem', marginBottom: '2rem'}}>
+                  <input type="file" onChange={saveFile} />
+                  <button onClick={uploadFile}>
+                    {isUploading ? "Laddar upp..." : "Ladda upp"}
+                  </button>
+                </div>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
@@ -319,17 +329,6 @@ export default function CrudPage() {
                   </Button>
                 </DialogActions>
               </Dialog>
-
-              {/* FILE UPLOAD */}
-              <Typography variant="h6">
-                <div style={{ marginTop: '1rem' }}>
-                  Bilduppladdning
-                </div>
-              </Typography>
-              <div style={{marginTop: '2rem', marginBottom: '2rem'}}>
-                <input type="file" onChange={saveFile} />
-                <button onClick={uploadFile}>Ladda upp</button>
-              </div>
 
               {/* BUTTONS */}
               <div className={classes.paper} style={container}>

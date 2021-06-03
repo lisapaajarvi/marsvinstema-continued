@@ -29,15 +29,16 @@ interface Props {
 export default function ProductCard(props: Props) {
   const classes = useStyles();
   const cart = useContext(CartContext)
-  const { title, img, price, _id} = props.product;
+  const { title, img, price, _id, imageUrl } = props.product;
   const productUrl = `/produkt/${_id}`;
+  console.log(imageUrl)
  
   return (
     <Card className={classes.root}>
       <CardActionArea component={Link} to={productUrl}>
         <CardMedia
           className={classes.media}
-          image={img}
+          image={imageUrl || img}
           title={title}
         />
         <CardContent>
