@@ -33,27 +33,27 @@ export default function ProductView() {
 		<div className={classes.root}>
 			<div className={classes.categories}>
 				<CategoryButton
-					name="Alla"
+					name='Alla'
 					categoriesActive={categories === 'Alla' ? true : false}
 					handleSetCategories={setCategories}
 				/>{' '}
 				<CategoryButton
-					name="Leksaker"
+					name='Leksaker'
 					categoriesActive={categories === 'Leksaker' ? true : false}
 					handleSetCategories={setCategories}
 				/>{' '}
 				<CategoryButton
-					name="Kläder"
+					name='Kläder'
 					categoriesActive={categories === 'Kläder' ? true : false}
 					handleSetCategories={setCategories}
 				/>{' '}
 				<CategoryButton
-					name="Mat"
+					name='Mat'
 					categoriesActive={categories === 'Mat' ? true : false}
 					handleSetCategories={setCategories}
 				/>
 			</div>
-			<Container maxWidth="lg">
+			<Container maxWidth='lg'>
 				<Box pt={5} pb={0}>
 					<Grid container spacing={3}>
 						{filteredProducts.map((product, index) => (
