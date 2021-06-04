@@ -80,23 +80,14 @@ export default function Checkout() {
 
   const handleNext = async () => {
     if (activeStep === 3) {
-      const orderId = createFakeOrderID(); 
-      console.log(shippingMethod)
+      const orderId = createOrderID(); 
       const newOrder: NewOrder = {
-        //orderNumber: orderId, ska genereras automatiskt i databasen?
         customer,
         shippingMethod,
         totalPrice,
-        //paymentOption: {paymentOption},
-        //cardInfo: {cardInfo},
         cart
       }
       setIsLoading(true)
-
-      // här ska ordern skickas in till databasen?
-
-
-      //await sendOrderToApi(order);
       addNewOrder(newOrder)
       setOrderNumber(orderId)
       setIsLoading(false)
@@ -126,7 +117,7 @@ export default function Checkout() {
     }
   }
 
-  function createFakeOrderID() {
+  function createOrderID() {
     let x = Math.floor((Math.random() * 10000) + 1);
     return x;
   }

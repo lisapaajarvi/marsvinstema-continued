@@ -68,8 +68,7 @@ class ProductProvider extends Component<{}, State> {
         });
 
         if (response.ok) {
-            const updatedProduct = await response.json();
-            console.log(updatedProduct)
+            await response.json();
             this.fetchProducts()
         }
     }
@@ -81,8 +80,7 @@ class ProductProvider extends Component<{}, State> {
         });
 
         if (response.ok) {
-            const deletedProduct = await response.json();
-            console.log(deletedProduct)
+            await response.json();
             this.fetchProducts()
         }
     }
@@ -91,7 +89,6 @@ class ProductProvider extends Component<{}, State> {
         axios
             .post('/api/products', newProduct)
             .then(res => {
-                console.log(res)
                 this.fetchProducts()
             })
             .catch(err => console.log(err))

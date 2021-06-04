@@ -91,8 +91,7 @@ class OrderProvider extends Component<{}, State> {
         });
 
         if (response.ok) {
-            const updatedOrder = await response.json();
-            console.log(updatedOrder)
+            await response.json();
         }
     }
  

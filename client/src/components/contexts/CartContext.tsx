@@ -1,5 +1,4 @@
 import { Component, createContext } from 'react';
-// import { Product } from '../../ProductList';
 import { Product } from './ProductContext';
 
 interface State {

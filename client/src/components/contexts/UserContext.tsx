@@ -52,8 +52,6 @@ class UserProvider extends Component<{}, State> {
         axios
             .post('/api/users/register', newUser)
             .then(res => {
-                console.log(res)
-
             })
             .catch(err => console.log(err))
 
@@ -72,7 +70,6 @@ class UserProvider extends Component<{}, State> {
         axios
             .post('/api/users/logout')
             .then(res => {
-                console.log(res)
                 this.setState({ user: undefined })
             })
     }
