@@ -47,9 +47,9 @@ exports.addProduct = async (req, res) => {
       categories: req.body.categories,
       description: req.body.description,
       img: req.body.img,
-      url: req.body.url
+      imageId: req.body.imageId
     };
 
-    const newProduct = await ProductModel.create(productToCreate);
+    const newProduct = await ProductModel.create(req.body);
     res.status(201).json(newProduct);
 }

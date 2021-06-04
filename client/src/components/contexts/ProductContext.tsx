@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Component, createContext } from 'react';
 
 interface State {
@@ -87,19 +88,29 @@ class ProductProvider extends Component<{}, State> {
         }
     }
 
-    addProduct = async (newProduct:NewProduct) => {
-        console.log(newProduct)
-        const response = await fetch('/api/products/', {
-            method: 'POST',
-            body: JSON.stringify(newProduct)
-        });
+    addProduct = (newProduct: NewProduct) => {
+        axios
+            .post('/api/products', newProduct)
+            .then(res => {
+                console.log(res)
 
-        if (response.ok) {
-            const addedProduct = await response.json();
-            console.log(addedProduct)
-            this.fetchProducts()
-        }
+            })
+            .catch(err => console.log(err))
+
     }
+    // addProduct = async (newProduct:NewProduct) => {
+    //     console.log(newProduct)
+    //     const response = await fetch('/api/products/', {
+    //         method: 'POST',
+    //         body: JSON.stringify(newProduct)
+    //     });
+
+    //     if (response.ok) {
+    //         const addedProduct = await response.json();
+    //         console.log(addedProduct)
+    //         this.fetchProducts()
+    //     }
+    // }
 
     componentDidMount() {
         this.fetchProducts();
