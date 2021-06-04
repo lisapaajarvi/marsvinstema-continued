@@ -339,9 +339,7 @@ export default function CrudPage() {
 										fullWidth
 										error={imgError}
 									/>
-								</DialogContent>
-								{/* FILE UPLOAD */}
-								<div className={classes.fileUpload}>
+									{/* FILE UPLOAD */}
 									<Typography variant='h6'>
 										<div style={{ marginTop: '1rem' }}>
 											Bilduppladdning
@@ -349,11 +347,11 @@ export default function CrudPage() {
 									</Typography>
 									<div>
 										<input type='file' onChange={saveFile} />
-										<button onClick={uploadFile}>
+										<div onClick={uploadFile}>
 											<FileUploadSnackbar />
-										</button>
+										</div>
 									</div>
-								</div>
+								</DialogContent>
 								<DialogActions>
 									<Button onClick={handleClosed} color='primary'>
 										Tillbaka

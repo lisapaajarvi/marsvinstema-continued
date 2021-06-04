@@ -9,7 +9,7 @@ function Alert(props: AlertProps) {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-	root: {
+	snackbar: {
 		width: '100%',
 		'& > * + *': {
 			marginTop: theme.spacing(2),
@@ -34,7 +34,7 @@ export default function FileUploadSnackbar() {
 	};
 
 	return (
-		<div className={classes.root}>
+		<div className={classes.snackbar}>
 			<Button size='small' variant='text' onClick={handleClick}>
 				Ladda upp
 			</Button>
