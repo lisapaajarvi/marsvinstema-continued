@@ -90,8 +90,18 @@ class ProductProvider extends Component<{}, State> {
         }
     }
 
-    addProduct = () => {
-        // logik för att lägga till produkt här
+    addProduct = async (newProduct:NewProduct) => {
+        console.log(newProduct)
+        const response = await fetch('/api/products/', {
+            method: 'POST',
+            body: JSON.stringify(newProduct)
+        });
+
+        if (response.ok) {
+            const addedProduct = await response.json();
+            console.log(addedProduct)
+            this.fetchProducts()
+        }
     }
 
     componentDidMount() {
