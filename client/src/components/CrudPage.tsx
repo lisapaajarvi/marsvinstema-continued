@@ -78,8 +78,6 @@ export default function CrudPage() {
         setNewImageId(imageId)
       }
       setIsUploading(false)
-      
-      console.log(imageId);
     } catch (ex) {
       console.log(ex);
     }
