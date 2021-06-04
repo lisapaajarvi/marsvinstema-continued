@@ -103,13 +103,13 @@ You can also buy sausages (which are not made from guinea pigs).
 
 ## Developer instructions
 
-## Installation and start server-side
+**Installation and start server-side**
 
 -  cd server
 -  npm install
 -  npm start
 
-## Installation and start client-side
+**Installation and start client-side**
 
 -  cd client
 -  npm install
