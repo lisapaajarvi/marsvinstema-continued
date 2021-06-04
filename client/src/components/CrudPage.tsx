@@ -44,8 +44,6 @@ export default function CrudPage() {
   const [categories, setCategories] = useState<[string] | any>();
   const [price, setPrice] = useState<number>();
   const [img, setImg] = useState('')
-  // const [productList, setProductList] = React.useState(getProductList())
-  // const [isFieldDisabled, setIsFieldDisabled] = React.useState(true)
   const [titleError, setTitleError] = useState<boolean>(false);
   const [stockError, setStockError] = useState<boolean>(false);
   const [descriptionError, setDescriptionError] = useState<boolean>(false);
