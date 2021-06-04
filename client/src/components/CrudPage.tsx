@@ -119,8 +119,8 @@ export default function CrudPage() {
       description: description,
       stock: stock,
       categories: categories,
-      img: img
-      //imageId: newImageId
+      img: img,
+      imageId: newImageId
     }
     addProduct(newProduct as NewProduct)
   }

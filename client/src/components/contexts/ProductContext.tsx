@@ -98,19 +98,6 @@ class ProductProvider extends Component<{}, State> {
             .catch(err => console.log(err))
 
     }
-    // addProduct = async (newProduct:NewProduct) => {
-    //     console.log(newProduct)
-    //     const response = await fetch('/api/products/', {
-    //         method: 'POST',
-    //         body: JSON.stringify(newProduct)
-    //     });
-
-    //     if (response.ok) {
-    //         const addedProduct = await response.json();
-    //         console.log(addedProduct)
-    //         this.fetchProducts()
-    //     }
-    // }
 
     componentDidMount() {
         this.fetchProducts();
