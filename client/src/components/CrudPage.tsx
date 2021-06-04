@@ -12,25 +12,32 @@ import { Link } from 'react-router-dom';
 import { Product, NewProduct, ProductContext } from './contexts/ProductContext';
 import axios from "axios";
 import { Footer } from './Footer';
+import FileUploadSnackbar from './FileUploadSnackbar';
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      textAlign: 'center',
-      color: theme.palette.text.primary,
-      marginBottom: '1rem',
-    },
-    link: {
-      textDecoration: 'none',
-      color: 'grey'
-    },
-    icon: {
-      marginLeft: '1rem'
-    }
-  }),
+    createStyles({
+        root: {
+            flexGrow: 1,
+        },
+        fileUpload: {
+            margin: '1rem 0 0.5rem 0',
+            fontFamily: 'Roboto',
+            fontSize: '0.75rem',
+            color: 'rgba(0, 0, 0, 0.54)',
+        },
+        paper: {
+            textAlign: 'center',
+            color: theme.palette.text.primary,
+            marginBottom: '1rem',
+        },
+        link: {
+            textDecoration: 'none',
+            color: 'grey',
+        },
+        icon: {
+            marginLeft: '1rem',
+        },
+    }),
 );
 
 export default function CrudPage() {
@@ -289,12 +296,16 @@ export default function CrudPage() {
                     fullWidth
                     error={categoriesError}
                     />
-                <div style={{marginTop: '2rem', marginBottom: '2rem'}}>
-                  <input type="file" onChange={saveFile} />
-                  <button onClick={uploadFile}>
-                    {isUploading ? "Laddar upp..." : "Ladda upp"}
-                  </button>
-                </div>
+        {/* FILE UPLOAD */}
+                  <div className={classes.fileUpload}>
+                    Bilduppladdning
+                                    </div>
+                  <div style={{ overflowX: 'hidden' }}>
+                    <input type='file' onChange={saveFile} />
+                    <div onClick={uploadFile}>
+                      <FileUploadSnackbar />
+                    </div>
+                  </div>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
