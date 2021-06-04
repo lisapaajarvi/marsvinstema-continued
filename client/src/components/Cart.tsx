@@ -17,6 +17,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import swal from 'sweetalert';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -112,6 +113,11 @@ export default function Cart() {
 		setEmail('');
 		setPassword('');
 		setOpenSignup(false);
+		swal({
+			title: 'Grattis!',
+			text: 'Du är nu en registrerad marsvinstok!',
+			icon: 'success',
+		});
 	};
 
 	return (
@@ -271,14 +277,9 @@ export default function Cart() {
 														>
 															Tillbaka
 														</Button>
-														<Button
-															onClick={handleSignup}
-															variant='contained'
-															color='primary'
-															style={buttonStyle}
-														>
-															Bekräfta
-														</Button>
+														<div onClick={handleSignup}>
+															<RegistrationSnackbar />
+														</div>
 													</DialogActions>
 												</Dialog>
 											</div>
