@@ -1,136 +1,119 @@
-# #Marsvinstema-continued
+# Marsvinstema-continued
 
 Marsvinstema (Guinea pig theme) is an online shop for guinea pig accessories.
 You can also buy sausages (which are not made from guinea pigs).
 
-Kravspecifikation på projektet:
+## Kravspecifikation på projektet:
 
-## Alla sidor skall vara responsiva. (G)
+**Alla sidor skall vara responsiva. (G)**
 
-- Vi har skapat alla sidor så att dom är responsiva genom att skriva responsiv css.
+-  UPPFYLLT. Vi har skapat alla sidor så att dom är responsiva med hjälp av Material UI och CSS .
 
-## Checkoutflödet i frontendapplikationen ska ha validering på samtliga fält (G)
+**Checkoutflödet i frontendapplikationen ska ha validering på samtliga fält (G)**
 
-- Detta kravet är uppfyllt, vi använder oss av regEx för att lösa detta
+-  UPPFYLLT. Vi använder oss av Regular Expressions för att lösa detta
 
-## Administratörer ska kunna se en lista på alla gjorda beställningar (G)
+**Administratörer ska kunna se en lista på alla gjorda beställningar (G)**
 
-- Detta kravet är uppfyllt och finns på admin sidan under ' Hantrera ordrar '
+-  UPPFYLLT. Vi mappar ut skapade ordrar från databasen på admin sidan under 'Hantera ordrar'
 
-## Inga Lösenord får sparas i klartext i databasen (G)  
+**Inga Lösenord får sparas i klartext i databasen (G)**
 
-- Lösenorden sparas inte i databasen som klartext utan dom är krypterade
+-  UPPFYLLT. Lösenorden sparas inte i databasen som klartext utan dom är krypterade
 
-## Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan (G)
+**Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan (G)**
 
-- Admin kan uppdatera antalet produkterna, vi skapade en funktion till detta
+-  UPPFYLLT. Admin kan uppdatera antalet produkter i lager, vi skapade en funktion till detta
 
-## En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen (G)
+**En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen (G)**
 
-- Lagersaldot uppdateras i vår mongo databas
+-  UPPFYLLT. Lagersaldot uppdateras i vår mongo databas
 
-## Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera (G)  
+**Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera (G)**
 
-## En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas (G)
+-  UPPFYLLT. Produktobjektet innehåller en array av olika kategorier
 
-- Detta kravet är gjort genom att vi har en koll som kollar om du är en user , om ej så kommer du få logga in innan du kan gå vidare till kassan ......
+**En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas (G)**
 
-## Från hemsidan ska man kunna se en lista över alla produkter, och man ska kunna lista bara dom produkter som tillhör en kategori (G)
+-  UPPFYLLT. Detta krav är gjort genom att vi har en koll som kollar om du är en user , om ej så kommer du få logga in innan du kan gå vidare till kassan
 
-- Detta kravet är uppfyllt genom att mappa ut produkterna på startsidan
+**Från hemsidan ska man kunna se en lista över alla produkter, och man ska kunna lista bara dom produkter som tillhör en kategori (G)**
 
-## Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på klienten (G)
+-  UPPFYLLT. Detta krav är uppfyllt genom att mappa ut produkterna på startsidan samt filtrera utifrån kategorier
 
-- Denna lösningen har vi i serve.js
+**Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på klienten (G)**
 
-## Besökare ska kunna välja ett av flera fraktalternativ (G)
+-  UPPFYLLT. Produkterna kan läggas i en kundkorg, som sparas i local-storage på klienten
 
-- Kunden kan välja mellan 3 olika fraksätt
+**Besökare ska kunna välja ett av flera fraktalternativ (G)**
 
-## Tillgängliga fraktalternativ ska vara hämtade från databasen (G)
+-  UPPFYLLT. Kunden kan välja mellan 3 olika fraktsätt
 
-- Dessa hämtas från databasen och är skapade genom ett schema som heter shippingmethod.model.js
+**Tillgängliga fraktalternativ ska vara hämtade från databasen (G)**
 
-## Arbetet ska implementeras med en React frontend och en Express backend. (G)
+-  UPPFYLLT. Dessa hämtas från databasen och är skapade genom ett schema som heter shippingmethod.model.js
 
-- Detta kravet är uppfyllt , vi använder oss utav React på FE sidan och MongoDB och express på BE sidan
+**Arbetet ska implementeras med en React frontend och en Express backend. (G)**
 
-## Skapa ett ER diagram och koddiagram, detta ska lämnas in vid idégodkännandet G)
+-  UPPFYLLT. Vi använder oss utav React på klientsidan och MongoDB och express på serversidan
 
-- Detta kravet är uppfyllt cch godkännt
+**Skapa ett ER diagram och koddiagram, detta ska lämnas in vid idégodkännandet (G)**
 
-## Beskriv er företagsidé i en kort textuell presentation, detta ska lämnas in vid idégodkännandet (G)
+-  UPPFYLLT och inlämnat
 
-- Detta kravet är inlämnat och godkännt
+**Beskriv er företagsidé i en kort textuell presentation, detta ska lämnas in vid idégodkännandet (G)**
 
-## All data som programmet utnyttjar ska vara sparat i en Mongo-databas (produkter, beställningar, konton mm) (G)
+-  UPPFYLLT och inlämnat
 
-- All vår information är sparat i en Mongo databs. Databasen kopplar vi i server.js
+**All data som programmet utnyttjar ska vara sparad i en Mongo-databas (produkter, beställningar, konton mm) (G)**
 
-## Man ska kunna logga in som administratör i systemet (G)
+-  UPPFYLLT. All vår information är sparad i MongoDB Atlas. Databasen kopplar vi i server.js
 
-- Du kan logga in som admin genom att vi skapat en användare vid det namnet som ochså får göra vissa ändringar som en kund ej får göra
+**Man ska kunna logga in som administratör i systemet (G)**
 
-## Man ska kunna registrera sig som administratör på sidan, nya användare ska sparas i databasen (VG)
+-  UPPFYLLT. Du kan logga in som admin genom att vi skapat en användare vid det namnet som också får göra vissa ändringar som en vanlig användare ej får göra
 
-- Detta kravet är ej uppfyllt pågrund av tidsbrist
+**Man ska kunna registrera sig som administratör på sidan, nya användare ska sparas i databasen (VG)**
 
-## En administratör behöver godkännas av en tidigare administratör innan man kan logga in fösta gången (VG)
+-  Ej uppfyllt
 
-- Detta kravet är ej uppfyllt pågrund av tidsbrist 
+**En administratör behöver godkännas av en tidigare administratör innan man kan logga in fösta gången (VG)**
 
-## Administratörer ska kunna markera beställningar som skickade (VG)
+-  Ej uppfyllt
 
-- Detta kravet är uppfyllt och finns på admin sidan under ' Hantera ordrar '
+**Administratörer ska kunna markera beställningar som skickade (VG)**
 
-## När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte (VG)
+-  UPPFYLLT. Genom ett PUT-anrop ändras en boolean i databasen. Finns på admin-sidan under 'Hantera ordrar'
 
-- Detta kravet är ej uppfyllt pågrund av tidsbrist 
+**När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte (VG)**
 
-## Administratörer ska kunna redigera vilka kategorier en produkt tillhör (VG)
+-  Ej uppfyllt
 
--Detta kravet är ej uppfyllt pågrund av tidsbrist 
+**Administratörer ska kunna redigera vilka kategorier en produkt tillhör (VG)**
 
-## Administratörer ska kunna lägga till och ta bort produkter (VG)
+-  Delvis uppfyllt, man kan byta kategori, men man kan inte lägga till en extra kategori
 
-- Detta kravet är uppfyllt, detta går att göra på admin sidan under ' Hantera produkt'
+**Administratörer ska kunna lägga till och ta bort produkter (VG)**
 
-## Backendapplikationen måste ha en fungerande global felhantering (VG)
+-  UPPFYLLT. Detta går att göra på admin sidan under 'Hantera produkt' genom POST/DELETE-anrop
 
-- Detta kravet är ej uppfyllt pågrund av tidsbrist
+**Backendapplikationen måste ha en fungerande global felhantering (VG)**
 
-
-
+-  Ej uppfyllt
 
 ## Developer instructions
 
-### `npm install`
+## Installation and start server-side
 
-Installs all the required dependencies for the root scripts.
+-  cd server
+-  npm install
+-  npm start
 
-### `npm start`
+## Installation and start client-side
 
-Starts both the server application as well as the client application.
-
-### `npm run start-client`
-
-Runs the client application.
-
-### `npm run start-server`
-
-Runs the server application.
-
-### `npm run postinstall`
-
-Installs all the required dependencies for both the server application as well as the client application.
-
-### `npm run install-client`
-
-Installs all the required dependencies for the client application.
-
-### `npm run install-server`
-
-Installs all the required dependencies for the server application.
+-  cd client
+-  npm install
+-  npm start
 
 ## Links
 
