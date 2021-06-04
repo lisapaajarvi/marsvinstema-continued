@@ -14,6 +14,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { Button, Hidden } from '@material-ui/core';
 import { UserContext } from './contexts/UserContext';
+import RegistrationSnackbar from './RegistrationSnackbar';
 import '../css/header.css';
 
 const StyledBadge = withStyles((theme) => ({
@@ -90,7 +91,7 @@ function Header() {
 		setEmail('');
 		setPassword('');
 		setOpenSignup(false);
-		alert('New user created!');
+		// alert('New user created!');
 	};
 
 	return (
@@ -107,21 +108,21 @@ function Header() {
 				let cartLength = getCartLength(cart);
 
 				return (
-					<div className="headerContainer">
-						<div className="headerStyle">
+					<div className='headerContainer'>
+						<div className='headerStyle'>
 							<div style={{ marginLeft: '1rem' }}>
 								<Typography>
-									<Link className="logoStyle" to="/">
+									<Link className='logoStyle' to='/'>
 										MARSVINSTEMA
 									</Link>
 								</Typography>
 							</div>
 							<Hidden smUp>
-								<Link style={cartStyle} to="/kundvagn">
-									<IconButton aria-label="cart">
+								<Link style={cartStyle} to='/kundvagn'>
+									<IconButton aria-label='cart'>
 										<StyledBadge
 											badgeContent={cartLength}
-											color="secondary"
+											color='secondary'
 											style={{
 												color: '#F0F0F0',
 												marginRight: '1rem',
@@ -142,11 +143,11 @@ function Header() {
 							>
 								<div>
 									<Hidden xsDown>
-										<Link style={cartStyle} to="/kundvagn">
-											<IconButton aria-label="cart">
+										<Link style={cartStyle} to='/kundvagn'>
+											<IconButton aria-label='cart'>
 												<StyledBadge
 													badgeContent={cartLength}
-													color="secondary"
+													color='secondary'
 													style={{
 														color: '#F0F0F0',
 														marginRight: '1rem',
@@ -161,49 +162,51 @@ function Header() {
 								</div>
 								<div>
 									{!user ? (
-										<div className="buttonContainer">
+										<div className='buttonContainer'>
 											<Button
-												size="medium"
-												variant="contained"
-												color="primary"
+												size='medium'
+												variant='contained'
+												color='primary'
 												style={buttonStyle}
 												onClick={openLoginModal}
 											>
 												LOGGA IN
 											</Button>
 											<Button
-												size="medium"
-												variant="contained"
-												color="primary"
+												size='medium'
+												variant='contained'
+												color='primary'
 												style={buttonStyle}
 												onClick={openSignupModal}
 											>
 												REGISTRERA
 											</Button>
+
+											{/* DIALOG MODALS */}
 											<Dialog
 												open={openLogin}
 												onClose={handleLoginClose}
-												aria-labelledby="form-dialog-login"
+												aria-labelledby='form-dialog-login'
 											>
-												<DialogTitle id="login">
+												<DialogTitle id='login'>
 													Logga in
 												</DialogTitle>
 												<DialogContent>
 													<TextField
 														autoFocus
-														margin="dense"
-														id="email"
-														label="E-mail"
-														type="text"
+														margin='dense'
+														id='email'
+														label='E-mail'
+														type='text'
 														onChange={handleLoginEmail}
 														defaultValue={email}
 														fullWidth
 													/>
 													<TextField
-														margin="dense"
-														id="password"
-														label="Lösenord"
-														type="password"
+														margin='dense'
+														id='password'
+														label='Lösenord'
+														type='password'
 														onChange={handleLoginPassword}
 														defaultValue={password}
 														fullWidth
@@ -212,14 +215,14 @@ function Header() {
 												<DialogActions>
 													<Button
 														onClick={handleLoginClose}
-														color="primary"
+														color='primary'
 													>
 														Tillbaka
 													</Button>
 													<Button
 														onClick={handleLogin}
-														variant="contained"
-														color="primary"
+														variant='contained'
+														color='primary'
 													>
 														Bekräfta
 													</Button>
@@ -228,57 +231,54 @@ function Header() {
 											<Dialog
 												open={openSignup}
 												onClose={handleSignupClose}
-												aria-labelledby="form-dialog-signup"
+												aria-labelledby='form-dialog-signup'
 											>
-												<DialogTitle id="signup">
+												<DialogTitle id='signup'>
 													Registrering
 												</DialogTitle>
 												<DialogContent>
 													<TextField
 														autoFocus
-														margin="dense"
-														id="username"
-														label="Användarnamn"
-														type="text"
+														margin='dense'
+														id='username'
+														label='Användarnamn'
+														type='text'
 														value={username}
 														onChange={handleSignupUsername}
 														fullWidth
 													/>
 													<TextField
-														margin="dense"
-														id="email"
-														label="E-mail"
-														type="text"
+														margin='dense'
+														id='email'
+														label='E-mail'
+														type='text'
 														value={email}
 														onChange={handleSignupEmail}
 														fullWidth
 													/>
 													<TextField
-														margin="dense"
-														id="password"
-														label="Lösenord"
-														type="password"
+														margin='dense'
+														id='password'
+														label='Lösenord'
+														type='password'
 														onChange={handleSignupPassword}
 														value={password}
 														fullWidth
 													/>
 												</DialogContent>
+
+												{/* BUTTONS */}
 												<DialogActions>
 													<Button
 														onClick={handleSignupClose}
-														color="primary"
+														color='primary'
 														style={buttonStyle}
 													>
 														Tillbaka
 													</Button>
-													<Button
-														onClick={handleSignup}
-														variant="contained"
-														color="primary"
-														style={buttonStyle}
-													>
-														Bekräfta
-													</Button>
+													<div onClick={handleSignup}>
+														<RegistrationSnackbar />
+													</div>
 												</DialogActions>
 											</Dialog>
 										</div>
