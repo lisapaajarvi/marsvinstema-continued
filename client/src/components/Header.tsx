@@ -280,9 +280,14 @@ function Header() {
 													>
 														Tillbaka
 													</Button>
-													<div onClick={handleSignup}>
-														<RegistrationSnackbar />
-													</div>
+													<Button
+														onClick={handleSignup}
+														variant='contained'
+														color='primary'
+														style={buttonStyle}
+													>
+														Bekräfta
+													</Button>
 												</DialogActions>
 											</Dialog>
 										</div>
