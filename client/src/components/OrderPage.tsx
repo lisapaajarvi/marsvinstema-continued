@@ -1,31 +1,11 @@
 import React, { CSSProperties, useContext, useEffect } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Box, Button, Container, Typography } from '@material-ui/core';
+import { Box, Button, Container, Hidden, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Footer } from './Footer';
 import { OrderContext } from './contexts/OrderContext'
 import OrderItem from './OrderItem';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      textAlign: 'center',
-      color: theme.palette.text.primary,
-      marginBottom: '1rem',
-    },
-    link: {
-      textDecoration: 'none',
-      color: 'grey'
-    },
-    icon: {
-      marginLeft: '1rem'
-    }
-  }),
-);
 
 export default function OrderPage() {
   const { orders, getOrders } = useContext(OrderContext);
@@ -46,15 +26,17 @@ export default function OrderPage() {
                     Orderhantering
                 </Typography>
                 <Grid container spacing={2}>
-                  <Grid item xs={4} >
-                    <Typography variant="body1">Orderdatum</Typography>
-                  </Grid>
-                  <Grid item xs={4} >
-                    <Typography variant="body1">OrderId</Typography>
-                  </Grid>
-                  <Grid item xs={4} >
-                    <Typography variant="body1">Skickad</Typography>
-                  </Grid>
+                <Hidden xsDown>                  
+                    <Grid item xs={4} >
+                      <Typography variant="body1">Orderdatum</Typography>
+                    </Grid>
+                    <Grid item xs={4} >
+                      <Typography variant="body1">OrderId</Typography>
+                    </Grid>
+                    <Grid item xs={4} >
+                      <Typography variant="body1">Skickad</Typography>
+                    </Grid>
+                  </Hidden>
 
                   {orders && (
                     orders.map((order, index) => (
@@ -75,6 +57,26 @@ export default function OrderPage() {
     </>
   );
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      textAlign: 'center',
+      color: theme.palette.text.primary,
+      marginBottom: '1rem',
+    },
+    link: {
+      textDecoration: 'none',
+      color: 'grey'
+    },
+    icon: {
+      marginLeft: '1rem'
+    }
+  }),
+);
 
 const container: CSSProperties = {
   display: 'flex',
