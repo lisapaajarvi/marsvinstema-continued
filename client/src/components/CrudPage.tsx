@@ -20,7 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			flexGrow: 1,
 		},
 		fileUpload: {
-			margin: '0 0 0 2rem',
+			margin: '1rem 0 0.5rem 0',
+			fontFamily: 'Roboto',
+			fontSize: '0.75rem',
+			color: 'rgba(0, 0, 0, 0.54)',
 		},
 		paper: {
 			textAlign: 'center',
@@ -340,12 +343,10 @@ export default function CrudPage() {
 										error={imgError}
 									/>
 									{/* FILE UPLOAD */}
-									<Typography variant='h6'>
-										<div style={{ marginTop: '1rem' }}>
-											Bilduppladdning
-										</div>
-									</Typography>
-									<div>
+									<div className={classes.fileUpload}>
+										Bilduppladdning
+									</div>
+									<div style={{ overflowX: 'hidden' }}>
 										<input type='file' onChange={saveFile} />
 										<div onClick={uploadFile}>
 											<FileUploadSnackbar />

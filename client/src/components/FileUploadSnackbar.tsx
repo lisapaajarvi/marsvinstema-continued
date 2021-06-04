@@ -15,6 +15,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 			marginTop: theme.spacing(2),
 		},
 	},
+	button: {
+		backgroundColor: 'rgba(239,239,239,255)',
+		borderColor: 'rgb(113, 113, 113)',
+		fontSize: '0.75rem',
+		textTransform: 'capitalize',
+		fontWeight: 400,
+		color: 'rgb(5, 5, 5)',
+		marginTop: '0.2rem',
+		padding: ' 0.01rem 0.3rem 0.01rem',
+		fontFamily: 'Tahoma',
+		borderRadius: '2px',
+	},
 }));
 
 export default function FileUploadSnackbar() {
@@ -35,7 +47,12 @@ export default function FileUploadSnackbar() {
 
 	return (
 		<div className={classes.snackbar}>
-			<Button size='small' variant='text' onClick={handleClick}>
+			<Button
+				className={classes.button}
+				size='small'
+				variant='outlined'
+				onClick={handleClick}
+			>
 				Ladda upp
 			</Button>
 			<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
