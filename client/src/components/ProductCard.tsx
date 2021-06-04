@@ -31,7 +31,6 @@ export default function ProductCard(props: Props) {
   const cart = useContext(CartContext)
   const { title, img, price, _id, imageUrl } = props.product;
   const productUrl = `/produkt/${_id}`;
-  console.log(imageUrl)
  
   return (
     <Card className={classes.root}>
