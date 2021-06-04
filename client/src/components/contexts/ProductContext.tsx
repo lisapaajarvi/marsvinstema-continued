@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Component, createContext } from 'react';
 
 interface State {
@@ -12,21 +13,22 @@ export interface Product {
     stock: number
     categories: string[]
     description: string
-    img: string
     quantity?: number
     imageId: string
     imageUrl: string
 }
+
+export type NewProduct = Omit<Product, "_id" | "imageUrl">
 interface ContextValue extends State {
-    // addProduct: (newProduct: Product) => void;
-    editProduct: (newProduct: Product) => void;
+    addProduct: (newProduct: NewProduct) => void;
+    editProduct: (product: Product) => void;
     deleteProduct: (deletedProduct: Product) => void;
 }
 
 export const ProductContext = createContext<ContextValue>({
     products: [],
     categories: [],
-    // addProduct: () => {}
+    addProduct: () => {},
     editProduct: () => {},
     deleteProduct: () => {}
 });
@@ -85,9 +87,15 @@ class ProductProvider extends Component<{}, State> {
         }
     }
 
-    // addProduct = () => {
-    //     // logik för att lägga till produkt här
-    // }
+    addProduct = (newProduct: NewProduct) => {
+        axios
+            .post('/api/products', newProduct)
+            .then(res => {
+                console.log(res)
+                this.fetchProducts()
+            })
+            .catch(err => console.log(err))
+    }
 
     componentDidMount() {
         this.fetchProducts();
@@ -100,8 +108,8 @@ class ProductProvider extends Component<{}, State> {
                 products: this.state.products,
                 categories: this.state.categories,
                 editProduct: this.editProduct,
-                deleteProduct: this.deleteProduct
-                // addProduct: this.addProduct,
+                deleteProduct: this.deleteProduct,
+                addProduct: this.addProduct
             }}>
                 {this.props.children}
             </ProductContext.Provider>

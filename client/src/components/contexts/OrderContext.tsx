@@ -95,21 +95,9 @@ class OrderProvider extends Component<{}, State> {
             console.log(updatedOrder)
         }
     }
-    // async editOrderStatus(order:Order) {
-    //     console.log(order)
-    //     axios
-    //         .put('/api/orders', JSON.stringify(order))
-    //         .then(res => {
-    //             console.log(res.data)
-    //         })   
-    //         .catch(err =>{
-    //             console.log(err);
-    //         })   
-    // }
  
     componentDidMount() {
         this.getShippingMethods()
-        this.getOrders()
     }
     
     render() {

@@ -8,7 +8,6 @@ const productSchema = new mongoose.Schema({
     quantity: { type: Number },
     categories: { type: [String], required: true },
     description: { type: String, required: true },
-    img: { type: String, required: true },
     imageId: { type: mongoose.Schema.Types.ObjectId }
 }, {
     toJSON: { virtuals: true }

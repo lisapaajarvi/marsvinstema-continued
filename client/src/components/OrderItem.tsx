@@ -77,15 +77,14 @@ export default function OrderItem(props: Props) {
                 <DialogTitle>Orderdetaljer</DialogTitle>
                 <DialogContent>
                     <Typography className={classes.marginBottom}><b>Orderdatum:</b> {getOrderDate()}</Typography>
-                    <Typography><b>Produkter: </b>
-                        <ul>
-                            {products.map((product, index) => (
-                                <li className={classes.marginLeft} key={index}>
-                                    {product.quantity} st {product.title} à {product.price} kr
-                                </li>
-                            ))}
-                        </ul>
-                    </Typography>
+                    <Typography><b>Produkter: </b></Typography>
+                    <ul>
+                        {products.map((product, index) => (
+                            <li className={classes.marginLeft} key={index}>
+                                <Typography>{product.quantity} st {product.title} à {product.price} kr</Typography>
+                            </li>
+                        ))}
+                    </ul>
                     <Typography className={classes.marginBottom}><b>Fraktsätt:</b> {shippingMethod.name}</Typography>
                     <Typography><b>Leveransadress:</b></Typography>
                     <Typography> {shippingAddress.firstName} {shippingAddress.lastName}</Typography>
