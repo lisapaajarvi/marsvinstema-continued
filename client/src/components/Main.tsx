@@ -7,6 +7,7 @@ import CrudPage from './CrudPage';
 import OrderPage from './OrderPage';
 import ProductDetail from './ProductDetail';
 import ProductView from './ProductView';
+import ProtectedRoute from './ProtectedRoute';
 
 function Main() {   
     return (
@@ -14,11 +15,11 @@ function Main() {
             <Route exact path="/">
                 <ProductView />
             </Route>
-            <Route path="/admin" component={AdminPage} />
+            <ProtectedRoute adminOnly path="/admin" component={AdminPage} />
             <Route path="/kundvagn" component={Cart} />
-            <Route path="/crud" component={CrudPage} />
+            <ProtectedRoute adminOnly path="/crud" component={CrudPage} />
             <Route path="/checkout" component={Checkout} />
-            <Route path="/orders" component={OrderPage} />
+            <ProtectedRoute adminOnly path="/orders" component={OrderPage} />
             <Route path="/produkt/:_id" component={ProductDetail} />
             {/* <Route path="/produkt/:category" component={ProductDetail} /> */}
         </Switch>

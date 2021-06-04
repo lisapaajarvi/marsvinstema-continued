@@ -49,7 +49,7 @@ class OrderProvider extends Component<{}, State> {
    
     state: State = {}
     
-    async getOrders() {
+    getOrders = async () => {
         axios
         .get('/api/orders')
         .then(res => {

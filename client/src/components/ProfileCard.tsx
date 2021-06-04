@@ -22,7 +22,7 @@ function ProfileCard() {
                 ) : (
                     <div></div>
                 )}
-                <Button size="small" variant="contained" color="primary" style={buttonStyle} onClick={logout}>
+                <Button size="small" href={"/"} variant="contained" color="primary" style={buttonStyle} onClick={logout} >
                     LOGGA UT
                 </Button>
             </div>
