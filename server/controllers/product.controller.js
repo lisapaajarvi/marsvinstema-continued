@@ -20,14 +20,6 @@ exports.getAllCategories = async (req, res) => {
     res.status(200).json(categories);
 }
 
-exports.getProductsByCategory = async (req, res) => {
-    const products = await ProductModel.find({})
-    categories = products.map(product => {
-        return {'title': product.title, 'categories': product.categories};
-    });
-    res.status(200).json(categories); 
-}
-
 exports.editProduct = async (req, res) => {
     const { _id } = req.body;
     await ProductModel.findOneAndUpdate({ _id: _id }, req.body);
@@ -40,15 +32,6 @@ exports.deleteProduct = async (req, res) => {
 }
 
 exports.addProduct = async (req, res) => {
-    const productToCreate = {
-      title: req.body.title,
-      price: req.body.price,
-      stock: req.body.stock,
-      categories: req.body.categories,
-      description: req.body.description,
-      imageId: req.body.imageId
-    };
-
     const newProduct = await ProductModel.create(req.body);
     res.status(201).json(newProduct);
 }

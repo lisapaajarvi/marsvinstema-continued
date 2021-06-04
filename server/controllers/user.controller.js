@@ -19,10 +19,8 @@ exports.register = async (req, res) => {
         access: "user"
     }
     const newUser = await UserModel.create(userToSave);
-    // newUser.password = undefined;
     delete newUser.password;
     res.status(201).json(newUser);
-    console.log(newUser)
 };
 
 exports.login = async (req, res) => {
@@ -73,7 +71,7 @@ exports.newAddress = async (req, res) => {
             zipCode: req.body.zipCode,
             city: req.body.city,
         }
-    const user = await UserModel.findOneAndUpdate({ _id: req.body._id }, {address: newAddress});
+    await UserModel.findOneAndUpdate({ _id: req.body._id }, {address: newAddress});
 
     res.status(201).json(newAddress);
 }

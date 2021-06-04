@@ -126,11 +126,3 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 	}),
 );
-// const category: CSSProperties = {
-// 	outline: 'none',
-// 	border: 'none',
-// 	color: '#eee',
-// 	margin: '0px 10px',
-// 	backgroundColor: 'transparent',
-// 	cursor: 'pointer',
-// };

@@ -21,7 +21,6 @@ function Main() {
             <Route path="/checkout" component={Checkout} />
             <ProtectedRoute adminOnly path="/orders" component={OrderPage} />
             <Route path="/produkt/:_id" component={ProductDetail} />
-            {/* <Route path="/produkt/:category" component={ProductDetail} /> */}
         </Switch>
     )    
 }

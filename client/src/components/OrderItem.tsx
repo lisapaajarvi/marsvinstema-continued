@@ -3,7 +3,6 @@ import React, { useContext, useState } from "react";
 import { Order, OrderContext } from "./contexts/OrderContext";
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-
 interface Props {
     order: Order;
 }    

@@ -231,9 +231,7 @@ export default function CrudPage() {
                 {/* PRODUCT MAP */}
                 {products.map((product, index) => (
                   <Grid item xs={12} key={index}>
-                    {/* <CrudItem products={products} removeFromProductList={removeFromProductList} openEditProductModal={openEditProductModal} /> */}
                     <CrudItem product={product} deleteProduct={deleteProduct} openEditProductModal={openEditProductModal} />
-                    {/* <CrudItem product={product} /> */}
                     <Divider />
                   </Grid>
                 ))}
@@ -245,7 +243,6 @@ export default function CrudPage() {
                 <DialogContent>
                   <TextField
                     margin="dense"
-                    id="title"
                     label="Produktnamn"
                     defaultValue={title}
                     type="text"
@@ -255,7 +252,6 @@ export default function CrudPage() {
                     />
                   <TextField
                     margin="dense"
-                    id="price"
                     label="Pris"
                     defaultValue={price}
                     type="text"
@@ -265,7 +261,6 @@ export default function CrudPage() {
                     />
                   <TextField
                     margin="dense"
-                    id="description"
                     label="Beskrivning"
                     multiline
                     defaultValue={description}
@@ -276,7 +271,6 @@ export default function CrudPage() {
                     />
                   <TextField
                     margin="dense"
-                    id="stock"
                     label="Lagersaldo"
                     multiline
                     defaultValue={stock}
@@ -287,7 +281,6 @@ export default function CrudPage() {
                     />
                   <TextField
                     margin="dense"
-                    id="categories"
                     label="Kategori"
                     multiline
                     defaultValue={categories}
@@ -299,7 +292,7 @@ export default function CrudPage() {
         {/* FILE UPLOAD */}
                   <div className={classes.fileUpload}>
                     Bilduppladdning
-                                    </div>
+                  </div>
                   <div style={{ overflowX: 'hidden' }}>
                     <input type='file' onChange={saveFile} />
                     <div onClick={uploadFile}>
