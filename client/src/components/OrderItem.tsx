@@ -57,12 +57,7 @@ export default function OrderItem(props: Props) {
                 </Hidden>
             </Grid>
             <Grid item xs={12} sm={4} onClick={openOrderModal}>
-                <Hidden smUp>
-                    <Typography variant="body1" className={classes.linkColor} >Order id:{''}{_id}</Typography>
-                </Hidden>
-                <Hidden xsDown>
-                    <Typography variant="body1" className={classes.linkColor} >{_id}</Typography>
-                </Hidden>
+                <Typography variant="body1" className={classes.linkColor} >{_id}</Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
                 <Hidden smUp>
