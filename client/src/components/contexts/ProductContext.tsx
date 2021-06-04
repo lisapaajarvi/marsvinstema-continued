@@ -13,7 +13,6 @@ export interface Product {
     stock: number
     categories: string[]
     description: string
-    img: string
     quantity?: number
     imageId: string
     imageUrl: string
@@ -93,10 +92,9 @@ class ProductProvider extends Component<{}, State> {
             .post('/api/products', newProduct)
             .then(res => {
                 console.log(res)
-
+                this.fetchProducts()
             })
             .catch(err => console.log(err))
-
     }
 
     componentDidMount() {

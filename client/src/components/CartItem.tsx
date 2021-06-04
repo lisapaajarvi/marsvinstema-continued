@@ -53,7 +53,7 @@ interface Props {
 export default function CartItem(props: Props) {
   const classes = useStyles();
   const cart = useContext(CartContext);
-  const { title, img, imageUrl, price, _id, quantity} = props.product;
+  const { title, imageUrl, price, _id, quantity} = props.product;
   const productUrl = `/produkt/${_id}`;
 
   const increaseQuantityInCart = () => {
@@ -77,7 +77,7 @@ export default function CartItem(props: Props) {
     <div className={classes.root}>
       <Grid container spacing={2} className={classes.container}>
         <Grid item xs={3} sm={2} className={classes.gridItem}>
-          <CardMedia className={classes.media} image={imageUrl || img} component={Link} to={productUrl} />
+          <CardMedia className={classes.media} image={imageUrl} component={Link} to={productUrl} />
         </Grid>
         <Grid item xs={6} sm={3} className={classes.gridItem}>
           <Typography variant="body1">{title}</Typography>

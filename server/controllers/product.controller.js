@@ -46,7 +46,6 @@ exports.addProduct = async (req, res) => {
       stock: req.body.stock,
       categories: req.body.categories,
       description: req.body.description,
-      img: req.body.img,
       imageId: req.body.imageId
     };
 

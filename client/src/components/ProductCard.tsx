@@ -29,7 +29,7 @@ interface Props {
 export default function ProductCard(props: Props) {
   const classes = useStyles();
   const cart = useContext(CartContext)
-  const { title, img, price, _id, imageUrl } = props.product;
+  const { title, price, _id, imageUrl } = props.product;
   const productUrl = `/produkt/${_id}`;
  
   return (
@@ -37,7 +37,7 @@ export default function ProductCard(props: Props) {
       <CardActionArea component={Link} to={productUrl}>
         <CardMedia
           className={classes.media}
-          image={imageUrl || img}
+          image={imageUrl}
           title={title}
         />
         <CardContent>

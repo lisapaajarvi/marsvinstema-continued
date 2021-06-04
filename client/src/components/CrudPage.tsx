@@ -43,16 +43,12 @@ export default function CrudPage() {
   const [description, setDescription] = useState('');
   const [categories, setCategories] = useState<[string] | any>();
   const [price, setPrice] = useState<number>();
-  const [img, setImg] = useState('')
   const [newImageId, setNewImageId] = useState('')
-  // const [productList, setProductList] = React.useState(getProductList())
-  // const [isFieldDisabled, setIsFieldDisabled] = React.useState(true)
   const [titleError, setTitleError] = useState<boolean>(false);
   const [stockError, setStockError] = useState<boolean>(false);
   const [descriptionError, setDescriptionError] = useState<boolean>(false);
   const [categoriesError, setCategoriesError] = useState<boolean>(false);
   const [priceError, setPriceError] = useState<boolean>(false);
-  const [imgError, setImgError] = useState<boolean>(false);
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("");
   const [isUploading, setIsUploading] = useState(false);
@@ -89,7 +85,6 @@ export default function CrudPage() {
       && title
       && price
       && description
-      && img
       && categories
     )
   }
@@ -101,14 +96,13 @@ export default function CrudPage() {
       && !titleError
       && !priceError
       && !descriptionError
-      && !imgError
       && !categoriesError
       && !isUploading
     )
   }
 
   function saveEditedProduct() {
-    editProduct({ ...editingProduct, stock, title, price, description, img, categories } as Product)
+    editProduct({ ...editingProduct, stock, title, price, description, categories } as Product)
     setOpen(false);
   }
 
@@ -119,20 +113,17 @@ export default function CrudPage() {
       description: description,
       stock: stock,
       categories: categories,
-      img: img,
       imageId: newImageId
     }
     addProduct(newProduct as NewProduct)
   }
 
   function openEditProductModal(product: Product) {
-    // setIsFieldDisabled(true)
     setTitle(product.title)
     setDescription(product.description)
     setStock(product.stock)
     setCategories(product.categories)
     setPrice(product.price)
-    setImg(product.img)
     setEditingProduct(product)
     setOpen(true);
   }
@@ -144,8 +135,6 @@ export default function CrudPage() {
     setStock(undefined)
     setPrice(undefined)
     setCategories([])
-    setImg('')
-    // setIsFieldDisabled(false)
     setOpen(true);
   }
 
@@ -212,15 +201,6 @@ export default function CrudPage() {
     setPrice(Number(e.target.value))
   };
 
-  const handleImgInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if (/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)/.test(e.target.value)) {
-      setImgError(false);
-    }
-    else {
-      setImgError(true);
-    }
-    setImg(e.target.value)
-  };
 
   return (    
     <div className={classes.root}>
@@ -309,17 +289,6 @@ export default function CrudPage() {
                     fullWidth
                     error={categoriesError}
                     />
-                  <TextField
-                    margin="dense"
-                    id="img"
-                    label="Länk till bild"
-                    multiline
-                    defaultValue={img}
-                    type="text"
-                    onChange={handleImgInput}
-                    fullWidth
-                    error={imgError}
-                    /> 
                 <div style={{marginTop: '2rem', marginBottom: '2rem'}}>
                   <input type="file" onChange={saveFile} />
                   <button onClick={uploadFile}>

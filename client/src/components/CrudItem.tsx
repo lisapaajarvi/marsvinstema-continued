@@ -52,13 +52,13 @@ interface Props {
 
 export default function CrudItem(props: Props) {
   const classes = useStyles();
-  const { title, img, imageUrl, stock } = props.product;
+  const { title, imageUrl, stock } = props.product;
 
   return (
     <div style={{ margin: '0.5rem 0rem' }}>
       <Grid container spacing={4}>
         <Grid item xs={1} sm={1} md={1} lg={1}>
-          <CardMedia className={classes.media} image={imageUrl || img} />
+          <CardMedia className={classes.media} image={imageUrl} />
         </Grid>
         <Grid item xs={1} sm={1} md={1} lg={1}>
           <IconButton edge="end" aria-label="delete" onClick={() => props.deleteProduct(props.product)}>
