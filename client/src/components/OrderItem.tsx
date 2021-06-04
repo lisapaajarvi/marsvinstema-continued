@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Switch, Typography } from "@material-ui/core";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Hidden, Switch, Typography } from "@material-ui/core";
 import React, { useContext, useState } from "react";
 import { Order, OrderContext } from "./contexts/OrderContext";
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
@@ -6,11 +6,10 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 interface Props {
     order: Order;
-}
+}    
 
 export default function OrderItem(props: Props) {
-    	const classes = useStyles();
-
+    const classes = useStyles();
     const [modalOpen, setModalOpen] = useState(false);
     const { createdAt, _id, isShipped, products, shippingMethod, shippingAddress, totalPrice} = props.order;
     const { editOrderStatus } = useContext(OrderContext);
@@ -50,12 +49,20 @@ export default function OrderItem(props: Props) {
     return (
         <>
             <Grid item xs={12} sm={4}>
-                <Typography variant="body1">{getOrderDate()}</Typography>
+                <Hidden smUp>
+                    <Typography variant="body1">Orderdatum:{''}{getOrderDate()}</Typography>
+                </Hidden>
+                <Hidden xsDown>
+                    <Typography variant="body1">{getOrderDate()}</Typography>
+                </Hidden>
             </Grid>
             <Grid item xs={12} sm={4} onClick={openOrderModal}>
-                <Typography className={classes.linkColor} variant="body1">{_id}</Typography>
+                <Typography variant="body1" className={classes.linkColor} >{_id}</Typography>
             </Grid>
             <Grid item xs={12} sm={4}>
+                <Hidden smUp>
+                    <Typography>Skickad:</Typography>
+                </Hidden>
                 <Switch
                     checked={state.shipped}
                     onChange={handleChange}
@@ -64,6 +71,7 @@ export default function OrderItem(props: Props) {
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
             </Grid>
+
 
             <Dialog open={modalOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle>Orderdetaljer</DialogTitle>
@@ -92,7 +100,7 @@ export default function OrderItem(props: Props) {
                   </Button>
                 </DialogActions>
               </Dialog>
-        </>
+              </>
     );
 }
 
@@ -104,7 +112,7 @@ const useStyles = makeStyles((theme: Theme) =>
         marginBottom: {
 			marginBottom: '0.5rem',
         },
-    linkColor: {
+        linkColor: {
             cursor: 'pointer',
 			color: '#3f51b5',
         },

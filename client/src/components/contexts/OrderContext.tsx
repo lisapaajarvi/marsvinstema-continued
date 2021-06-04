@@ -54,7 +54,6 @@ class OrderProvider extends Component<{}, State> {
         .get('/api/orders')
         .then(res => {
             this.setState({ orders: res.data })
-            console.log(this.state.orders)
         })
         .catch(err =>{
             console.log(err);

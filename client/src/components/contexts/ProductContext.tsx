@@ -51,14 +51,12 @@ class ProductProvider extends Component<{}, State> {
         const response = await fetch('/api/products/categories');
         if (response.ok) {
             const categories = await response.json();
-            console.log(categories)
             this.setState({ categories });
         }
         return [];
     }
 
     editProduct = async (editedProduct: Product) => {
-        console.log(editedProduct)
         const response = await fetch('/api/products/' + editedProduct._id.toString(), {
             method: 'PUT',
             headers: {
@@ -75,7 +73,6 @@ class ProductProvider extends Component<{}, State> {
     }
 
     deleteProduct = async (deletedProduct: Product) => {
-        console.log(deletedProduct)
         const response = await fetch('/api/products/' + deletedProduct._id.toString(), {
             method: 'DELETE',
             body: JSON.stringify(deletedProduct)
