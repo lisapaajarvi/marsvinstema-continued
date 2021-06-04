@@ -14,7 +14,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { Button, Hidden } from '@material-ui/core';
 import { UserContext } from './contexts/UserContext';
-import RegistrationSnackbar from './RegistrationSnackbar';
+import swal from 'sweetalert';
 import '../css/header.css';
 
 const StyledBadge = withStyles((theme) => ({
@@ -91,7 +91,11 @@ function Header() {
 		setEmail('');
 		setPassword('');
 		setOpenSignup(false);
-		// alert('New user created!');
+		swal({
+			title: 'Grattis!',
+			text: 'Du är nu en registrerad marsvinstok!',
+			icon: 'success',
+		});
 	};
 
 	return (
