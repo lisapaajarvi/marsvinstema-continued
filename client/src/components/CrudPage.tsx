@@ -9,7 +9,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
-import { Product, ProductContext } from './contexts/ProductContext';
+import { Product, NewProduct, ProductContext } from './contexts/ProductContext';
 import axios from "axios";
 import { Footer } from './Footer';
 
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function CrudPage() {
-  const { products, editProduct, deleteProduct } = useContext(ProductContext)
+  const { products, editProduct, deleteProduct, addProduct } = useContext(ProductContext)
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product>();
@@ -44,6 +44,7 @@ export default function CrudPage() {
   const [categories, setCategories] = useState<[string] | any>();
   const [price, setPrice] = useState<number>();
   const [img, setImg] = useState('')
+  const [newImageId, setNewImageId] = useState('')
   // const [productList, setProductList] = React.useState(getProductList())
   // const [isFieldDisabled, setIsFieldDisabled] = React.useState(true)
   const [titleError, setTitleError] = useState<boolean>(false);
@@ -70,7 +71,12 @@ export default function CrudPage() {
         "/api/upload",
         formData
       );
-      setEditingProduct((prev) => ({ ...prev, imageId} as Product))
+      if(editingProduct) {
+        setEditingProduct((prev) => ({ ...prev, imageId} as Product))
+      }
+      else {
+        setNewImageId(imageId)
+      }
       setIsUploading(false)
       
       console.log(imageId);
@@ -108,6 +114,19 @@ export default function CrudPage() {
     setOpen(false);
   }
 
+  function saveNewProduct() {
+    const newProduct = {
+      title: title,
+      price: price,
+      description: description,
+      stock: stock,
+      categories: categories,
+      img: img,
+      imageId: newImageId
+    }
+    addProduct(newProduct as NewProduct)
+  }
+
   function openEditProductModal(product: Product) {
     // setIsFieldDisabled(true)
     setTitle(product.title)
@@ -120,41 +139,31 @@ export default function CrudPage() {
     setOpen(true);
   }
 
-  // function openAddProductModal() {
-  //   setTitle('')
-  //   setDescription('')
-  //   // setPrice()
-  //   setCategories([])
-  //   setImg('')
-  //   // setIsFieldDisabled(false)
-  //   setOpen(true);
-  // }
+  function openAddProductModal() {
+    setEditingProduct(undefined)
+    setTitle('')
+    setDescription('')
+    setStock(undefined)
+    setPrice(undefined)
+    setCategories([])
+    setImg('')
+    // setIsFieldDisabled(false)
+    setOpen(true);
+  }
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  // const handleSubmit = () => {
-  //   if(isFieldDisabled) {
-  //     let editedProduct = productList.find(item=> item._id === _id);  
-  //     if(editedProduct) {
-  //       editedProduct.title = title;
-  //       editedProduct.description = description;
-  //       editedProduct.category = category;
-  //       editedProduct.price = parseInt(price);
-  //       editedProduct.img = img;
-  //       setProductList(productList)
-  //       updateProductListInLocalStorage(productList)
-  //     }
-  //   }
-  //   else {
-  //     let updatedProductList = [...productList, {title: title, description: description, categories: categories, price: parseInt(price), img: img }];
-  //     setProductList(updatedProductList)
-  //     setIsFieldDisabled(true)  
-  //     updateProductListInLocalStorage(updatedProductList);
-  //   }
-  //   setOpen(false);  
-  // }
+  const handleSubmit = () => {
+    if(editingProduct) {
+      saveEditedProduct() 
+    }
+    else {
+      saveNewProduct()
+    }
+  setOpen(false);  
+  }
 
   const handleTitleInput = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (/^.{2,}$/.test(e.target.value)) {
@@ -324,7 +333,7 @@ export default function CrudPage() {
                   <Button onClick={handleClose} color="primary">
                     Tillbaka
                   </Button>
-                  <Button onClick={saveEditedProduct} disabled={!isFormValid()} variant="contained" color="primary">
+                  <Button onClick={handleSubmit} disabled={!isFormValid()} variant="contained" color="primary">
                     Spara
                   </Button>
                 </DialogActions>
@@ -335,9 +344,7 @@ export default function CrudPage() {
                 <Link className={classes.link} to="/admin">
                   <Button variant="contained" color="primary" style={{ margin: '1rem' }}>Tillbaka</Button>
                 </Link>
-                <Link className={classes.link} to="/admin">
-                  <Button disabled variant="contained" color="primary" style={{ margin: '1rem' }}>Lägg till</Button>
-                </Link>
+                <Button variant="contained" onClick={openAddProductModal} color="primary" style={{ margin: '1rem' }}>Lägg till</Button>
               </div>
               <div>
                 <Footer />
