@@ -26,7 +26,6 @@ const UserProvider = (props: any) => {
       console.error(error);
     }
   };
-
   const signup = async (newUser: NewUser) => {
     try {
       axios.post("/api/users/register", newUser);
@@ -47,8 +46,8 @@ const UserProvider = (props: any) => {
 
   const logout = () => {
     try {
-      axios.post("/api/users/logout").then(({ data: user }) => {
-        dispatch({ type: LOGOUT, payload: user });
+      axios.post("/api/users/logout").then((res) => {
+        dispatch({ type: LOGOUT, payload: res });
       });
     } catch (error) {
       console.error(error);

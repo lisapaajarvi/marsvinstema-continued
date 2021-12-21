@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties, useContext, useEffect } from "react";
+import React, { useState, CSSProperties, useContext } from "react";
 import Badge from "@material-ui/core/Badge";
 import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
@@ -32,7 +32,7 @@ function Header() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const { user, login, signup, getUser } = useContext(UserContext);
+  const { user, login, signup } = useContext(UserContext);
   const handleLoginClose = () => {
     setOpenLogin(false);
   };
@@ -97,10 +97,6 @@ function Header() {
       icon: "success",
     });
   };
-
-  useEffect(() => {
-    getUser();
-  });
 
   return (
     <CartContext.Consumer>

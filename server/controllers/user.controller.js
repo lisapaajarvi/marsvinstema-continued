@@ -44,6 +44,7 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
     req.session = null;
     res.status(200).json("logged out");
+    console.log("logged out")
 };
 
 exports.getLoggedInUser = async (req, res) => {
